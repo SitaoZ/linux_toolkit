@@ -1,0 +1,1 @@
+echo 'AGTCATGCAGTGCNNNNT' | rev | tr 'ACTG' 'TGAC'
