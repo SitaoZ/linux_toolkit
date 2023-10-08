@@ -9,8 +9,9 @@ $ wtach vmstat -sSM     # 实时监控
 $ vmstat -sSM           # 监控一次
 $ du -h -d 1 | sort -rh # 找出最大文件夹
 ```
+
 ### Conda tips
-1.创建环境
+1.创建环境(create)
 ```bash
 $ conda --version          # 显示conda版本
 $ conda create -n env_name python=3.7.2 # 创建环境
@@ -20,14 +21,34 @@ $ conda env list           # 显示当前所有环境
 $ conda info --env         # 显示当前所有环境
 ```
 
-2. 清理安装包的缓存
+2. 列出环境中的安装包(list)
+```bash
+$ conda list             # 显示当前环境中已经安装的包
+$ conda list -n env_name # 列出env_name环境中的安装包
+$ conda list --export > package-list.txt # 保存安装包便于后续使用
+$ conda create -n new_env_name --file package-list.txt # 参考文件重新安装并创建新环境
+```
+
+3. 清理安装包的缓存(clean)
 ```bash
 $ conda clean -h
 $ conda clean -a # 快速删除
 $ conda clean -p # 从可写包缓存中删除没有使用的包，但是不会检查已经安装的包是否有软连接到其中的缓存包
 $ conda clean -t # 一键删除anaconda pkgs下面的压缩包
-```
 
+```
+4. 包的安装(install)
+```bash
+$ conda install scipy # 当前环境下安装软件
+$ conda install -n env_name scipy # 指定环境下安装软件
+```
+5. 配置文件(config)
+```bash
+$ conda config --show         # 显示已经设置好的配置文件的值
+$ conda config --describe     # 显示所有可用的配置文件选项
+$ conda config --get channels # 显示已经添加的channel
+
+```
 ### BAM
 ```bash
 $ samtools view QC.sort.bam | grep "XM:i:0" > noMismatch.sam # 找出没有mismatch的比对
