@@ -49,11 +49,16 @@ $ conda config --describe     # 显示所有可用的配置文件选项
 $ conda config --get channels # 显示已经添加的channel
 $ conda config add channels x # 添加镜像
 $ # 国内提供conda镜像的大学
-$ 清华大学: https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/
-  北京外国语大学: https://mirrors.bfsu.edu.cn/help/anaconda/
-  南京大学: http://mirrors.nju.edu.cn/
-  上海交通大学: https://mirror.sjtu.edu.cn/
-  哈尔滨工业大学: http://mirrors.hit.edu.cn/#/home
+$ # 清华大学: https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/
+$ # 北京外国语大学: https://mirrors.bfsu.edu.cn/help/anaconda/
+$ # 南京大学: http://mirrors.nju.edu.cn/
+$ # 上海交通大学: https://mirror.sjtu.edu.cn/
+$ # 哈尔滨工业大学: http://mirrors.hit.edu.cn/#/home
+$ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+$ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+$ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+$ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/
+$ vi ~/.condarc # 直接添加镜像网址也可以
 ```
 ### BAM
 ```bash
