@@ -5,8 +5,8 @@ Linux commands and tricks in bioinformatics
 ### One-liner
 ```bash
 $ history | awk '{a[$2]++}END{for(i in a){print a[i]" "i}}' | sort -rn | head # 列出常用的命令
-$ wtach vmstat -sSM # 实时监控
-$ vmstat -sSM # 监控一次
+$ wtach vmstat -sSM     # 实时监控
+$ vmstat -sSM           # 监控一次
 $ du -h -d 1 | sort -rh # 找出最大文件夹
 ```
 ### Conda tips
@@ -16,8 +16,8 @@ $ conda --version          # 显示conda版本
 $ conda create -n env_name python=3.7.2 # 创建环境
 $ conda activate env_name  # 激活环境
 $ conda deactivate         # 退出环境
-$ conda env list           #显示当前所有环境
-$ conda info --env         #显示当前所有环境
+$ conda env list           # 显示当前所有环境
+$ conda info --env         # 显示当前所有环境
 ```
 
 2. 清理安装包的缓存
