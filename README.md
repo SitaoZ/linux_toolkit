@@ -75,11 +75,10 @@ $ fastq-dump --split-files SRR11180057 # 除去结尾的.sra后缀
 
 2. Entrez Direct [link](https://www.ncbi.nlm.nih.gov/books/NBK179288/)使用命令行来对NCBI中的数据进行下载，efetch就是其中子程序之一。
 
-2.1 efetch 下载任意格式的数据
 ```bash
+# efetch 下载任意格式的数据
 # 以MEDLINE的格式下载文献
 $ efetch -db pubmed -id 25359968 -format medline
-Retrieve the record for PMID 26287646 in XML format:
 # 使用XML下载文献
 $ efetch -db pubmed -id 26287646 -format xml
 # 以 abstract下载多个文献
