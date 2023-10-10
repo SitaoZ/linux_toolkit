@@ -73,8 +73,9 @@ $ fastq-dump --split-files SRR11180057 # 除去结尾的.sra后缀
 ```
 具体可以参考 [NCBI sra](https://www.ncbi.nlm.nih.gov/sra/docs/sradownload/)
 
-2. efetch 下载任一格式的数据
-Entrez Direct [link](https://www.ncbi.nlm.nih.gov/books/NBK179288/)使用命令行来对NCBI中的数据进行下载，efetch就是其中子程序之一。
+2. Entrez Direct [link](https://www.ncbi.nlm.nih.gov/books/NBK179288/)使用命令行来对NCBI中的数据进行下载，efetch就是其中子程序之一。
+
+2.1 efetch 下载任意格式的数据
 ```bash
 # 以MEDLINE的格式下载文献
 $ efetch -db pubmed -id 25359968 -format medline
