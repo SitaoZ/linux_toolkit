@@ -64,15 +64,27 @@ $ vi ~/.condarc # 直接添加镜像网址也可以
 生信数据庞杂，如何下载自己想要的数据，除了要找对数据库，也得找到合适的工具。
 1. SRA tools 下载测序数据
 ```bash
-# 事先安装好SRA toolkit，安装步骤如下
-[SRAtoolkit](https://github.com/ncbi/sra-tools/wiki)
+# 事先安装好SRA toolkit，安装步骤 https://github.com/ncbi/sra-tools/wiki
 $ prefetch SRR11180057
 $ # prefetch --option-file SraAccList.txt 一次下载多个，使用文件输入
 $ fastq-dump --split-files SRR11180057.sra # 将SRA文件转化成fastq
 $ # 注意，你也可以一步同时实现下载和解压
 $ fastq-dump --split-files SRR11180057 # 除去结尾的.sra后缀
 ```
-具体可以参考 [ncbi sra](https://www.ncbi.nlm.nih.gov/sra/docs/sradownload/)
+具体可以参考 [NCBI sra](https://www.ncbi.nlm.nih.gov/sra/docs/sradownload/)
+
+2. efetch 下载任一格式的数据
+Entrez Direct [link](https://www.ncbi.nlm.nih.gov/books/NBK179288/)使用命令行来对NCBI中的数据进行下载，efetch就是其中子程序之一。
+```bash
+# 以MEDLINE的格式下载文献
+$ efetch -db pubmed -id 25359968 -format medline
+Retrieve the record for PMID 26287646 in XML format:
+# 使用XML下载文献
+$ efetch -db pubmed -id 26287646 -format xml
+# 以 abstract下载多个文献
+$ efetch -db pubmed -id 24102982,21171099,17150207 -format abstract
+
+```
 ### BAM
 ```bash
 $ samtools view QC.sort.bam | grep "XM:i:0" > noMismatch.sam # 找出没有mismatch的比对
