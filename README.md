@@ -80,10 +80,74 @@ $ $n 第n个参数
 $ $@ 获取所有对应的参数值
 
 ```
-## AWK
+
+## shell 重用命令
+### 系统命令
+```bash
+$ uname -a # 显示系统和内核
+$ 
+```
+
+### 文件夹操作
+```bash
+$ pwd       # 显示当前文件夹 print working dir
+$ mkdir dir # 创建目录 make directory 
+$ cd dir    # 进入dir目录 change directory to dir 
+$ cd ..     # 进入上一个层级目录 go up a directory 
+$ ls        # 列出文件 list files
+```
+### 查找文件
+```bash
+$ find  dir -name *fasta # 在dir 目录下查找后缀为fasta的文件
+$ whereis # 给命令找到二进制，源代码和手册文件
+$ which   
+$ locate 
+```
+
+### 文件处理
+```bash
+$ touch filea     # 创建文件 create file 
+$ cat file1 file2 # 合并文件1和2 concatenate files and output
+$ less file1      # 查看文件
+$ file file1      # 查看文件类型
+$ cp file1 file2  # 复制文件1到文件2 copy file1 to file2
+$ mv file1 file2  # 重命名文件 move file1 to file2
+$ rm file1        # 删除文件
+$ head file1
+$ tail file1
+$ tail -F file1   # 实时查看文件
+```
+
+### 文件权限
+```bash
+$ chmod 755 file1            # change mode of file
+$ chomod -R zhusitao folder  # recursively chmod folder to zhusitao
+$ chown zhusitao ath.csv     # 将文件的所属者改成zhusitao
+$ chown user:group file1     # 将文件的所属者改成user, 将文件的所属组改成group
+$ chown :gruop file1         # 只改变所属组, 不改变所有者
+```
+
+
+### 进程管理
+
+```bash
+$ ps         # 查看进程 show snapshoot of processes
+$ top        # 查看实时进程 show real time processes
+$ kii pid    # 删除进程 kill process with id pid
+$ pkill name # 使用程序名称删除进程 kill process with name 
+```
+
+## linux三剑客
+### awk
 ```bash
 $ awk 
 ```
+### grep
+
+### sed
+
+### cut 
+
 
 ## Conda tips
 Conda软件安装十分便利，可以建立不同的环境对软件进行依赖匹配。
@@ -166,9 +230,9 @@ $ efetch -db pubmed -id 24102982,21171099,17150207 -format abstract
 文件下载后需要对文件进行检查，确保文件在下载中没有出现错误，导致文件不完整。
 ```
 $ # linux 使用md5sum来对文件进行检查
-md5sum xxxxx       # 对于单个文件，可以执行该命令两次，看产生的md5值是否一致
-md5sum -c MD5.txt  # 输入MD5文件检查，可以批量检查很多文件
-
+$ md5sum xxxxx       # 对于单个文件，可以执行该命令两次，看产生的md5值是否一致
+$ md5sum -c MD5.txt  # 输入MD5文件检查，可以批量检查很多文件
+$ # Mac 使用md5 对文件进行检查
 ```
 ##  Bio format
 ### FASTA
@@ -176,10 +240,10 @@ FASTA文件的处理
 1.seqkit 
 seqkit工具可以快速处理fasta文件 [seqkit](https://bioinf.shenwei.me/seqkit/usage/)。
 ```bash
-# 按照长度过滤,选取长度小于300bp的fasta子集
-seqkit seq -M 300 refer.fasta -o lt300.fa
-# 使用seqkit 选取特定的子集，使用grep子命令 
-seqkit grep -n -f wanted_gene.csv refer.fasta -o wanted.fa
+$ # 按照长度过滤,选取长度小于300bp的fasta子集
+$ seqkit seq -M 300 refer.fasta -o lt300.fa
+$ # 使用seqkit 选取特定的子集，使用grep子命令 
+$ seqkit grep -n -f wanted_gene.csv refer.fasta -o wanted.fa
 ```
 ### BAM
 SAMtools是li heng开发的用于比对文件处理的利器[samtools](http://www.htslib.org/)。
