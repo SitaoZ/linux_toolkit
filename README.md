@@ -48,7 +48,14 @@ $ `date`
 
 $ \ 倒斜线 1.作为转义字符，将符号特定的含义去掉，使其变成普通标点或者 取消alias的含义。2.放在命令的最末端表示接下一行
 
-$ - 短横线 表示标准输出，或从标准输出中获得输入
+$ - 短横线 表示标准输出，或从标准输出中获得输入。一般用于程序需要对个输入的时候。
+$ paste <(zcat LJ0612_1.fq.gz|paste - - - -) <(zcat LJ0612_2.fq.gz|paste - - - - ) | awk -v FS="\t" -v OFS="\n" 'FNR==NR {samples[$2]=$1; next} {barcode = substr($2,0,6); if(samples[barcode]) { print $1,$2,$3,$4>>samples[barcode]"_1.fq"; print $5,$6,$7,$8>>samples[barcode]"_2.fq"}}' samples.txt -
+$ # 命令解析
+$ # awk 命令，samples.txt是第一个输入文件，FNR: 当前文件的行号，NR: 总文件的行号，当有多个文件的是时候，FNR==NR表示第一个文件的内容
+$ # (zcat | paste - - - -)  将四行文件转成单行, 括弧表示整体执行，执行后作为标准输入传给 paste
+$ # 因此，paste 将两个标准输入合并成一个，read1 和对应的read2 八行变成一行
+$ # awk直接输入的samles.txt 作为第一个输入, - 表示将将管道符来源的输入传给当前命令
+$ # 所以，管道符号接入的文件作为第二个输入，表示上面FNR==NR表示第一个文件的内容是正确的
 
 $ $ 变量调用符号
 
