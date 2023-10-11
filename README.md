@@ -12,7 +12,7 @@ $ du -h -d 1 | sort -rh # 找出最大文件夹
 
 ### linux 特殊符号
 linux中一些符号具有特定的含义，需要注意
-```
+```bash
 $ # 井号 (comments)
 
 $ ~ 家目录 (home)
