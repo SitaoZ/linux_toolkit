@@ -13,7 +13,7 @@ $ du -h -d 1 | sort -rh # 找出最大文件夹
 ### linux 特殊符号
 linux中一些符号具有特定的含义，需要注意
 ```
-$ #井号 (comments)
+$ # 井号 (comments)
 
 $ ~ 家目录 (home)
 
@@ -58,13 +58,13 @@ $ ;; 连续分号(terminator)，专门在case语句中承担终止的角色
 
 $ () 整体执行(command group)
 
-$ {}变量分离
+$ {} 变量分离
 
 $ [] 中括号流程控制中使用
 
 # head -n 10 < file.fa
 
-## 组合字符
+$ # 组合字符
 $ $? 状态值 status variable
 $ $# 脚本中参数的个数
 $ $* 获取所有对应参数的值
