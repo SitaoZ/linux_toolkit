@@ -13,42 +13,42 @@ $ du -h -d 1 | sort -rh # 找出最大文件夹
 ### linux 特殊符号
 linux中一些符号具有特定的含义，需要注意
 ```bash
-$ # 井号 (comments)
+$ # # 井号 (comments)
 
-$ ~ 家目录 (home)
+$ # ~ 家目录 (home)
 
-$ > 重定向符号
+$ # > 重定向符号
 $ ls -s > result.txt # 覆盖文件
 
-$ >> 重定向追加符号
+$ # >> 重定向追加符号
 $ date >> date_time.txt
 
-$ 2> 错误重定向符号
+$ # 2> 错误重定向符号
 $ ls -l 2>stderr.csv
 
-$ 2>> 错误追缴符号
+$ # 2>> 错误追缴符号
 $ ls -lth 2>>stderr.csv
 
-$ < 重定向输入符号
+$ # < 重定向输入符号
 
-$ << 追加重定向输入符号
+$ # << 追加重定向输入符号
 
-$ | 管道符号
+$ # | 管道符号
 $ cat xxx.csv | head -n 10
 
-$ & 后台进程符号
+$ # & 后台进程符号
 $ sh work.sh & # 放到后台执行命令
 
-$ "" 双引号(double quote) 所包含的字符作为普通字符，但是\和$除外
+$ # "" 双引号(double quote) 所包含的字符作为普通字符，但是\和$除外
 
-$ '' 单引号(single quote) 所包含的字符视为普通字符， 无例外
+$ # '' 单引号(single quote) 所包含的字符视为普通字符， 无例外
 
-$ `` 倒引号(backticks) 执行它所包含的命令
+$ # `` 倒引号(backticks) 执行它所包含的命令
 $ `date`
 
-$ \ 倒斜线 1.作为转义字符，将符号特定的含义去掉，使其变成普通标点或者 取消alias的含义。2.放在命令的最末端表示接下一行
+$ # \ 倒斜线 1.作为转义字符，将符号特定的含义去掉，使其变成普通标点或者 取消alias的含义。2.放在命令的最末端表示接下一行
 
-$ - 短横线 表示标准输出，或从标准输出中获得输入。一般用于程序需要对个输入的时候。
+$ # - 短横线 表示标准输出，或从标准输出中获得输入。一般用于程序需要对个输入的时候。
 $ paste <(zcat LJ0612_1.fq.gz|paste - - - -) <(zcat LJ0612_2.fq.gz|paste - - - - ) | awk -v FS="\t" -v OFS="\n" 'FNR==NR {samples[$2]=$1; next} {barcode = substr($2,0,6); if(samples[barcode]) { print $1,$2,$3,$4>>samples[barcode]"_1.fq"; print $5,$6,$7,$8>>samples[barcode]"_2.fq"}}' samples.txt -
 $ # 命令解析
 $ # awk 命令，samples.txt是第一个输入文件，FNR: 当前文件的行号，NR: 总文件的行号，当有多个文件的是时候，FNR==NR表示第一个文件的内容
@@ -57,17 +57,17 @@ $ # 因此，paste 将两个标准输入合并成一个，read1 和对应的read
 $ # awk直接输入的samles.txt 作为第一个输入, - 表示将将管道符来源的输入传给当前命令
 $ # 所以，管道符号接入的文件作为第二个输入，表示上面FNR==NR表示第一个文件的内容是正确的
 
-$ $ 变量调用符号
+$ # $ 变量调用符号
 
-$ ; 命令分割符号(command separator)，一行中使用;链接的命令顺序执行
+$ # ; 命令分割符号(command separator)，一行中使用;链接的命令顺序执行
 
-$ ;; 连续分号(terminator)，专门在case语句中承担终止的角色
+$ # ;; 连续分号(terminator)，专门在case语句中承担终止的角色
 
-$ () 整体执行(command group)
+$ # () 整体执行(command group)
 
-$ {} 变量分离
+$ # {} 变量分离
 
-$ [] 中括号流程控制中使用
+$ # [] 中括号流程控制中使用
 
 # head -n 10 < file.fa
 
