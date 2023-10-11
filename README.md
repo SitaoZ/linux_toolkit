@@ -83,6 +83,7 @@ $ $@ 获取所有对应的参数值
 
 ### Conda tips
 Conda软件安装十分便利，可以建立不同的环境对软件进行依赖匹配。
+
 1.创建环境(create)
 ```bash
 $ conda --version          # 显示conda版本
