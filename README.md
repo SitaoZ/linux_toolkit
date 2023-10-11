@@ -1,8 +1,8 @@
-## Linux_toolkit
+# Linux_toolkit
 Linux commands and tricks in bioinformatics
 
 
-### One-liner
+## One-liner
 ```bash
 $ history | awk '{a[$2]++} END{for(i in a){print a[i]" "i}}' | sort -rn | head # 列出常用的命令
 $ wtach vmstat -sSM     # 实时监控
@@ -10,7 +10,7 @@ $ vmstat -sSM           # 监控一次
 $ du -h -d 1 | sort -rh # 找出最大文件夹
 ```
 
-### linux 特殊符号
+## linux 特殊符号
 linux中一些符号具有特定的含义，需要注意
 ```bash
 $ # # 井号 (comments)
@@ -80,8 +80,12 @@ $ $n 第n个参数
 $ $@ 获取所有对应的参数值
 
 ```
+## AWK
+```bash
+$ awk 
+```
 
-### Conda tips
+## Conda tips
 Conda软件安装十分便利，可以建立不同的环境对软件进行依赖匹配。
 
 1.创建环境(create)
@@ -133,7 +137,7 @@ $ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/clou
 $ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/
 $ vi ~/.condarc # 直接添加镜像网址也可以
 ```
-### Data download
+## Data download
 生信数据庞杂，如何下载自己想要的数据，除了要找对数据库，也得找到合适的工具。
 1. SRA tools 下载测序数据
 ```bash
@@ -166,7 +170,7 @@ md5sum xxxxx       # 对于单个文件，可以执行该命令两次，看产�
 md5sum -c MD5.txt  # 输入MD5文件检查，可以批量检查很多文件
 
 ```
-
+##  Bio format
 ### FASTA
 FASTA文件的处理
 1.seqkit 
