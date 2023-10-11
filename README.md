@@ -82,10 +82,33 @@ $ $@ 获取所有对应的参数值
 ```
 
 ## shell 重用命令
+
 ### 系统命令
 ```bash
 $ uname -a # 显示系统和内核
-$ 
+$ hostname # 显示当前系统的主机名
+$ du       # 显示磁盘使用空间
+$ du -sh dir    # 显示文件的总的占用空间
+$ du -h -d 1 ./ # 显示当前文件中深度为1 的文件的大小
+$ df     # 报告文件系统磁盘空间的使用情况
+$ df -h  # 友好查看磁盘
+$ mount  # 挂载文件系统
+$ umount # 卸载文件系统
+$ fsck   # 检查并修复文件系统
+$ fdisk  # 磁盘分区命令，适用于2TB以下的磁盘分区
+$ parted # 磁盘分区命令，没有磁盘大小限制，常用与2TB一下的磁盘分区
+$ swapon # 启用交换分区
+$ swapoff # 关闭交换分区
+```
+
+### 系统用户登录信息
+```bash
+$ whoami  # 显示当前用户的名称
+$ who     # 显示目前系统的用户信息
+$ w       # 显示已经登录的用户列表，并显示用户正在执行的指令
+$ last    # 显示登录系统的用户
+$ lastlog # 显示当前系统中所有用户最近一次的登陆信息
+$ users   # 显示当前登录系统的所有用户
 ```
 
 ### 文件夹操作
@@ -100,8 +123,32 @@ $ ls        # 列出文件 list files
 ```bash
 $ find  dir -name *fasta # 在dir 目录下查找后缀为fasta的文件
 $ whereis # 给命令找到二进制，源代码和手册文件
-$ which   
-$ locate 
+$ which   # 查找二进制命令，按环境变量PATH的路径找
+$ locate  # 从数据库查找命令
+```
+
+### 用户管理
+```bash
+$ useradd # 添加用户
+$ userdel # 删除用户
+$ groupadd #  添加用户组
+$ passwd   # 修改用户密码
+$ change   # 修改用户密码的有效期限
+$ su       # 切换用户
+$ sudo     # 以另外一个身份执行sudoers文件中允许的命令
+$ 
+```
+
+### 网络操作
+```bash
+$ ssh    # 使用SHH加密协议远程登录
+$ telnet # 使用TELNET协议远程登录
+$ scp    # secure copy 用于不同主机之间复制文件
+$ wget   # 下载文件
+$ ping   # 测试主机之间网络的联通性
+$ ifconfig   # 查看、配置、重启或者禁用网络接口
+$ netstat    # 查看网络状态
+$ ss         # 查看网络状态
 ```
 
 ### 文件处理
@@ -113,9 +160,19 @@ $ file file1      # 查看文件类型
 $ cp file1 file2  # 复制文件1到文件2 copy file1 to file2
 $ mv file1 file2  # 重命名文件 move file1 to file2
 $ rm file1        # 删除文件
-$ head file1
-$ tail file1
+$ head file1      # 前十行
+$ tail file1      # 后十行
 $ tail -F file1   # 实时查看文件
+$ sort            # 对文件排序
+$ uniq            # 对文件去重
+$ wc              # 统计文件行数，单词数，字符数
+$ diff file1 file2# 比较文件差异
+$ paste           # 按行合并文件内容
+$ split           # 将分割文件成小部分
+$ tr              # 替换或删除字符
+$ rev             # 反向输出内容
+$ echo agctagtcg | tr a-z A-Z | tr ATCG TAGC | rev # 反向互补DNA序列
+
 ```
 
 ### 文件权限
@@ -125,6 +182,8 @@ $ chomod -R zhusitao folder  # recursively chmod folder to zhusitao
 $ chown zhusitao ath.csv     # 将文件的所属者改成zhusitao
 $ chown user:group file1     # 将文件的所属者改成user, 将文件的所属组改成group
 $ chown :gruop file1         # 只改变所属组, 不改变所有者
+$ chgrp                      # 更改文件用户组
+$ 
 ```
 
 
