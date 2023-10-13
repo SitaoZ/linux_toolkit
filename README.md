@@ -182,7 +182,7 @@ $ chomod -R zhusitao folder  # recursively chmod folder to zhusitao
 $ chown zhusitao ath.csv     # 将文件的所属者改成zhusitao
 $ chown user:group file1     # 将文件的所属者改成user, 将文件的所属组改成group
 $ chown :gruop file1         # 只改变所属组, 不改变所有者
-$ chgrp                      # 更改文件用户组
+$ chgrp -v group_id file1    # 更改文件用户组
 $ 
 ```
 
