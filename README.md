@@ -435,6 +435,8 @@ sed (stream editor for filtering and transforming text)流式编辑器
 $ # 命令格式
 $ sed [options] 'command' file(s)
 $ sed [options] -f scriptfile file(s)
+$ # 每个command 由最多两个地址addresses和一个动作action组成,
+$ # 每个address可以是正则表达式或者行数，动作见4.3.2
 ```
 #### 4.3.1 sed 参数
 ```bash
@@ -470,6 +472,10 @@ $ sed '/^$/d' file # 去除所有的空白行
 $ sed '2d'         # 删除第二行
 $ sed '$d'         # 删除最后一行
 $ sed '2,$d' file  # 删除第二行到末尾所有行
+$ sed '1,/^$/d'    # 从第一行到第一个空白行之间的都删除, 这里的/^$/表示锁定第一个空白行
+$ sed '/^$/, $d'   # 删除第一个空白行到最后一行的内容
+$ sed '/^$/, 10d'  # 删除第一个空白行到第十行之间的内容
+$ sed '/^ya*y/, /[0-9]$/d' # 删除以ya*y模式开始的行到第一个以数字结尾的行
 $ sed '/^test/d' $ # 删除文件中所有开头是test的行
 $ echo this is a test line | sed 's/\w\+/[&]/g' #  \w+表示匹配每一个单词，使用[&]替换它，& 对应之前所匹配到的单词
 
@@ -490,6 +496,13 @@ $ # 定界符号一致均可
 $ sed 's#AAAA#TTTT#g' file 
 $ sed 's:AAAA:TTTT:g' file
 
+$ sed '2s/AAAA/TTTT/' file # 只替换第二行
+$ sed '/DDDD/s/AAAA/TTTT/' file # 替换匹配DDDD的行
+
+$ # 正则
+$ echo aaa BBB | sed 's/\([a-z]\+\) \([A-Z]\+\)/\2 \1/'
+$ echo this is digit 7 in a number | sed 's/digit \([0-9]\)/\1/'
+
 ```
 
 #### 4.3.6 transform 转换
@@ -501,6 +514,7 @@ $ echo ATCG | sed 'y/ATCG/TAGC/' | rev # DNA反向互补
 ```bash
 $ sed '100q' file # 打印前100行，然后退出
 ```
+[sed lecture](https://cs.nyu.edu/~mohri/unix08/lect5.pdf)
 
 ### cut 
 
