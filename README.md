@@ -198,6 +198,7 @@ $ pkill name # 使用程序名称删除进程 kill process with name
 
 ## linux三剑客
 ### awk
+文本处理的工具之一,[awk](https://wangchujiang.com/linux-command/c/awk.html)
 ```bash
 $ man awk
 $ # -f/--file 从文件中读取awk脚本执行,是命令行执行wak的一种补充方式，可以使用多个-f
@@ -220,13 +221,61 @@ $ awk 'BEGIN{ print "start" } pattern{ commands } END{ print "end" }' file # 三
 
 $ awk 的内置变量
 $ ARGC 命令行参数数目
+$ ARGV 包含命令行参数的数组
 $ FILENAME 当前文件名
-$ FNR 当前文件的行号
+$ FNR 当前文件的行号，记录数
 $ FS 字符分割符号，默认是空格
 $ OFS 输出字段分隔符号，默认是一个空格
+$ RS 记录分割符, 默认是一个换行符
 $ ORS 输出记录分隔符，默认是一个换行符
 $ NF 字段数
-$ NR 文件行号
+$ NR 文件行号，记录数
+
+$ awk 传入外部变量
+$ awk -v variable=100 '{print $variable}' files
+
+$ awk 运算与判断
+
+$ awk 算术运算符
+$ # + - 加减
+$ awk '{print $1-1, $1+2}' files
+$ * / % 乘 除求余
+$ awk "NR%4==2" fastq_files
+$  ^**n 求幂
+$ awk '{print 2**$1}' files
+$ ++ -- 自加和自减
+$ awk
+
+$ akw 赋值运算符
+$ =, +=, -=, *=, /=, %=, ^=, **=
+
+$ 逻辑运算符
+$ || 逻辑或
+$ && 逻辑与
+$ awk 'BEGIN{a=1;b=2;print (a>5 && b<=2),(a>5 || b<=2);}'
+
+$ 正则运算符
+$ ~, !~
+$ ^ 行首
+$ $ 行尾
+$ . 除了换行符以外的任意单个字符
+$ * 前导字符的零个或者多个
+$ .*所有字符
+$ []字符组内的任一字符
+$ [^]不匹配字符组内的任一字符
+$ ^[^] 非字符组内的字符开头的行
+$ [a-z] 小写字母
+$ [A-Z] 大写字母
+$ [a-Z] 小写和大写字母
+$ [0-9] 数字
+$ \< 单词头
+$ \> 单词尾
+$ 正则需要用 /正则/ 包围
+
+$ 关系运算符
+$ <, <=, >, >=, !=, ==
+
+
 ```
 ### grep
 
