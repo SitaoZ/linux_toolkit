@@ -199,7 +199,34 @@ $ pkill name # 使用程序名称删除进程 kill process with name
 ## linux三剑客
 ### awk
 ```bash
-$ awk 
+$ man awk
+$ # -f/--file 从文件中读取awk脚本执行,是命令行执行wak的一种补充方式，可以使用多个-f
+$ # -F/--field-separator fs，指定输入文件分隔符号
+$ # -v/--assign 指定变量和其对应的值，
+
+$ awk执行方式
+$ awk [options] 'script' file(s)
+$ awk [options] -f scriptfile files(s)
+
+$ awk 模式和操作
+$ 模式主要包括: /正则表达式/: 使用通配符;
+$            关系表达式: 使用运算符进行操作;
+$            模式匹配表达式: ~匹配 和 !~不匹配;
+$            BEGIN语句、pattern语句、END语句;
+$ 操作主要包括：有一个或者多个命令、函数、表达式组成，用换行符和分号隔开，并位于大括号内
+$             包括。变量数组赋值，输出命令，内置函数和控制语句
+
+$ awk 'BEGIN{ print "start" } pattern{ commands } END{ print "end" }' file # 三个语句块都是可选的
+
+$ awk 的内置变量
+$ ARGC 命令行参数数目
+$ FILENAME 当前文件名
+$ FNR 当前文件的行号
+$ FS 字符分割符号，默认是空格
+$ OFS 输出字段分隔符号，默认是一个空格
+$ ORS 输出记录分隔符，默认是一个换行符
+$ NF 字段数
+$ NR 文件行号
 ```
 ### grep
 
