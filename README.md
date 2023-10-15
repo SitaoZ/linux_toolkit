@@ -2,7 +2,7 @@
 Linux commands and tricks in bioinformatics
 
 
-## One-liner
+## 1. One-liner
 ```bash
 $ history | awk '{a[$2]++} END{for(i in a){print a[i]" "i}}' | sort -rn | head # 列出常用的命令
 $ wtach vmstat -sSM     # 实时监控
@@ -10,7 +10,7 @@ $ vmstat -sSM           # 监控一次
 $ du -h -d 1 | sort -rh # 找出最大文件夹
 ```
 
-## linux 特殊符号
+## 2. linux 特殊符号
 linux中一些符号具有特定的含义，需要注意
 ```bash
 $ # # 井号 (comments)
@@ -81,9 +81,9 @@ $ $@ 获取所有对应的参数值
 
 ```
 
-## shell 常用命令
+## 3. shell 常用命令
 
-### 系统命令
+### 3.1 系统命令
 ```bash
 $ uname -a # 显示系统和内核
 $ hostname # 显示当前系统的主机名
@@ -101,7 +101,7 @@ $ swapon # 启用交换分区
 $ swapoff # 关闭交换分区
 ```
 
-### 系统用户登录信息
+### 3.2 系统用户登录信息
 ```bash
 $ whoami  # 显示当前用户的名称
 $ who     # 显示目前系统的用户信息
@@ -111,7 +111,7 @@ $ lastlog # 显示当前系统中所有用户最近一次的登陆信息
 $ users   # 显示当前登录系统的所有用户
 ```
 
-### 文件夹操作
+### 3.3 文件夹操作
 ```bash
 $ pwd       # 显示当前文件夹 print working dir
 $ mkdir dir # 创建目录 make directory 
@@ -119,7 +119,7 @@ $ cd dir    # 进入dir目录 change directory to dir
 $ cd ..     # 进入上一个层级目录 go up a directory 
 $ ls        # 列出文件 list files
 ```
-### 查找文件
+### 3.4 查找文件
 ```bash
 $ find  dir -name *fasta # 在dir 目录下查找后缀为fasta的文件
 $ whereis # 给命令找到二进制，源代码和手册文件
@@ -127,7 +127,7 @@ $ which   # 查找二进制命令，按环境变量PATH的路径找
 $ locate  # 从数据库查找命令
 ```
 
-### 用户管理
+### 3.5 用户管理
 ```bash
 $ useradd # 添加用户
 $ userdel # 删除用户
@@ -139,7 +139,7 @@ $ sudo     # 以另外一个身份执行sudoers文件中允许的命令
 $ 
 ```
 
-### 网络操作
+### 3.6 网络操作
 ```bash
 $ ssh    # 使用SHH加密协议远程登录
 $ telnet # 使用TELNET协议远程登录
@@ -151,7 +151,7 @@ $ netstat    # 查看网络状态
 $ ss         # 查看网络状态
 ```
 
-### 文件处理
+### 3.7 文件处理
 ```bash
 $ touch filea     # 创建文件 create file 
 $ cat file1 file2 # 合并文件1和2 concatenate files and output
@@ -175,7 +175,7 @@ $ echo agctagtcg | tr a-z A-Z | tr ATCG TAGC | rev # 反向互补DNA序列
 
 ```
 
-### 文件权限
+### 3.8 文件权限
 ```bash
 $ chmod 755 file1            # change mode of file
 $ chomod -R zhusitao folder  # recursively chmod folder to zhusitao
@@ -187,7 +187,7 @@ $
 ```
 
 
-### 进程管理
+### 3.9 进程管理
 
 ```bash
 $ ps         # 查看进程 show snapshoot of processes
@@ -196,8 +196,8 @@ $ kii pid    # 删除进程 kill process with id pid
 $ pkill name # 使用程序名称删除进程 kill process with name 
 ```
 
-## linux三剑客
-### awk
+## 4. linux三剑客
+### 4.1 awk
 文本处理的工具之一,[awk](https://wangchujiang.com/linux-command/c/awk.html)
 ```bash
 $ man awk
@@ -359,11 +359,11 @@ $ awk 'BEGIN{info="this is a test";split(info,tA," ");print length(tA);for(k in 
 $ 1.3 一般函数
 $ # close, system, getline,
 ```
-### grep
+### 4.2 grep
 grep(global search regular expression and print out the line),全面搜索正则表达式并把行打印。
 $ man grep 
 
-#### pattern syntax 
+#### 4.2.1 pattern syntax 
 ```bash
 $ -E/--extended-regexp # 拓展的正则匹配
 $ -F/--fixed-strings   # 将模式固定，不支持正则表达
@@ -371,7 +371,7 @@ $ -G/--basic-regexp    # 一般的正则表达
 $ -P/--perl-regexp     # perl正则
 ```
 
-#### match control 
+#### 4.2.2 match control 
 
 ```bash
 $ -e/--regexp # 指定字符串作为模式
@@ -383,28 +383,55 @@ $ -w/--word-regexp  # 匹配单词
 $ -x/--line-regexp  # 匹配整行
 ```
 
-#### general outputy control
+#### 4.2.3 general outputy control
 ```bash
 $ -c/--count # 打印出匹配的行数， 而不是输出行
-$ --color # 显示颜色
+$ --color    # 显示颜色
 $ -L/--files-without-match # 输出没有匹配的文件名
 $ -l/--files-with-matches  # 输出匹配的文件名
-$ -m/--max-count # 指定最大的匹配次数
+$ -m/--max-count     # 指定最大的匹配次数
 $ -o/--only-matching # 只打印出匹配的,同时显示文件名
 ```
 
-#### output line prefix control
+#### 4.2.4 output line prefix control
 ```bash
-$ -b/--byte-offset # 输出匹配的位置，0-base开始；可以和-o配合使用
+$ -b/--byte-offset   # 输出匹配的位置，0-base开始；可以和-o配合使用
 $ -H/--with-filename # 打印出每个匹配的文件名
 $ -h/--no-filename   # 不打印文件名
-$ --lable # 转化输入文件成新的文件名，
+$ --lable            # 转化输入文件成新的文件名，
 $ cat text.txt | grep --label=text 'aaa' -H -i
-$ -n/--line-number # 打印行号，1-based
-$ -T 
+$ -n/--line-number   # 打印行号，1-based
+$ -T/--initial-tab   # 在匹配的文件前使用一个tab符号, 结合-H, -n, -b效果更佳
 ```
 
-### sed
+#### 4.3.5 context line control 
+
+```bash
+$ -A/--after-context  # 打印匹配行后面NUM行
+$ -B/--before-context # 打印匹配文件前面NUM行
+$ -C/--context        # 打印前后NUM行
+```
+
+#### 4.3.6 grep 正则表达式
+```bash
+$ ^ # 锚定行的开始 
+$ $ # 锚定行的结束
+$ . # 匹配一个非换行字符
+$ * # 匹配零个或者多个先前字符
+$ .* # 任意字符
+$ [] # 指定范围内的字符 '[Gg]rep'匹配Grep和grep
+$ [^] # 匹配一个不在指定范围内的字符，'[^A-Z]rep'匹配不包含A-Z开头的行
+$ \<  # 锚定单词开始
+$ \>  # 锚定单词结束
+$ x\{m\} # 重复字符x, 'A\{9\}' 匹配9个A
+$ x\{m,\}\ # 重复字符x, 至少m次
+$ x\{m, n\}} # 重复字符x, 至少m次，至多n次
+$ \w # 匹配文字或数字字符 [a-zA-Z0-9]
+```
+
+### 4.3 sed
+sed (stream editor for filtering and transforming text)流式编辑器
+
 
 ### cut 
 
