@@ -275,7 +275,89 @@ $ 正则需要用 /正则/ 包围
 $ 关系运算符
 $ <, <=, >, >=, !=, ==
 
+$ AWK 读取
+$ # next 语句
+$ awk 'NR%4==3{next}{print NR,$0}' fastqs # 去读fastq文件，判断去除其第三行
+$ next 语句，循环逐行匹配，匹配就跳过，然后进行下一行匹配，next一般用于多行合并
+$ cat text.txt
+>chr1
+AAAAAAAAA
+>chr2
+TTTTTTTTT
+>chr3
+CCCCCCCCC
+>chr4
+GGGGGGGGG
+$ awk '/^>/{ID=$0;next;}{print ID","$0}' text.txt
+>chr1,AAAAAAAAA
+>chr2,TTTTTTTTT
+>chr3,CCCCCCCCC
+>chr4,GGGGGGGGG
 
+$ # getline 从标准输入、管道和正在处理的文件之外的其他输入文件或得输入
+$ awk 'BEGIN{ "date" | getline out; print out }' test
+$ getline 当其左右没有重定向符|或<时：getline作用于当前文件
+$ getline 当其左右有重定向符|或<时：getline作用于输入文件，
+
+$ awk 'BEGIN{ "date" | getline out; split(out,mon); print mon[2] }'
+$ seq 5 | awk 'BEGIN{getline; print "The first line "$0};{print $0}'
+
+$ 流程控制语句
+$ while, for, do-while; break, continue语句控制流程
+$ break 退出循环; continue 中断当前正在执行的循环并跳到下一循环。
+
+$ 条件语句
+if(表达式)
+  {语句1}
+else if(表达式)
+  {语句2}
+else
+  {语句3}
+
+$ while循环语句
+while(表达式)
+  {语句}
+$ awk 'BEGIN{
+test=100;total=0;
+while(i<=test){
+  total += i;
+  i++;
+}
+print total;
+}'
+
+$ for循环
+$ awk 'BEGIN{
+total=0;
+for(i=0;i<=100;i++){
+  total+=i;
+}
+print total;
+}'
+
+
+$ 数组应用
+$ # awk 数组应用十分便利。数组不必提前声明
+$ # 数组下标1-based
+$ # Array[1] = 'AAAA'
+$ # split 分割函数 and length 函数
+$ awk 'BEGIN{info="it is a test";lens=split(info,tA," ");print length(tA),lens;}'
+
+$ awk 内置函数
+
+$ 1.1 awk 算术函数
+$ # atan2, cos, sin, exp, log, sqrt, int, rand, strand
+
+$ 1.2 awk 字符串函数
+$ # gsub, sub, index, length, blength, substr, match, split, tolower, toupper, sprintf
+$ awk 'BEGIN{info="this is a test2010test!";gsub(/[0-9]+/,"!",info);print info}' # gsub 替换
+$ awk 'BEGIN{info="this is a test2010test!";print index(info,"test")?"ok":"no found";}' # index 查找字符串
+$ awk 'BEGIN{info="this is a test2010test!";print match(info,/[0-9]+/)?"ok":"no found";}' # match 正则表达式匹配查找
+$ awk 'BEGIN{info="this is a test2010test!";print substr(info,4,10);}'  #截取字符串， 从第四个字符串开始，，截取10个长度字符串
+$ awk 'BEGIN{info="this is a test";split(info,tA," ");print length(tA);for(k in tA){print k,tA[k];}}' # 字符串分割
+
+$ 1.3 一般函数
+$ # close, system, getline,
 ```
 ### grep
 
