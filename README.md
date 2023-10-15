@@ -404,7 +404,7 @@ $ -n/--line-number   # 打印行号，1-based
 $ -T/--initial-tab   # 在匹配的文件前使用一个tab符号, 结合-H, -n, -b效果更佳
 ```
 
-#### 4.3.5 context line control 
+#### 4.2.5 context line control 
 
 ```bash
 $ -A/--after-context  # 打印匹配行后面NUM行
@@ -412,7 +412,7 @@ $ -B/--before-context # 打印匹配文件前面NUM行
 $ -C/--context        # 打印前后NUM行
 ```
 
-#### 4.3.6 grep 正则表达式
+#### 4.2.6 grep 正则表达式
 ```bash
 $ ^ # 锚定行的开始 
 $ $ # 锚定行的结束
@@ -431,7 +431,76 @@ $ \w # 匹配文字或数字字符 [a-zA-Z0-9]
 
 ### 4.3 sed
 sed (stream editor for filtering and transforming text)流式编辑器
+```bash
+$ # 命令格式
+$ sed [options] 'command' file(s)
+$ sed [options] -f scriptfile file(s)
+```
+#### 4.3.1 sed 参数
+```bash
+$ -e/--expression # 传入脚本到命令行执行
+$ -f/--file       # 从文件传入命令执行
+$ -i/--in-place   # 原地编辑文件
+$ -n/--quiet/--silent # 仅仅显示脚本处理后的结果
+$ -E/--regexp-extended # 正则表达式
+$ -V/--version # 显示版本信息
+$ -h/--help # 显示帮助信息
+```
 
+#### 4.3.2 动作说明
+
+a: 新增 append 
+c: 取代 change
+d: 删除 delete
+i: 插入 insert
+p: 打印 print
+s: 取代 substitute
+y: 转换 transform
+q: 退出 quit
+
+#### 4.3.3 print 打印命令
+```bash
+$ sed -n '1,5p' # 打印第一行到第五行
+```
+
+#### 4.3.4 deletion 删除命令
+```bash
+$ d
+$ sed '/^$/d' file # 去除所有的空白行
+$ sed '2d'         # 删除第二行
+$ sed '$d'         # 删除最后一行
+$ sed '2,$d' file  # 删除第二行到末尾所有行
+$ sed '/^test/d' $ # 删除文件中所有开头是test的行
+$ echo this is a test line | sed 's/\w\+/[&]/g' #  \w+表示匹配每一个单词，使用[&]替换它，& 对应之前所匹配到的单词
+
+```
+
+#### 4.3.5 substitute 替换标记
+```bash
+$ g # 表示全局替换
+$ p # 表示打印行
+$ w # 表示把行写入一个文件
+$ x # 表示互换模板中的文本和缓冲区的文本
+$ y # 表示把第一个字符翻译成另外的字符
+$ \1 # 子串匹配标记
+$ & # 已匹配字符串标记
+
+$ sed 's/AAAA/TTTT/g' file # 全局替换
+$ # 定界符号一致均可
+$ sed 's#AAAA#TTTT#g' file 
+$ sed 's:AAAA:TTTT:g' file
+
+```
+
+#### 4.3.6 transform 转换
+```bash
+$ echo ATCG | sed 'y/ATCG/TAGC/' | rev # DNA反向互补
+```
+
+#### 4.3.7 quit 退出 
+```bash
+$ sed '100q' file # 打印前100行，然后退出
+```
 
 ### cut 
 
