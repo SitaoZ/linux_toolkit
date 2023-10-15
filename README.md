@@ -360,6 +360,49 @@ $ 1.3 一般函数
 $ # close, system, getline,
 ```
 ### grep
+grep(global search regular expression and print out the line),全面搜索正则表达式并把行打印。
+$ man grep 
+
+#### pattern syntax 
+```bash
+$ -E/--extended-regexp # 拓展的正则匹配
+$ -F/--fixed-strings   # 将模式固定，不支持正则表达
+$ -G/--basic-regexp    # 一般的正则表达
+$ -P/--perl-regexp     # perl正则
+```
+
+#### match control 
+
+```bash
+$ -e/--regexp # 指定字符串作为模式
+$ -f/--file   # 从文件中一行行读取作为模式
+$ -i//--ignore-case # 忽略大小写
+$ --no-ignore-case  # 不忽略大小写
+$ -v/--invert-match # 反向匹配
+$ -w/--word-regexp  # 匹配单词
+$ -x/--line-regexp  # 匹配整行
+```
+
+#### general outputy control
+```bash
+$ -c/--count # 打印出匹配的行数， 而不是输出行
+$ --color # 显示颜色
+$ -L/--files-without-match # 输出没有匹配的文件名
+$ -l/--files-with-matches  # 输出匹配的文件名
+$ -m/--max-count # 指定最大的匹配次数
+$ -o/--only-matching # 只打印出匹配的,同时显示文件名
+```
+
+#### output line prefix control
+```bash
+$ -b/--byte-offset # 输出匹配的位置，0-base开始；可以和-o配合使用
+$ -H/--with-filename # 打印出每个匹配的文件名
+$ -h/--no-filename   # 不打印文件名
+$ --lable # 转化输入文件成新的文件名，
+$ cat text.txt | grep --label=text 'aaa' -H -i
+$ -n/--line-number # 打印行号，1-based
+$ -T 
+```
 
 ### sed
 
