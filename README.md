@@ -129,7 +129,7 @@ $ locate  # 从数据库查找命令
 
 ### 3.5 用户管理
 ```bash
-$ useradd # 添加用户
+$ useradd # 添加用户, 注意Ubuntu命令不一致, adduser
 $ userdel # 删除用户
 $ groupadd #  添加用户组
 $ passwd   # 修改用户密码
@@ -155,13 +155,27 @@ $ telnet # 使用TELNET协议远程登录
 ```bash 
 $ scp    # secure copy 用于不同主机之间复制文件
 $ wget   # 下载文件
-$ ping   # 测试主机之间网络的联通性
+$ wget http://www.example.com/filename.txt -o /path/filename.txt
+$ wget -c http://example.com/samplefile.tar.gz # -c 恢复下载文件
+$ curl   # (client URL) transfer a URL 用于数据传输，支持各种传输协议
+$ man curl
+$ curl -# # --progress-bar 显示进度条
+$ curl -O # --remote-name 使用远程文件的文件名作为写入文件名
+```
+#### 3.6.3 网络配置
+```bash
+$ ifconfig # 查看、配置、重启或者禁用网络接口
+$ ip 
 ```
 
-#### 3.6.3 netstat 网络查询和控制
+#### 3.6.4 网络诊断
 ```bash
-$ ifconfig   # 查看、配置、重启或者禁用网络接口
-$
+$ ping   # 测试主机之间网络的联通性
+$ mtr    # mytraceroute，它集成了 ping、 traceroute、 nslookup 的功能，诊断网络问题非常方便
+$ mtr -n www.baidu.com
+```
+#### 3.6.5 网络连接
+```bash 
 $ netstat    # 查看网络状态
 $ netstat -ntpl # 查询TCP类型端口
 $ # -n/--numeric 显示数字地址
@@ -173,6 +187,13 @@ $ ss         # 查看网络状态
 ```
 
 [TCP/UDP/PORT](https://zhuanlan.zhihu.com/p/57987304)
+
+#### 3.6.6 流量统计
+```bash
+$ man ifstat
+$ man sar
+$ 
+```
 
 ### 3.7 文件处理
 ```bash
