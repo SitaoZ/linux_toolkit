@@ -140,16 +140,39 @@ $
 ```
 
 ### 3.6 网络操作
+
+#### 3.6.1 远程登陆 
+SSH(secure shell protocol)安全外壳协议，一种加密的网络传输协定
 ```bash
 $ ssh    # 使用SHH加密协议远程登录
+$ man ssh
+$ ssh -p 22 username@ip # 远程指定端口登陆
+$
 $ telnet # 使用TELNET协议远程登录
+```
+
+#### 3.6.2 文件下载和拷贝
+```bash 
 $ scp    # secure copy 用于不同主机之间复制文件
 $ wget   # 下载文件
 $ ping   # 测试主机之间网络的联通性
+```
+
+#### 3.6.3 netstat 网络查询和控制
+```bash
 $ ifconfig   # 查看、配置、重启或者禁用网络接口
+$
 $ netstat    # 查看网络状态
+$ netstat -ntpl # 查询TCP类型端口
+$ # -n/--numeric 显示数字地址
+$ # -t/--tcp     显示tcp, transmission control protocol 传输控制协议
+$ # -p/--program 显示占用的程序
+$ # -l/--listen  正在监听
+$ netstat -nupl # 查询UDP 端口类型
 $ ss         # 查看网络状态
 ```
+
+[TCP/UDP/PORT](https://zhuanlan.zhihu.com/p/57987304)
 
 ### 3.7 文件处理
 ```bash
