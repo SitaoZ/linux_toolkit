@@ -161,6 +161,12 @@ $ wget -nc -P ~/refs http://geneontology.org/ontology/go-basic.obo
 $ # -nc/--no-clobber 文件只下载一次，如果文件已经下载在~/refs目录，则不需要重复下载
 $ # -P/--prefix-directory 目录前缀， 默认是当前目录
 
+$ wget -r -np -nH -R index.html  http://data.biostarhandbook.com/circos/config/ # 下载目录和其中全部文件
+$ # -r/--recursive 遍历所有子目录
+$ # -np/--no-parent 不到父目录去
+$ # -nH/--no-host-directories 不要将文件保存到主机名文件夹
+$ # -R/--reject index.html 不下载index.html文件
+
 $ curl   # (client URL) transfer a URL 用于数据传输，支持各种传输协议
 $ man curl
 $ curl -# # --progress-bar 显示进度条
