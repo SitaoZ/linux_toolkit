@@ -157,10 +157,15 @@ $ scp    # secure copy 用于不同主机之间复制文件
 $ wget   # 下载文件
 $ wget http://www.example.com/filename.txt -o /path/filename.txt
 $ wget -c http://example.com/samplefile.tar.gz # -c 恢复下载文件
+$ wget -nc -P ~/refs http://geneontology.org/ontology/go-basic.obo
+$ # -nc/--no-clobber 文件只下载一次，如果文件已经下载在~/refs目录，则不需要重复下载
+$ # -P/--prefix-directory 目录前缀， 默认是当前目录
+
 $ curl   # (client URL) transfer a URL 用于数据传输，支持各种传输协议
 $ man curl
 $ curl -# # --progress-bar 显示进度条
 $ curl -O # --remote-name 使用远程文件的文件名作为写入文件名
+$ curl -O http://data.biostarhandbook.com/rnaseq/mouse-gene-expression.txt
 ```
 #### 3.6.3 网络配置
 ```bash
