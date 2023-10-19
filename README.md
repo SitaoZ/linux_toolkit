@@ -665,8 +665,11 @@ $ cut -d ',' -f1 GSE87822_runinfo.csv | grep SRR | xargs fastq-dump
 
 ```
 [database name](https://www.ncbi.nlm.nih.gov/books/NBK25497/table/chapter2.T._entrez_unique_identifiers_ui/?report=objectonly)
+
 [NCBI edirect guide](https://www.nlm.nih.gov/dataguide/eutilities/utilities.html)
+
 [NCBI esearch guide](https://www.nlm.nih.gov/dataguide/edirect/esearch.html)
+
 [stowers institute example](https://research.stowers.org/cws/CompGenomics/Tutorial/geo.html)
 
 
