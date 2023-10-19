@@ -653,7 +653,22 @@ $ efetch -db pubmed -id 25359968 -format medline
 $ efetch -db pubmed -id 26287646 -format xml
 # 以 abstract下载多个文献
 $ efetch -db pubmed -id 24102982,21171099,17150207 -format abstract
+
+
+$ esearch -db sra -query PRJNA830912 | efetch -format summary > summary.xml # 根据项目编号下载
+$ # 下载GEO数据库
+$ esearch -db gds -query GSE201349 | efetch > GSE201349.txt
+
+$ # 下载SRA run的信息
+$ esearch -db sra -query PRJNA347885 | efetch --format runinfo > GSE87822_runinfo.csv
+$ cut -d ',' -f1 GSE87822_runinfo.csv | grep SRR | xargs fastq-dump
+
 ```
+[database name](https://www.ncbi.nlm.nih.gov/books/NBK25497/table/chapter2.T._entrez_unique_identifiers_ui/?report=objectonly)
+[NCBI edirect guide](https://www.nlm.nih.gov/dataguide/eutilities/utilities.html)
+[NCBI esearch guide](https://www.nlm.nih.gov/dataguide/edirect/esearch.html)
+[stowers institute example](https://research.stowers.org/cws/CompGenomics/Tutorial/geo.html)
+
 
 3.数据检查
 文件下载后需要对文件进行检查，确保文件在下载中没有出现错误，导致文件不完整。
