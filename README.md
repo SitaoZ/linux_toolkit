@@ -687,7 +687,12 @@ $ # PRJNA257197	SAMN03253744	SRR1972974
 $ # PRJNA257197	SAMN03254300	SRR1972973
 $ # PRJNA257197	SAMN03254299	SRR1972972
 
-$ bash sra-runinfo.sh 2022 10 # Downloading SRA run info for Year=2022 Month=10 
+$ bash sra-runinfo.sh 2022 10 # Downloading SRA run info for Year=2022 Month=10
+
+$ #运用上述脚本，下载2007-2020的测序数据，结合csvkit (pip install csvkit) 统计不同条件下的频数
+$ cat allruns.csv | csvcut -c 29 | sort | uniq -c | sort -rn | head # 物种测的数据频数
+$ cat allruns.csv | csvcut -c 19 | sort | uniq -c | sort -rn | head # 测序公司频数
+$ cat allruns.csv | csvcut -c 20 | sort | uniq -c | sort -rn | head # 测序仪频数
 ```
 [NBK25497, database name](https://www.ncbi.nlm.nih.gov/books/NBK25497/table/chapter2.T._entrez_unique_identifiers_ui/?report=objectonly)
 
