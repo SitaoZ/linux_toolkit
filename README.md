@@ -679,8 +679,17 @@ $ # 下载SRA run的信息
 $ esearch -db sra -query PRJNA347885 | efetch --format runinfo > GSE87822_runinfo.csv
 $ cut -d ',' -f1 GSE87822_runinfo.csv | grep SRR | xargs fastq-dump
 
+$ esearch -db sra -query PRJNA257197 | efetch -format docsum > docsum.xml
+$ cat docsum.xml | xtract -pattern DocumentSummary -element Bioproject,Biosample,Run@acc | head -n 5
+$ # PRJNA257197	SAMN03253746	SRR1972976
+$ # PRJNA257197	SAMN03253745	SRR1972975
+$ # PRJNA257197	SAMN03253744	SRR1972974
+$ # PRJNA257197	SAMN03254300	SRR1972973
+$ # PRJNA257197	SAMN03254299	SRR1972972
+
+$ bash sra-runinfo.sh 2022 10 # Downloading SRA run info for Year=2022 Month=10 
 ```
-[database name](https://www.ncbi.nlm.nih.gov/books/NBK25497/table/chapter2.T._entrez_unique_identifiers_ui/?report=objectonly)
+[NBK25497, database name](https://www.ncbi.nlm.nih.gov/books/NBK25497/table/chapter2.T._entrez_unique_identifiers_ui/?report=objectonly)
 
 [NCBI edirect guide](https://www.nlm.nih.gov/dataguide/eutilities/utilities.html)
 
