@@ -155,6 +155,7 @@ $ telnet # 使用TELNET协议远程登录
 ```bash 
 $ scp    # secure copy 用于不同主机之间复制文件
 $ wget   # 下载文件
+$ wget http://data.biostarhandbook.com/data/sequencing-adapters.fa # sequencing adapter
 $ wget http://www.example.com/filename.txt -o /path/filename.txt
 $ wget -c http://example.com/samplefile.tar.gz # -c 恢复下载文件
 $ wget -nc -P ~/refs http://geneontology.org/ontology/go-basic.obo
