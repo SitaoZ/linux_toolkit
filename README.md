@@ -2,7 +2,7 @@
 Linux commands and tricks in bioinformatics  
 ## Table of content
 * [One-liner](#One-liner)
-* [linux symbol](#linux symbol)
+* [linux-symbol](#linux-symbol)
 
 
 ## One-liner
