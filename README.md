@@ -3,6 +3,8 @@ Linux commands and tricks in bioinformatics
 ## Table of content
 * [One-liner](#One-liner)
 * [Linux symbol](#linux-symbol)
+* [shell 常用命令](#shell-常用命令)
+*   [系统命令](#系统命令)
 
 
 ## One-liner
@@ -84,9 +86,9 @@ $ $@ 获取所有对应的参数值
 
 ```
 
-## 3. shell 常用命令
+## shell 常用命令
 
-### 3.1 系统命令
+### 系统命令
 ```bash
 $ uname -a # 显示系统和内核
 $ hostname # 显示当前系统的主机名
