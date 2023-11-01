@@ -7,8 +7,42 @@ Linux commands and tricks in bioinformatics
   * [系统命令](#系统命令)
   * [系统用户登录信息](#系统用户登录信息)
   * [文件夹操作](#文件夹操作)
-
-
+  * [查找文件](#查找文件)
+  * [用户管理](#用户管理)
+  * [网络操作](#网络操作)
+    * [远程登陆](#远程登陆)
+    * [文件下载和拷贝](#文件下载和拷贝)
+    * [网络配置](#网络配置)
+    * [网络诊断](#网络诊断)
+    * [网络连接](#网络连接)
+    * [流量统计](#流量统计)
+   * [文件处理](#文件处理)
+   * [文件权限](#文件权限)
+   * [进程管理](#进程管理)
+ * [Linux三剑客](#Linux三剑客)
+   * [awk](#awk)
+   * [grep](#grep)
+     * [pattern syntax](#pattern-syntax)
+     * [match control](#match-control)
+     * [general output control](#general-output-control)
+     * [output line prefix control](#output-line-prefix-control)
+     * [context line control](#context-line-control)
+     * [grep 正则表达式](#grep-正则表达式)
+    * [sed](#sed)
+      * [sed 参数](sed-参数)
+      * [动作说明](#动作说明)
+      * [print 打印命令](#print-打印命令)
+      * [deletion 删除命令](#deletion-删除命令)
+      * [substitute 替换标记](#substitute-替换标记)
+      * [transform 转换](#transform-转换)
+      * [quit 退出](#quit-退出)
+   * [Vim](#Vim)
+   * [库文件](#库文件)
+   * [Conda tips](#Conda-tips)
+   * [Data download](#Data-download)
+   * [Bio format](#Bio-format)
+     * [FASTA](#FASTA)
+     * [BAM](#BAM)
 ## One-liner
 ```bash
 $ history | awk '{a[$2]++} END{for(i in a){print a[i]" "i}}' | sort -rn | head # 列出常用的命令
@@ -126,7 +160,7 @@ $ cd dir    # 进入dir目录 change directory to dir
 $ cd ..     # 进入上一个层级目录 go up a directory 
 $ ls        # 列出文件 list files
 ```
-### 3.4 查找文件
+### 查找文件
 ```bash
 $ find  dir -name *fasta # 在dir 目录下查找后缀为fasta的文件
 $ whereis # 给命令找到二进制，源代码和手册文件
@@ -134,7 +168,7 @@ $ which   # 查找二进制命令，按环境变量PATH的路径找
 $ locate  # 从数据库查找命令
 ```
 
-### 3.5 用户管理
+### 用户管理
 ```bash
 $ useradd # 添加用户, 注意Ubuntu命令不一致, adduser
 $ userdel # 删除用户
@@ -146,9 +180,9 @@ $ sudo     # 以另外一个身份执行sudoers文件中允许的命令
 $ 
 ```
 
-### 3.6 网络操作
+### 网络操作
 
-#### 3.6.1 远程登陆 
+#### 远程登陆 
 SSH(secure shell protocol)安全外壳协议，一种加密的网络传输协定
 ```bash
 $ ssh    # 使用SHH加密协议远程登录
@@ -158,7 +192,7 @@ $
 $ telnet # 使用TELNET协议远程登录
 ```
 
-#### 3.6.2 文件下载和拷贝
+#### 文件下载和拷贝
 ```bash 
 $ scp    # secure copy 用于不同主机之间复制文件
 $ wget   # 下载文件
@@ -181,19 +215,19 @@ $ curl -# # --progress-bar 显示进度条
 $ curl -O # --remote-name 使用远程文件的文件名作为写入文件名
 $ curl -O http://data.biostarhandbook.com/rnaseq/mouse-gene-expression.txt
 ```
-#### 3.6.3 网络配置
+#### 网络配置
 ```bash
 $ ifconfig # 查看、配置、重启或者禁用网络接口
 $ ip 
 ```
 
-#### 3.6.4 网络诊断
+#### 网络诊断
 ```bash
 $ ping   # 测试主机之间网络的联通性
 $ mtr    # mytraceroute，它集成了 ping、 traceroute、 nslookup 的功能，诊断网络问题非常方便
 $ mtr -n www.baidu.com
 ```
-#### 3.6.5 网络连接
+#### 网络连接
 ```bash 
 $ netstat    # 查看网络状态
 $ netstat -ntpl # 查询TCP类型端口
@@ -207,14 +241,14 @@ $ ss         # 查看网络状态
 
 [TCP/UDP/PORT](https://zhuanlan.zhihu.com/p/57987304)
 
-#### 3.6.6 流量统计
+#### 流量统计
 ```bash
 $ man ifstat
 $ man sar
 $ 
 ```
 
-### 3.7 文件处理
+### 文件处理
 ```bash
 $ touch filea     # 创建文件 create file 
 $ cat file1 file2 # 合并文件1和2 concatenate files and output
@@ -238,7 +272,7 @@ $ echo agctagtcg | tr a-z A-Z | tr ATCG TAGC | rev # 反向互补DNA序列
 
 ```
 
-### 3.8 文件权限
+### 文件权限
 ```bash
 $ chmod 755 file1            # change mode of file
 $ chomod -R zhusitao folder  # recursively chmod folder to zhusitao
@@ -250,7 +284,7 @@ $
 ```
 
 
-### 3.9 进程管理
+### 进程管理
 
 ```bash
 $ ps         # 查看进程 show snapshoot of processes
@@ -259,8 +293,8 @@ $ kii pid    # 删除进程 kill process with id pid
 $ pkill name # 使用程序名称删除进程 kill process with name 
 ```
 
-## 4. linux三剑客
-### 4.1 awk
+## Linux三剑客
+### awk
 文本处理的工具之一,[awk](https://wangchujiang.com/linux-command/c/awk.html)
 ```bash
 $ man awk
@@ -422,11 +456,11 @@ $ awk 'BEGIN{info="this is a test";split(info,tA," ");print length(tA);for(k in 
 $ 1.3 一般函数
 $ # close, system, getline,
 ```
-### 4.2 grep
+### grep
 grep(global search regular expression and print out the line),全面搜索正则表达式并把行打印。
 $ man grep 
 
-#### 4.2.1 pattern syntax 
+#### pattern syntax 
 ```bash
 $ -E/--extended-regexp # 拓展的正则匹配
 $ -F/--fixed-strings   # 将模式固定，不支持正则表达
@@ -434,7 +468,7 @@ $ -G/--basic-regexp    # 一般的正则表达
 $ -P/--perl-regexp     # perl正则
 ```
 
-#### 4.2.2 match control 
+#### match control 
 
 ```bash
 $ -e/--regexp # 指定字符串作为模式
@@ -446,7 +480,7 @@ $ -w/--word-regexp  # 匹配单词
 $ -x/--line-regexp  # 匹配整行
 ```
 
-#### 4.2.3 general outputy control
+#### general output control
 ```bash
 $ -c/--count # 打印出匹配的行数， 而不是输出行
 $ --color    # 显示颜色
@@ -456,7 +490,7 @@ $ -m/--max-count     # 指定最大的匹配次数
 $ -o/--only-matching # 只打印出匹配的,同时显示文件名
 ```
 
-#### 4.2.4 output line prefix control
+#### output line prefix control
 ```bash
 $ -b/--byte-offset   # 输出匹配的位置，0-base开始；可以和-o配合使用
 $ -H/--with-filename # 打印出每个匹配的文件名
@@ -467,7 +501,7 @@ $ -n/--line-number   # 打印行号，1-based
 $ -T/--initial-tab   # 在匹配的文件前使用一个tab符号, 结合-H, -n, -b效果更佳
 ```
 
-#### 4.2.5 context line control 
+#### context line control 
 
 ```bash
 $ -A/--after-context  # 打印匹配行后面NUM行
@@ -475,7 +509,7 @@ $ -B/--before-context # 打印匹配文件前面NUM行
 $ -C/--context        # 打印前后NUM行
 ```
 
-#### 4.2.6 grep 正则表达式
+#### grep 正则表达式
 ```bash
 $ ^ # 锚定行的开始 
 $ $ # 锚定行的结束
@@ -492,7 +526,7 @@ $ x\{m, n\}} # 重复字符x, 至少m次，至多n次
 $ \w # 匹配文字或数字字符 [a-zA-Z0-9]
 ```
 
-### 4.3 sed
+### sed
 sed (stream editor for filtering and transforming text)流式编辑器
 ```bash
 $ # 命令格式
@@ -501,7 +535,7 @@ $ sed [options] -f scriptfile file(s)
 $ # 每个command 由最多两个地址addresses和一个动作action组成,
 $ # 每个address可以是正则表达式或者行数，动作见4.3.2
 ```
-#### 4.3.1 sed 参数
+#### sed 参数
 ```bash
 $ -e/--expression # 传入脚本到命令行执行
 $ -f/--file       # 从文件传入命令执行
@@ -512,7 +546,7 @@ $ -V/--version # 显示版本信息
 $ -h/--help # 显示帮助信息
 ```
 
-#### 4.3.2 动作说明
+#### 动作说明
 
 a: 新增 append 
 c: 取代 change
@@ -523,12 +557,12 @@ s: 取代 substitute
 y: 转换 transform
 q: 退出 quit
 
-#### 4.3.3 print 打印命令
+#### print 打印命令
 ```bash
 $ sed -n '1,5p' # 打印第一行到第五行
 ```
 
-#### 4.3.4 deletion 删除命令
+#### deletion 删除命令
 ```bash
 $ d
 $ sed '/^$/d' file # 去除所有的空白行
@@ -544,7 +578,7 @@ $ echo this is a test line | sed 's/\w\+/[&]/g' #  \w+表示匹配每一个单�
 
 ```
 
-#### 4.3.5 substitute 替换标记
+#### substitute 替换标记
 ```bash
 $ g # 表示全局替换
 $ p # 表示打印行
@@ -568,19 +602,19 @@ $ echo this is digit 7 in a number | sed 's/digit \([0-9]\)/\1/'
 
 ```
 
-#### 4.3.6 transform 转换
+#### transform 转换
 ```bash
 $ echo ATCG | sed 'y/ATCG/TAGC/' | rev # DNA反向互补
 ```
 
-#### 4.3.7 quit 退出 
+#### quit 退出 
 ```bash
 $ sed '100q' file # 打印前100行，然后退出
 ```
 [sed lecture](https://cs.nyu.edu/~mohri/unix08/lect5.pdf)
 
 
-## 5 Vim
+## Vim
 Vim编辑器
 
 ```bash
