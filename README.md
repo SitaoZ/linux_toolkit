@@ -2,11 +2,11 @@
 Linux commands and tricks in bioinformatics
 目录
 ===
-* [1. One-liner](#1. One-liner)
+* [One-liner](#One-liner)
 * [2. linux 特殊符号](#2. linux 特殊符号)
 
 
-## 1. One-liner
+## One-liner
 ```bash
 $ history | awk '{a[$2]++} END{for(i in a){print a[i]" "i}}' | sort -rn | head # 列出常用的命令
 $ wtach vmstat -sSM     # 实时监控
