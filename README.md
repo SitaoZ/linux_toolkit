@@ -2,7 +2,7 @@
 Linux commands and tricks in bioinformatics  
 ## Table of content
 * [One-liner](#One-liner)
-* [linux symbol](#linux-symbol)
+* [Linux symbol](#linux-symbol)
 
 
 ## One-liner
@@ -13,7 +13,7 @@ $ vmstat -sSM           # 监控一次
 $ du -h -d 1 | sort -rh # 找出最大文件夹
 ```
 
-## linux symbol
+## Linux symbol
 linux中一些符号具有特定的含义，需要注意
 ```bash
 $ # # 井号 (comments)
