@@ -3,7 +3,7 @@ Linux commands and tricks in bioinformatics
 目录
 ===
 * [One-liner](#One-liner)
-* [2. linux 特殊符号](#2. linux 特殊符号)
+* [linux 特殊符号](#linux 特殊符号)
 
 
 ## One-liner
@@ -14,7 +14,7 @@ $ vmstat -sSM           # 监控一次
 $ du -h -d 1 | sort -rh # 找出最大文件夹
 ```
 
-## 2. linux 特殊符号
+## linux 特殊符号
 linux中一些符号具有特定的含义，需要注意
 ```bash
 $ # # 井号 (comments)
