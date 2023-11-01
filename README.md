@@ -4,7 +4,9 @@ Linux commands and tricks in bioinformatics
 * [One-liner](#One-liner)
 * [Linux symbol](#linux-symbol)
 * [shell 常用命令](#shell-常用命令)
-*   [系统命令](#系统命令)
+  * [系统命令](#系统命令)
+  * [系统用户登录信息](#系统用户登录信息)
+  * [文件夹操作](#文件夹操作)
 
 
 ## One-liner
@@ -106,7 +108,7 @@ $ swapon # 启用交换分区
 $ swapoff # 关闭交换分区
 ```
 
-### 3.2 系统用户登录信息
+### 系统用户登录信息
 ```bash
 $ whoami  # 显示当前用户的名称
 $ who     # 显示目前系统的用户信息
@@ -116,7 +118,7 @@ $ lastlog # 显示当前系统中所有用户最近一次的登陆信息
 $ users   # 显示当前登录系统的所有用户
 ```
 
-### 3.3 文件夹操作
+### 文件夹操作
 ```bash
 $ pwd       # 显示当前文件夹 print working dir
 $ mkdir dir # 创建目录 make directory 
