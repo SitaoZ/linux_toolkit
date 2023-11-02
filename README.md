@@ -46,9 +46,25 @@ Linux commands and tricks in bioinformatics
 ## One-liner
 ```bash
 $ history | awk '{a[$2]++} END{for(i in a){print a[i]" "i}}' | sort -rn | head # 列出常用的命令
-$ wtach vmstat -sSM     # 实时监控
+$ watch vmstat -sSM     # 实时监控
 $ vmstat -sSM           # 监控一次
 $ du -h -d 1 | sort -rh # 找出最大文件夹
+$ cat file.txt | sort | uniq -c | sort -k1nr | head # 排序找出现最多的
+$ echo $PATH | tr ":" "\n" | nl # 打印全部路径按行排列
+$ sed '/^$/d' file.txt # 去除空白行
+$ grep -v '^$' file.txt # 去除空白行
+$ awk '/./' file.txt    # 去除空白行
+$ cat file.txt | tr -s "\n" # 去除空白行
+$ 交错排布read1和2
+$ paste <(paste - - - - < reads-1.fastq) \
+      <(paste - - - - < reads-2.fastq) \
+    | tr '\t' '\n' \
+    > reads-int.fastq
+$ 分开read1和2
+$ paste - - - - - - - - < reads-int.fastq \
+    | tee >(cut -f 1-4 | tr '\t' '\n' > reads-1.fastq) \
+    | cut -f 5-8 | tr '\t' '\n' > reads-2.fastq
+
 ```
 
 ## Linux symbol
