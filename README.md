@@ -19,7 +19,7 @@ Linux commands and tricks in bioinformatics
    * [文件处理](#文件处理)
    * [文件权限](#文件权限)
    * [进程管理](#进程管理)
- * [Linux三剑客](#Linux三剑客)
+* [Linux三剑客](#Linux三剑客)
    * [awk](#awk)
    * [grep](#grep)
      * [pattern syntax](#pattern-syntax)
@@ -28,21 +28,21 @@ Linux commands and tricks in bioinformatics
      * [output line prefix control](#output-line-prefix-control)
      * [context line control](#context-line-control)
      * [grep 正则表达式](#grep-正则表达式)
-    * [sed](#sed)
-      * [sed 参数](sed-参数)
-      * [动作说明](#动作说明)
-      * [print 打印命令](#print-打印命令)
-      * [deletion 删除命令](#deletion-删除命令)
-      * [substitute 替换标记](#substitute-替换标记)
-      * [transform 转换](#transform-转换)
-      * [quit 退出](#quit-退出)
-   * [Vim](#Vim)
-   * [库文件](#库文件)
-   * [Conda tips](#Conda-tips)
-   * [Data download](#Data-download)
-   * [Bio format](#Bio-format)
-     * [FASTA](#FASTA)
-     * [BAM](#BAM)
+   * [sed](#sed)
+     * [sed 参数](sed-参数)
+     * [动作说明](#动作说明)
+     * [print 打印命令](#print-打印命令)
+     * [deletion 删除命令](#deletion-删除命令)
+     * [substitute 替换标记](#substitute-替换标记)
+     * [transform 转换](#transform-转换)
+     * [quit 退出](#quit-退出)
+* [Vim](#Vim)
+* [库文件](#库文件)
+* [Conda tips](#Conda-tips)
+* [Data download](#Data-download)
+* [Bio format](#Bio-format)
+   * [FASTA](#FASTA)
+   * [BAM](#BAM)
 ## One-liner
 ```bash
 $ history | awk '{a[$2]++} END{for(i in a){print a[i]" "i}}' | sort -rn | head # 列出常用的命令
@@ -55,6 +55,8 @@ $ sed '/^$/d' file.txt # 去除空白行
 $ grep -v '^$' file.txt # 去除空白行
 $ awk '/./' file.txt    # 去除空白行
 $ cat file.txt | tr -s "\n" # 去除空白行
+$ echo 'ATTGCTATGCTNNNT' | rev | tr 'ACTG' 'TGAC' # 反向互补序列
+$ zcat file.fastq.gz | awk 'NR%4 == 2 {lengths[length($0)]++} END {for (l in lengths) {print l, lengths[l]}}'  # fastq长度分布
 $ 交错排布read1和2
 $ paste <(paste - - - - < reads-1.fastq) \
       <(paste - - - - < reads-2.fastq) \
