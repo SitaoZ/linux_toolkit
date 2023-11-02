@@ -333,8 +333,10 @@ $ 操作主要包括：有一个或者多个命令、函数、表达式组成，
 $             包括。变量数组赋值，输出命令，内置函数和控制语句
 
 $ awk 'BEGIN{ print "start" } pattern{ commands } END{ print "end" }' file # 三个语句块都是可选的
+```
 
-$ awk 的内置变量
+#### awk 内置变量
+```bash
 $ ARGC 命令行参数数目
 $ ARGV 包含命令行参数的数组
 $ FILENAME 当前文件名
@@ -345,12 +347,12 @@ $ RS 记录分割符, 默认是一个换行符
 $ ORS 输出记录分隔符，默认是一个换行符
 $ NF 字段数
 $ NR 文件行号，记录数
-
 $ awk 传入外部变量
 $ awk -v variable=100 '{print $variable}' files
+```
 
-$ awk 运算与判断
-
+#### awk 运算与判断
+```bash
 $ awk 算术运算符
 $ # + - 加减
 $ awk '{print $1-1, $1+2}' files
@@ -368,7 +370,9 @@ $ 逻辑运算符
 $ || 逻辑或
 $ && 逻辑与
 $ awk 'BEGIN{a=1;b=2;print (a>5 && b<=2),(a>5 || b<=2);}'
-
+```
+#### awk 正则运算
+```bash 
 $ 正则运算符
 $ ~, !~
 $ ^ 行首
@@ -389,8 +393,9 @@ $ 正则需要用 /正则/ 包围
 
 $ 关系运算符
 $ <, <=, >, >=, !=, ==
-
-$ AWK 读取
+```
+#### awk 读取
+```bash
 $ # next 语句
 $ awk 'NR%4==3{next}{print NR,$0}' fastqs # 去读fastq文件，判断去除其第三行
 $ next 语句，循环逐行匹配，匹配就跳过，然后进行下一行匹配，next一般用于多行合并
@@ -416,8 +421,10 @@ $ getline 当其左右有重定向符|或<时：getline作用于输入文件，
 
 $ awk 'BEGIN{ "date" | getline out; split(out,mon); print mon[2] }'
 $ seq 5 | awk 'BEGIN{getline; print "The first line "$0};{print $0}'
+```
 
-$ 流程控制语句
+#### awk 流程控制
+```bash
 $ while, for, do-while; break, continue语句控制流程
 $ break 退出循环; continue 中断当前正在执行的循环并跳到下一循环。
 
@@ -449,17 +456,18 @@ for(i=0;i<=100;i++){
 }
 print total;
 }'
+```
 
-
-$ 数组应用
+#### awk 数组应用
+```bash
 $ # awk 数组应用十分便利。数组不必提前声明
 $ # 数组下标1-based
 $ # Array[1] = 'AAAA'
 $ # split 分割函数 and length 函数
 $ awk 'BEGIN{info="it is a test";lens=split(info,tA," ");print length(tA),lens;}'
-
-$ awk 内置函数
-
+```
+#### awk 内置函数
+```bash
 $ 1.1 awk 算术函数
 $ # atan2, cos, sin, exp, log, sqrt, int, rand, strand
 
@@ -474,6 +482,7 @@ $ awk 'BEGIN{info="this is a test";split(info,tA," ");print length(tA);for(k in 
 $ 1.3 一般函数
 $ # close, system, getline,
 ```
+
 ### grep
 grep(global search regular expression and print out the line),全面搜索正则表达式并把行打印。
 $ man grep 
