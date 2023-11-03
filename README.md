@@ -743,6 +743,7 @@ $ efetch -db pubmed -id 24102982,21171099,17150207 -format abstract
 $ esearch -db sra -query PRJNA830912 | efetch -format summary > summary.xml # 根据项目编号下载
 $ # 下载GEO数据库
 $ esearch -db gds -query GSE201349 | efetch > GSE201349.txt
+$ esearch -db sra -query GSE201349 |efetch -format docsum | xtract -pattern DocumentSummary -element Run@acc
 
 $ # 下载SRA run的信息
 $ esearch -db sra -query PRJNA347885 | efetch --format runinfo > GSE87822_runinfo.csv
