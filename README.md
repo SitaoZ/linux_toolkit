@@ -22,6 +22,13 @@ Linux commands and tricks in bioinformatics
    * [进程管理](#进程管理)
 * [Linux三剑客](#Linux三剑客)
    * [awk](#awk)
+     * [awk 内置变量](#awk-内置变量)
+     * [awk 运算与判断](#awk-运算与判断)
+     * [awk 正则运算](#awk-正则运算)
+     * [awk 读取](#awk-读取)
+     * [awk 流程控制](#awk-流程控制)
+     * [awk 数组应用](#awk-数组应用)
+     * [awk 内置函数](#awk-内置函数)
    * [grep](#grep)
      * [pattern syntax](#pattern-syntax)
      * [match control](#match-control)
@@ -342,15 +349,16 @@ $ awk执行方式
 $ awk [options] 'script' file(s)
 $ awk [options] -f scriptfile files(s)
 
-$ awk 模式和操作
-$ 模式主要包括: /正则表达式/: 使用通配符;
+$ awk 'BEGIN{ print "start" } pattern{ commands } END{ print "end" }' file # 三个语句块都是可选的
+
+$ awk 模式和操作 # pattern {action statement}
+$ 模式(pattern)主要包括: /正则表达式/: 使用通配符;
 $            关系表达式: 使用运算符进行操作;
 $            模式匹配表达式: ~匹配 和 !~不匹配;
 $            BEGIN语句、pattern语句、END语句;
-$ 操作主要包括：有一个或者多个命令、函数、表达式组成，用换行符和分号隔开，并位于大括号内
-$             包括。变量数组赋值，输出命令，内置函数和控制语句
+$ 操作(action)主要包括：有一个或者多个命令、函数、表达式组成，用换行符和分号隔开，并位于大括号内。包括变量数组赋值，输出命令，内置函数和控制语句
 
-$ awk 'BEGIN{ print "start" } pattern{ commands } END{ print "end" }' file # 三个语句块都是可选的
+
 ```
 
 #### awk 内置变量
@@ -359,11 +367,11 @@ $ ARGC 命令行参数数目
 $ ARGV 包含命令行参数的数组
 $ FILENAME 当前文件名
 $ FNR 当前文件的行号，记录数
-$ FS 字符分割符号，默认是空格
-$ OFS 输出字段分隔符号，默认是一个空格
+$ FS 字符分割符号，默认是空格 Field Separator
+$ OFS 输出字段分隔符号，默认是一个空格, Output Record Separator
 $ RS 记录分割符, 默认是一个换行符
 $ ORS 输出记录分隔符，默认是一个换行符
-$ NF 字段数
+$ NF 字段数 Number of Fields
 $ NR 文件行号，记录数
 $ awk 传入外部变量
 $ awk -v variable=100 '{print $variable}' files
