@@ -2,6 +2,7 @@
 Linux commands and tricks in bioinformatics  
 ## Table of content
 * [One-liner](#One-liner)
+* [Linux bash strict model](#Linux-bash-strict-model)
 * [Linux symbol](#linux-symbol)
 * [shell 常用命令](#shell-常用命令)
   * [系统命令](#系统命令)
@@ -67,6 +68,23 @@ $ paste - - - - - - - - < reads-int.fastq \
     | tee >(cut -f 1-4 | tr '\t' '\n' > reads-1.fastq) \
     | cut -f 5-8 | tr '\t' '\n' > reads-2.fastq
 
+```
+## Linux bash strict model 
+Linux bash strict model非官方模式，和perl `use strict;`类似。
+```bash
+$ set -e # error exit，当一个未处理的错误出现时立刻跳出程序，不会继续执行。
+$ set -u # 当调用没有设置的变量时，报错。
+$ set -o pipefail # 设置pipefail时，如果多级管道报错，会导致整个管道程序报错。
+```
+IFS
+```
+$ IFS # interval Field Separator，分隔符，会影响split函数
+$ IFS=$' '
+$ items='a b c'
+$ for x in $items;
+$ do 
+$	 echo $x;
+$ done 
 ```
 
 ## Linux symbol
