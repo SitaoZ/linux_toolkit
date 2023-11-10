@@ -52,19 +52,39 @@ Linux commands and tricks in bioinformatics
    * [FASTA](#FASTA)
    * [BAM](#BAM)
 ## One-liner
+### 基本文件处理
 ```bash
 $ history | awk '{a[$2]++} END{for(i in a){print a[i]" "i}}' | sort -rn | head # 列出常用的命令
+
 $ watch vmstat -sSM     # 实时监控
 $ vmstat -sSM           # 监控一次
+
 $ du -h -d 1 | sort -rh # 找出最大文件夹
+
 $ cat file.txt | sort | uniq -c | sort -k1nr | head # 排序找出现最多的
+
 $ echo $PATH | tr ":" "\n" | nl # 打印全部路径按行排列
+
 $ sed '/^$/d' file.txt # 去除空白行
 $ grep -v '^$' file.txt # 去除空白行
 $ awk '/./' file.txt    # 去除空白行
 $ cat file.txt | tr -s "\n" # 去除空白行
+
 $ echo 'ATTGCTATGCTNNNT' | rev | tr 'ACTG' 'TGAC' # 反向互补序列
-$ zcat file.fastq.gz | awk 'NR%4 == 2 {lengths[length($0)]++} END {for (l in lengths) {print l, lengths[l]}}'  # fastq长度分布
+```
+### fastq处理
+```
+$ # fastq长度分布
+$ zcat file.fastq.gz | awk 'NR%4 == 2 {lengths[length($0)]++} END {for (l in lengths) {print l, lengths[l]}}'  
+$ # 过滤掉小片段fastq
+$ awk 'BEGIN {OFS = "\n"} {header = $0 ; getline seq ; getline qheader ; getline qseq ; \
+  if (length(seq) >= 10000) {print ">"header, seq}}' < input_reads.fastq > filtered_gt10kb.fasta 
+$ # 保留区间的长度
+$ awk 'BEGIN {OFS = "\n"} {header = $0 ; getline seq ; getline qheader ; getline qseq ; \
+  if (length(seq) >= 10000 && length(seq) <= 20000) {print header, seq, qheader, qseq}}' < input.fastq > filtered_10kb-20kb.fastq
+$ # 计算fastq的碱基数
+$ awk 'BEGIN{sum=0;}{if(NR%4==2){sum+=length($0);}}END{print sum;}' sequences.fastq 
+$ 
 $ 交错排布read1和2
 $ paste <(paste - - - - < reads-1.fastq) \
       <(paste - - - - < reads-2.fastq) \
@@ -74,8 +94,18 @@ $ 分开read1和2
 $ paste - - - - - - - - < reads-int.fastq \
     | tee >(cut -f 1-4 | tr '\t' '\n' > reads-1.fastq) \
     | cut -f 5-8 | tr '\t' '\n' > reads-2.fastq
-
 ```
+### samtools处理
+```
+$ # 计算基因组覆盖度
+$ samtools depth my.bam | awk '{sum+=$3} END { print "Average = ",sum/NR}'
+$ # 计算基因组大小
+$ samtools view -H my.bam | grep -P '^@SQ' | cut -f 3 -d ':' | awk '{sum+=$1} END {print sum}'
+$ # 添加MD标签, MD标签用于SNP calling
+$ samtools calmd -b <my.bam> <ref_genome.fasta> > my_md.bam
+```
+[MD tag](https://vincebuffalo.com/notes/2014/01/17/md-tags-in-bam-files.html)
+
 ## Linux bash strict model 
 Linux bash strict model非官方模式，和perl `use strict;`类似。
 ```bash
