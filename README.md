@@ -106,6 +106,21 @@ $ samtools calmd -b <my.bam> <ref_genome.fasta> > my_md.bam
 ```
 [MD tag](https://vincebuffalo.com/notes/2014/01/17/md-tags-in-bam-files.html)
 
+### 链接处理
+
+```bash
+$ readlink -f/--canonicalize # 检查链接地址，且地址不能失效，失效报错
+$ readlink -m/--canonicalize-missing # 返回地址，且地址可以失效
+$ # 循环更改失效路径
+$ for i in input ip;
+  do
+   for j in 1 2 3;
+    do
+		   ln -s `readlink -m ${i}${j}.bam | sed 's/02.hisat2/03.hisat2/';rm ${i}${j}.bam` ${i}${j}.bam 
+	   done
+  done
+```
+
 ## Linux bash strict model 
 Linux bash strict model非官方模式，和perl `use strict;`类似。
 ```bash
