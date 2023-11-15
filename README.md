@@ -740,7 +740,11 @@ $ sed 's/chr/Chr/g; s/geneid/GeneID/g' xxx.fa # 同时多个替换操作
 $ # 传入shell变量时，需要使用双引号
 $ gene_id=AT1G79550
 $ cat file.txt | sed 's/$gene_id/PGK/g' # 替换基因名
+```
 
+#### 多点编辑
+```bash
+$ nl /etc/passwd | sed -e '3,$d' -e 's/bash/blueshell/' # -e表示多点编辑，第一个编辑命令删除第三行到末尾的数据，第二条命令搜索bash替换为blueshell
 ```
 [sed lecture](https://cs.nyu.edu/~mohri/unix08/lect5.pdf)
 
