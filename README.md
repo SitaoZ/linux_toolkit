@@ -71,6 +71,15 @@ $ awk '/./' file.txt    # 去除空白行
 $ cat file.txt | tr -s "\n" # 去除空白行
 
 $ echo 'ATTGCTATGCTNNNT' | rev | tr 'ACTG' 'TGAC' # 反向互补序列
+
+$ cat a b | sort | uniq -d | wc # 求两个文件的交集
+$ cat a b | sort | uniq | wc    # 两个文件的并集
+$ cat a b b | sort | uniq -u    # a - b 差集
+$ cat a b a | sort | uniq -u    # b - a 差集
+
+$ 打印文件第一行
+$ cat file.txt | sed -n '1p' # -n 表示silence模式，只有命令中指定的行才会被打印,1..n都可以
+$ cat file.txt | awk -F',' 'NR==1{print;next} {print $1}'
 ```
 ### fastq处理
 ```
@@ -549,6 +558,12 @@ $ awk 'BEGIN{info="this is a test2010test!";print index(info,"test")?"ok":"no fo
 $ awk 'BEGIN{info="this is a test2010test!";print match(info,/[0-9]+/)?"ok":"no found";}' # match 正则表达式匹配查找
 $ awk 'BEGIN{info="this is a test2010test!";print substr(info,4,10);}'  #截取字符串， 从第四个字符串开始，，截取10个长度字符串
 $ awk 'BEGIN{info="this is a test";split(info,tA," ");print length(tA);for(k in tA){print k,tA[k];}}' # 字符串分割
+$ awk '{split($0, array, ":")}'
+$ #           \_/  \___/  \_/
+$ #            |     |     |
+$ #        string    |     delimiter
+$ #                  |
+$ #               array to store the pieces
 
 $ 1.3 一般函数
 $ # close, system, getline,
@@ -630,11 +645,13 @@ sed (stream editor for filtering and transforming text)流式编辑器
 $ # 命令格式
 $ sed [options] 'command' file(s)
 $ sed [options] -f scriptfile file(s)
-$ # 每个command 由最多两个地址addresses和一个动作action组成,
-$ # 每个address可以是正则表达式或者行数，动作见4.3.2
+$ # 命令必须由单引号包住；或者使用双引号包住，双引号主要在传入变量时使用
+$ # 每个command 由最多两个地址(addresses)和一个动作(action)组成,
+$ # 每个地址可以是正则表达式或者行数，动作见4.3.2
 ```
 #### sed 参数
 ```bash
+$ # 常用的sed参数，用来指定执行的方式
 $ -e/--expression # 传入脚本到命令行执行
 $ -f/--file       # 从文件传入命令执行
 $ -i/--in-place   # 原地编辑文件
@@ -646,14 +663,14 @@ $ -h/--help # 显示帮助信息
 
 #### 动作说明
 
-a: 新增 append 
-c: 取代 change
-d: 删除 delete
-i: 插入 insert
-p: 打印 print
-s: 取代 substitute
-y: 转换 transform
-q: 退出 quit
+a: 新增 append  
+c: 取代 change  
+d: 删除 delete  
+i: 插入 insert  
+p: 打印 print, 通常和-n一起使用，打印特定的行
+s: 取代 substitute  
+y: 转换 transform  
+q: 退出 quit  
 
 #### print 打印命令
 ```bash
@@ -678,6 +695,7 @@ $ echo this is a test line | sed 's/\w\+/[&]/g' #  \w+表示匹配每一个单�
 
 #### substitute 替换标记
 ```bash
+$ s
 $ g # 表示全局替换
 $ p # 表示打印行
 $ w # 表示把行写入一个文件
@@ -700,7 +718,7 @@ $ echo this is digit 7 in a number | sed 's/digit \([0-9]\)/\1/'
 
 ```
 
-#### transform 转换
+#### transform 翻译
 ```bash
 $ echo ATCG | sed 'y/ATCG/TAGC/' | rev # DNA反向互补
 ```
@@ -708,6 +726,20 @@ $ echo ATCG | sed 'y/ATCG/TAGC/' | rev # DNA反向互补
 #### quit 退出 
 ```bash
 $ sed '100q' file # 打印前100行，然后退出
+```
+#### 组合多个表达式
+```bash
+$ sed '表达式1; 表达式2' # sed '表达式1' | sed '表达式2'
+$ sed 's/chr/Chr/g; s/geneid/GeneID/g' xxx.fa # 同时多个替换操作
+```
+
+#### 引用
+
+```bash
+$ # 传入shell变量时，需要使用双引号
+$ gene_id=AT1G79550
+$ cat file.txt | sed 's/$gene_id/PGK/g' # 替换基因名
+
 ```
 [sed lecture](https://cs.nyu.edu/~mohri/unix08/lect5.pdf)
 
