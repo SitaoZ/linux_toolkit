@@ -37,7 +37,7 @@ Linux commands and tricks in bioinformatics
      * [context line control](#context-line-control)
      * [grep 正则表达式](#grep-正则表达式)
    * [sed](#sed)
-     * [sed 参数](sed-参数)
+     * [sed 参数](#sed-参数)
      * [动作说明](#动作说明)
      * [print 打印命令](#print-打印命令)
      * [deletion 删除命令](#deletion-删除命令)
@@ -650,6 +650,7 @@ $ # 每个command 由最多两个地址(addresses)和一个动作(action)组成,
 $ # 每个地址可以是正则表达式或者行数，动作见4.3.2
 ```
 #### sed 参数
+
 ```bash
 $ # 常用的sed参数，用来指定执行的方式
 $ -e/--expression # 传入脚本到命令行执行
@@ -718,7 +719,7 @@ $ echo this is digit 7 in a number | sed 's/digit \([0-9]\)/\1/'
 
 ```
 
-#### transform 翻译
+#### transform 转换
 ```bash
 $ echo ATCG | sed 'y/ATCG/TAGC/' | rev # DNA反向互补
 ```
