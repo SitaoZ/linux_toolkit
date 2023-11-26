@@ -104,6 +104,18 @@ $ paste - - - - - - - - < reads-int.fastq \
     | tee >(cut -f 1-4 | tr '\t' '\n' > reads-1.fastq) \
     | cut -f 5-8 | tr '\t' '\n' > reads-2.fastq
 ```
+
+### fasta 处理
+```bash
+$ # 将染色体分开
+$ cat Homo_sapiens.GRCh38.chr.dna.toplevel.fa | awk '{
+        if (substr($0, 1, 1)==">") {filename=(substr($1,2) ".fasta")}
+        print $0 >> filename
+        close(filename)
+}'
+
+```
+
 ### samtools处理
 ```
 $ # 计算基因组覆盖度
