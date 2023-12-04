@@ -251,6 +251,15 @@ $ swapon # 启用交换分区
 $ swapoff # 关闭交换分区
 ```
 
+```bash
+$ ulimit    # 控制shell程序资源
+$ ulimit -a # 显示目前资源的限定
+$ ulimit -n # 指定同一时间最多可开启的文件数
+$ ulimit -H # 设定资源的硬性限制，也就是管理员所设下的限制
+
+$ launchctl limit maxfiles # macOS 最大文件数目
+$ sudo launchctl limit maxfiles 65536 200000 # 将文件句柄数设置到最大 
+```
 ### 系统用户登录信息
 ```bash
 $ whoami  # 显示当前用户的名称
