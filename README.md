@@ -591,30 +591,52 @@ $ # atan2, cos, sin, exp, log, sqrt, int, rand, strand
 $ 1.2 awk 字符串函数
 $ # gsub, sub, index, length, blength, substr, match, split, tolower, toupper, sprintf
 
-$ gsub(regular expression, subsitution string, target string)
+$ 1.2.1 gsub # g 表示 global, target string 可选
+$ gsub(/^>/,   "chr",  "Chr")
+$ #    \_/      \_/     \_/
+$ #     |        |       |
+$ #  regular     |    target string  
+$ # expression   |
+$ #           replace string
+$
 $ awk 'BEGIN{info="this is a test2010test!";gsub(/[0-9]+/,"!",info);print info}' # gsub 替换
 
-
-$ awk 'BEGIN{info="this is a test2010test!";print index(info,"test")?"ok":"no found";}' # index 查找字符串
-$ awk 'BEGIN{info="this is a test2010test!";print match(info,/[0-9]+/)?"ok":"no found";}' # match 正则表达式匹配查找
-$
-
-$ awk 'BEGIN{info="this is a test";split(info,tA," ");print length(tA);for(k in tA){print k,tA[k];}}' # 字符串分割
-$ awk '{split($0, array, ":")}'
-$ #           \_/  \___/  \_/
-$ #            |     |     |
-$ #         string   |   delimiter
-$ #                  |
-$ #               array to store the pieces
-$ 
-$ 1.2.1 substr
+$ 1.2.2 substr
 $ substr($3,  1,   2)
 $ #      \_/  \_/ \_/
 $ #       |    |   |
 $ #     string | end position (optional)
 $ #            |
 $ #         start position
+$
 $ awk 'BEGIN{info="this is a test2010test!";print substr(info,4,10);}'  #截取字符串， 从第四个字符串开始，，截取10个长度字符串
+
+
+$ 1.2.3 split 
+$ awk '{split($0, array, ":")}'
+$ #           \_/  \___/  \_/
+$ #            |     |     |
+$ #         string   |   delimiter
+$ #                  |
+$ #               array to store the pieces
+$
+$ awk 'BEGIN{info="this is a test";split(info,tA," ");print length(tA);for(k in tA){print k,tA[k];}}' # 字符串分割
+
+
+$ 1.2.4 match
+$ match(string, regexp)
+$
+$ awk 'BEGIN{info="this is a test2010test!";print match(info,/[0-9]+/)?"ok":"no found";}' # match 正则表达式匹配查找
+
+$ 1.2.5 index
+$ index($0, "target string")
+$
+$ awk 'BEGIN{info="this is a test2010test!";print index(info,"test")?"ok":"no found";}' # index 查找字符串
+ 
+
+
+
+
 
 
 $ 1.3 一般函数
