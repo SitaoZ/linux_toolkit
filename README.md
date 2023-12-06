@@ -48,9 +48,7 @@ Linux commands and tricks in bioinformatics
 * [库文件](#库文件)
 * [Conda tips](#Conda-tips)
 * [Data download](#Data-download)
-* [Bio format](#Bio-format)
-   * [FASTA](#FASTA)
-   * [BAM](#BAM)
+
 ## One-liner
 ### 基本文件处理
 ```bash
@@ -115,9 +113,27 @@ $ cat Homo_sapiens.GRCh38.chr.dna.toplevel.fa | awk '{
 }'
 
 ```
+- seqkit   
+seqkit工具可以快速处理fasta文件 [seqkit](https://bioinf.shenwei.me/seqkit/usage/)。
+```bash
+$ # 按照长度过滤,选取长度小于300bp的fasta子集
+$ seqkit seq -M 300 refer.fasta -o lt300.fa
+$ # 使用seqkit 选取特定的子集，使用grep子命令 
+$ seqkit grep -n -f wanted_gene.csv refer.fasta -o wanted.fa
+```
+
+
+
 
 ### samtools处理
-```
+SAMtools是li heng开发的用于比对文件处理的利器[samtools](http://www.htslib.org/)。
+```bash
+$ # 不同比对软件的tag有细微差异，注意区分
+$ samtools view QC.sort.bam | grep "XM:i:0" > noMismatch.sam # 找出没有mismatch的比对
+$ samtools view QC.sor.bam | grep "AS:" | grep –v "XS:" > unique_alignments.sam # 从bowtie2筛选唯一比对
+$ samtools view reads.bam | grep 'XT:A:U' | samtools view -bS -T referenceSequence.fa - > reads.uniqueMap.bam # 从bwa比对文件中筛选唯一比对
+$ (samtools view -H QC.sort.bam; samtools view QC.sort.bam | grep -P "\tNH:i:1\t|\tNH:i:1$" | grep -v "ZS:i" ) | samtools view -bS - > unique.bam # 从hisat2中筛选唯一比对
+$
 $ # 计算基因组覆盖度
 $ samtools depth my.bam | awk '{sum+=$3} END { print "Average = ",sum/NR}'
 $ # 计算基因组大小
@@ -150,7 +166,7 @@ $ set -u # 当调用没有设置的变量时，报错。
 $ set -o pipefail # 设置pipefail时，如果多级管道报错，会导致整个管道程序报错。
 ```
 IFS
-```
+```bash
 $ IFS # interval Field Separator，分隔符，会影响split函数
 $ IFS=$' '
 $ items='a b c'
@@ -925,24 +941,4 @@ $ # linux 使用md5sum来对文件进行检查
 $ md5sum xxxxx       # 对于单个文件，可以执行该命令两次，看产生的md5值是否一致
 $ md5sum -c MD5.txt  # 输入MD5文件检查，可以批量检查很多文件
 $ # Mac 使用md5 对文件进行检查
-```
-##  Bio format
-### FASTA
-FASTA文件的处理
-1.seqkit 
-seqkit工具可以快速处理fasta文件 [seqkit](https://bioinf.shenwei.me/seqkit/usage/)。
-```bash
-$ # 按照长度过滤,选取长度小于300bp的fasta子集
-$ seqkit seq -M 300 refer.fasta -o lt300.fa
-$ # 使用seqkit 选取特定的子集，使用grep子命令 
-$ seqkit grep -n -f wanted_gene.csv refer.fasta -o wanted.fa
-```
-### BAM
-SAMtools是li heng开发的用于比对文件处理的利器[samtools](http://www.htslib.org/)。
-```bash
-$ # 不同比对软件的tag有细微差异，注意区分
-$ samtools view QC.sort.bam | grep "XM:i:0" > noMismatch.sam # 找出没有mismatch的比对
-$ samtools view QC.sor.bam | grep "AS:" | grep –v "XS:" > unique_alignments.sam # 从bowtie2筛选唯一比对
-$ samtools view reads.bam | grep 'XT:A:U' | samtools view -bS -T referenceSequence.fa - > reads.uniqueMap.bam # 从bwa比对文件中筛选唯一比对
-$ (samtools view -H QC.sort.bam; samtools view QC.sort.bam | grep -P "\tNH:i:1\t|\tNH:i:1$" | grep -v "ZS:i" ) | samtools view -bS - > unique.bam # 从hisat2中筛选唯一比对
 ```
