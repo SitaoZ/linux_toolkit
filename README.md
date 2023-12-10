@@ -865,30 +865,43 @@ Linux库文件是可执行的公共代码，是为了减少程序开发的重复
 ## Conda tips
 Conda软件安装十分便利，可以建立不同的环境对软件进行依赖匹配。
 
-1.创建环境(create)
+1. 创建环境(create)
 ```bash
-$ conda --version          # 显示conda版本
+$ conda --version                       # 显示conda版本
 $ conda create -n env_name python=3.7.2 # 创建环境
-$ conda activate env_name  # 激活环境
-$ conda deactivate         # 退出环境
+$ conda activate env_name               # 激活环境
+$ conda deactivate                      # 退出环境
+$ conda remove -n env_name --all         # 删除环境
 
+$ conda create --clone env_name1 -n env_name2 #克隆环境到新环境
 ```
 
-2.conda env 
+2. 环境(environment) 
 
 ```bash
-$ conda env list           # 显示当前所有环境
-$ conda info --env         # 显示当前所有环境
-$ conda env remove -n env_name # 删除环境
-$ conda rename -n env_name env_new_name # 更改环境名称
+$ conda env list                             # 显示当前所有环境
+$ conda info --env                           # 显示当前所有环境
+$ conda install -n env_name pkg1 pkg2        # 在指定的环境中安装多个包
+$ conda uninstall pkg1 -n env_name           # 在指定的环境下删除包
+$ conda env remove -n env_name               # 删除环境
+$ conda rename -n env_name env_new_name      # 更改环境名称
+$ conda remove -n env_name -c channel_name pkgname # 删除指定环境下，特定来源的包
+
+$ conda env export -n env_name > ENV.yml               # 导出环境信息
+$ conda env create -n env_name --file ENV.yml          # 安装指定的环境
 ```
 
 3. 列出环境中的安装包(list)
 ```bash
-$ conda list             # 显示当前环境中已经安装的包
-$ conda list -n env_name # 列出env_name环境中的安装包
-$ conda list --export > package-list.txt # 保存安装包便于后续使用
+$ conda list                                           # 显示当前环境中已经安装的包
+$ conda list --show-channel-urls                       # 列出安装包和来源信息
+$ conda list -n env_name                               # 列出env_name环境中的安装包
+$ conda list -n env_name --show-channel-urls           # 列出指定环境下安装的全部包和其来源
+
+$ conda list --export > package-list.txt               # 保存安装包便于后续使用
 $ conda create -n new_env_name --file package-list.txt # 参考文件重新安装并创建新环境
+
+
 ```
 
 4. 清理安装包的缓存(clean)
@@ -901,8 +914,14 @@ $ conda clean -t # 一键删除anaconda pkgs下面的压缩包
 ```
 5. 包的安装(install)
 ```bash
-$ conda install scipy # 当前环境下安装软件
-$ conda install -n env_name scipy # 指定环境下安装软件
+$ conda install scipy                         # 当前环境下安装软件
+$ conda install -n env_name scipy             # 指定环境下安装软件
+$ conda install -c channel_name scipy         # 在指定的环境下安装
+$ conda install "pkgname>2.7,<3.5"            # 安装指定的版本
+$ conda install "pkgname [version='2.5|3.2']" # 安装指定的版本
+$ conda uninstall pkgname
+$
+$ conda search pkg --info                     # 搜索包的信息
 ```
 6. 配置文件(config)
 ```bash
