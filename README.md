@@ -871,11 +871,19 @@ $ conda --version          # 显示conda版本
 $ conda create -n env_name python=3.7.2 # 创建环境
 $ conda activate env_name  # 激活环境
 $ conda deactivate         # 退出环境
-$ conda env list           # 显示当前所有环境
-$ conda info --env         # 显示当前所有环境
+
 ```
 
-2. 列出环境中的安装包(list)
+2.conda env 
+
+```bash
+$ conda env list           # 显示当前所有环境
+$ conda info --env         # 显示当前所有环境
+$ conda env remove -n env_name # 删除环境
+$ conda rename -n env_name env_new_name # 更改环境名称
+```
+
+3. 列出环境中的安装包(list)
 ```bash
 $ conda list             # 显示当前环境中已经安装的包
 $ conda list -n env_name # 列出env_name环境中的安装包
@@ -883,7 +891,7 @@ $ conda list --export > package-list.txt # 保存安装包便于后续使用
 $ conda create -n new_env_name --file package-list.txt # 参考文件重新安装并创建新环境
 ```
 
-3. 清理安装包的缓存(clean)
+4. 清理安装包的缓存(clean)
 ```bash
 $ conda clean -h
 $ conda clean -a # 快速删除
@@ -891,12 +899,12 @@ $ conda clean -p # 从可写包缓存中删除没有使用的包，但是不会�
 $ conda clean -t # 一键删除anaconda pkgs下面的压缩包
 
 ```
-4. 包的安装(install)
+5. 包的安装(install)
 ```bash
 $ conda install scipy # 当前环境下安装软件
 $ conda install -n env_name scipy # 指定环境下安装软件
 ```
-5. 配置文件(config)
+6. 配置文件(config)
 ```bash
 $ conda config --show         # 显示已经设置好的配置文件的值
 $ conda config --describe     # 显示所有可用的配置文件选项
