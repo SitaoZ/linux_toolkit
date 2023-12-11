@@ -280,6 +280,38 @@ $ ulimit -H # 设定资源的硬性限制，也就是管理员所设下的限制
 $ launchctl limit maxfiles                   # macOS 最大文件数目
 $ sudo launchctl limit maxfiles 65536 200000 # 将文件句柄数设置到最大 
 ```
+
+- crontab
+命令可以在固定的间隔时间执行指定的系统指令或 shell script脚本。
+时间间隔的单位可以是分钟、小时、日、月、周及以上的任意组合。这个命令非常适合周期性的日志分析或数据备份等工作。
+```bash
+$ cat /etc/crontab
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+
+# For details see man 4 crontabs
+
+# Example of job definition:
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * user-name  command to be executed
+
+$ # 编辑文件，按照上面的额格式添加任务
+$ vi /etc/crontab 
+$ # 启动服务
+$ /bin/systemctl start crond.service
+
+$ # 非root用户想使用crontab
+$ # 首先创建一个cron.allow文件,将用户名写入
+$ touch /etc/cron.allow
+
+```
+[crontab](https://linuxtools-rst.readthedocs.io/zh-cn/latest/tool/crontab.html)
 ### 系统用户登录信息
 ```bash
 $ whoami  # 显示当前用户的名称
