@@ -120,6 +120,12 @@ $ # 按照长度过滤,选取长度小于300bp的fasta子集
 $ seqkit seq -M 300 refer.fasta -o lt300.fa
 $ # 使用seqkit 选取特定的子集，使用grep子命令 
 $ seqkit grep -n -f wanted_gene.csv refer.fasta -o wanted.fa
+
+$ # 全称匹配才行
+$ seqkit grep -n -f id.txt swissprot/swissprot.fa -o result_swiss.fa
+
+$ # 正则匹配
+$ seqkit grep -r -f id.txt TrEMBL/uniprot_trembl.fasta -o result.fa
 ```
 
 
