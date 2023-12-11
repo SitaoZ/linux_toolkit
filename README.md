@@ -251,29 +251,33 @@ $ $@ 获取所有对应的参数值
 
 ### 系统命令
 ```bash
-$ uname -a # 显示系统和内核
-$ hostname # 显示当前系统的主机名
-$ du       # 显示磁盘使用空间
+$ uname -a      # 显示系统和内核
+$ hostname      # 显示当前系统的主机名
+$ du            # 显示磁盘使用空间
 $ du -sh dir    # 显示文件的总的占用空间
 $ du -h -d 1 ./ # 显示当前文件中深度为1 的文件的大小
-$ df     # 报告文件系统磁盘空间的使用情况
-$ df -h  # 友好查看磁盘
-$ mount  # 挂载文件系统
-$ umount # 卸载文件系统
-$ fsck   # 检查并修复文件系统
-$ fdisk  # 磁盘分区命令，适用于2TB以下的磁盘分区
-$ parted # 磁盘分区命令，没有磁盘大小限制，常用与2TB一下的磁盘分区
-$ swapon # 启用交换分区
-$ swapoff # 关闭交换分区
+$ df            # 报告文件系统磁盘空间的使用情况
+$ df -h         # 易读取查看磁盘
+$ mount         # 挂载文件系统
+$ umount        # 卸载文件系统
+$ fsck          # 检查并修复文件系统
+$ fdisk         # 磁盘分区命令，适用于2TB以下的磁盘分区
+$ parted        # 磁盘分区命令，没有磁盘大小限制，常用与2TB一下的磁盘分区
+$ swapon        # 启用交换分区
+$ swapoff       # 关闭交换分区
 ```
 
+```bash
+$ ldd # 查看文件动态库依赖 print shared object dependencies
+$ ldd /bin/ls # 查看文件的动态依赖
+```
 ```bash
 $ ulimit    # 控制shell程序资源
 $ ulimit -a # 显示目前资源的限定
 $ ulimit -n # 指定同一时间最多可开启的文件数
 $ ulimit -H # 设定资源的硬性限制，也就是管理员所设下的限制
 
-$ launchctl limit maxfiles # macOS 最大文件数目
+$ launchctl limit maxfiles                   # macOS 最大文件数目
 $ sudo launchctl limit maxfiles 65536 200000 # 将文件句柄数设置到最大 
 ```
 ### 系统用户登录信息
@@ -297,16 +301,16 @@ $ ls        # 列出文件 list files
 ### 查找文件
 ```bash
 $ find  dir -name *fasta # 在dir 目录下查找后缀为fasta的文件
-$ whereis # 给命令找到二进制，源代码和手册文件
-$ which   # 查找二进制命令，按环境变量PATH的路径找
-$ locate  # 从数据库查找命令
+$ whereis                # 给命令找到二进制，源代码和手册文件
+$ which                  # 查找二进制命令，按环境变量PATH的路径找
+$ locate                 # 从数据库查找命令
 ```
 
 ### 用户管理
 ```bash
-$ useradd # 添加用户, 注意Ubuntu命令不一致, adduser
-$ userdel # 删除用户
-$ groupadd #  添加用户组
+$ useradd  # 添加用户, 注意Ubuntu命令不一致, adduser
+$ userdel  # 删除用户
+$ groupadd # 添加用户组
 $ passwd   # 修改用户密码
 $ change   # 修改用户密码的有效期限
 $ su       # 切换用户
@@ -363,14 +367,14 @@ $ mtr -n www.baidu.com
 ```
 #### 网络连接
 ```bash 
-$ netstat    # 查看网络状态
+$ netstat       # 查看网络状态
 $ netstat -ntpl # 查询TCP类型端口
-$ # -n/--numeric 显示数字地址
-$ # -t/--tcp     显示tcp, transmission control protocol 传输控制协议
-$ # -p/--program 显示占用的程序
-$ # -l/--listen  正在监听
+$       # -n/--numeric 显示数字地址
+$       # -t/--tcp     显示tcp, transmission control protocol 传输控制协议
+$       # -p/--program 显示占用的程序
+$       # -l/--listen  正在监听
 $ netstat -nupl # 查询UDP 端口类型
-$ ss         # 查看网络状态
+$ ss            # 查看网络状态
 ```
 
 [TCP/UDP/PORT](https://zhuanlan.zhihu.com/p/57987304)
@@ -496,9 +500,9 @@ $ ^ 行首
 $ $ 行尾
 $ . 除了换行符以外的任意单个字符
 $ * 前导字符的零个或者多个
-$ .*所有字符
-$ []字符组内的任一字符
-$ [^]不匹配字符组内的任一字符
+$ .* 所有字符
+$ [] 字符组内的任一字符
+$ [^] 不匹配字符组内的任一字符
 $ ^[^] 非字符组内的字符开头的行
 $ [a-z] 小写字母
 $ [A-Z] 大写字母
@@ -517,19 +521,19 @@ $ # next 语句
 $ awk 'NR%4==3{next}{print NR,$0}' fastqs # 去读fastq文件，判断去除其第三行
 $ next 语句，循环逐行匹配，匹配就跳过，然后进行下一行匹配，next一般用于多行合并
 $ cat text.txt
->chr1
-AAAAAAAAA
->chr2
-TTTTTTTTT
->chr3
-CCCCCCCCC
->chr4
-GGGGGGGGG
+$ # >chr1
+$ # AAAAAAAAA
+$ # >chr2
+$ # TTTTTTTTT
+$ # >chr3
+$ # CCCCCCCCC
+$ # >chr4
+$ # GGGGGGGGG
 $ awk '/^>/{ID=$0;next;}{print ID","$0}' text.txt
->chr1,AAAAAAAAA
->chr2,TTTTTTTTT
->chr3,CCCCCCCCC
->chr4,GGGGGGGGG
+$ # >chr1,AAAAAAAAA
+$ # >chr2,TTTTTTTTT
+$ # >chr3,CCCCCCCCC
+$ # >chr4,GGGGGGGGG
 
 $ # getline 从标准输入、管道和正在处理的文件之外的其他输入文件或得输入
 $ awk 'BEGIN{ "date" | getline out; print out }' test
@@ -699,19 +703,19 @@ $ -C/--context        # 打印前后NUM行
 
 #### grep 正则表达式
 ```bash
-$ ^ # 锚定行的开始 
-$ $ # 锚定行的结束
-$ . # 匹配一个非换行字符
-$ * # 匹配零个或者多个先前字符
-$ .* # 任意字符
-$ [] # 指定范围内的字符 '[Gg]rep'匹配Grep和grep
+$ ^   # 锚定行的开始 
+$ $   # 锚定行的结束
+$ .   # 匹配一个非换行字符
+$ *   # 匹配零个或者多个先前字符
+$ .*  # 任意字符
+$ []  # 指定范围内的字符 '[Gg]rep'匹配Grep和grep
 $ [^] # 匹配一个不在指定范围内的字符，'[^A-Z]rep'匹配不包含A-Z开头的行
 $ \<  # 锚定单词开始
 $ \>  # 锚定单词结束
-$ x\{m\} # 重复字符x, 'A\{9\}' 匹配9个A
-$ x\{m,\}\ # 重复字符x, 至少m次
+$ x\{m\}     # 重复字符x, 'A\{9\}' 匹配9个A
+$ x\{m,\}\   # 重复字符x, 至少m次
 $ x\{m, n\}} # 重复字符x, 至少m次，至多n次
-$ \w # 匹配文字或数字字符 [a-zA-Z0-9]
+$ \w         # 匹配文字或数字字符 [a-zA-Z0-9]
 ```
 
 ### sed
@@ -732,10 +736,10 @@ $ -e/--expression # 传入脚本到命令行执行
 $ -f/--file       # 从文件传入命令执行
 $ -l/--line-length# 输出行的字符长度
 $ -i/--in-place   # 原地编辑文件
-$ -n/--quiet/--silent # 仅仅显示脚本处理后的结果
+$ -n/--quiet/--silent  # 仅仅显示脚本处理后的结果
 $ -E/--regexp-extended # 正则表达式
 $ -V/--version # 显示版本信息
-$ -h/--help # 显示帮助信息
+$ -h/--help    # 显示帮助信息
 ```
 
 #### 动作说明
@@ -767,21 +771,21 @@ $ sed '1,/^$/d'    # 从第一行到第一个空白行之间的都删除, 这里
 $ sed '/^$/, $d'   # 删除第一个空白行到最后一行的内容
 $ sed '/^$/, 10d'  # 删除第一个空白行到第十行之间的内容
 $ sed '/^ya*y/, /[0-9]$/d' # 删除以ya*y模式开始的行到第一个以数字结尾的行
-$ sed '/^test/d' $ # 删除文件中所有开头是test的行
-$ echo this is a test line | sed 's/\w\+/[&]/g' #  \w+表示匹配每一个单词，使用[&]替换它，& 对应之前所匹配到的单词
+$ sed '/^test/d'           # 删除文件中所有开头是test的行
+$ echo this is a test line | sed 's/\w\+/[&]/g' # \w+表示匹配每一个单词，使用[&]替换它，& 对应之前所匹配到的单词
 
 ```
 
 #### print 打印命令
 ```bash
 $ # Nth line
-$ sed -n '2p' txt   # 打印文件第二行
-$ sed -n '$p' txt   # 打印文件最后一行
-$ sed -n '1,5p' txt # 打印第一行到第五行
+$ sed -n '2p' txt     # 打印文件第二行
+$ sed -n '$p' txt     # 打印文件最后一行
+$ sed -n '1,5p' txt   # 打印第一行到第五行
 $ sed -n '/chr/p' txt # 打印含有chr的行
 $ sed -n '/add/,/sub/p' txt # 打印匹配add开始和匹配sub结束的行
-$ sed -n '2,/pat/p' txt # 打印第二行开始,/pat/行结束的内容
-$ sed '/pat/,$d' txt    # 打印/pat/开始到最后一行的内容
+$ sed -n '2,/pat/p' txt     # 打印第二行开始,/pat/行结束的内容
+$ sed '/pat/,$d' txt        # 打印/pat/开始到最后一行的内容
 $ yes | head -c100 | tr '\n' ' ' | sed -n l | head -n1 | wc -c
 ```
 
@@ -801,7 +805,7 @@ $ # 定界符号一致均可
 $ sed 's#AAAA#TTTT#g' file 
 $ sed 's:AAAA:TTTT:g' file
 
-$ sed '2s/AAAA/TTTT/' file # 只替换第二行
+$ sed '2s/AAAA/TTTT/' file      # 只替换第二行
 $ sed '/DDDD/s/AAAA/TTTT/' file # 替换匹配DDDD的行
 
 $ # 正则
@@ -855,13 +859,15 @@ Vim编辑器
 : noh     # 除去高亮
 ```
 
-## 库文件
-Linux库文件是可执行的公共代码，是为了减少程序开发的重复劳动，分为静态库的动态库。
+## 库
+库，其实就是把多个源文件（.c文件），经过一定的翻译，然后打包————到最后只提供给我们一个文件。
+Linux库文件是可执行的公共代码，是为了减少程序开发的重复劳动，分为静态库(.a)的动态库(.so)。
 静态库文件后缀为.a，程序编译时，将静态文件中的代码复制，拷贝到程序生成的可执行文件中。
 静态库的优点就是执行程序时不需要外部的函数库的支持，缺点是如果静态函数库变了，程序必须重新编译。
 动态库文件后缀为.so (Shared Object)，动态库在编译是没有被编译进目标代码，而是程序执行到相关代码时才调用库中的函数。
 
-### 1. 动态链接 
+
+### 1. 动态库 
 - .so 结尾
 ```bash
 $ # 查看某个可执行文件的动态库依赖
@@ -892,8 +898,12 @@ $ # (1) LD_LIBRARY_PATH环境变量中的路径
 $ # (2) /etc/ld.so.cache缓存文件
 $ # (3) /usr/lib和/lib
 ```
-- GCC编译选项
-使用GCC编译链接时，有两个参数需要注意，一个是-l（小写的L），一个是-L（大写的L）。
+
+- gcc 是GNU Compiler Collection，原名为Gun C语言编译器，因为它原本只能处理C语言，但gcc很快地扩展，包含很多编译器（C、C++、Objective-C、Ada、Fortran、 Java），可以说gcc是GNU编译器集合；
+- g++既可以处理C/C++语言，而gcc只能处理C语言；一般我们使用g++即可；
+- gcc/g++就是将包含了代码的文本文件编译（预处理、编译、汇编、链接）成可执行的文件。
+- gcc编译选项
+使用gcc编译链接时，有两个参数需要注意，一个是-l（小写的L），一个是-L（大写的L）。
 Linux有个约定速成的规则，假如库名是name，那么动态链接库文件名就是libname.so。在使用GCC编译链接时，-lname来告诉GCC使用哪个库。
 链接时，GCC的链接器ld就会前往LD_LIBRARY_PATH环境变量、/etc/ld.so.cache缓存文件和/usr/lib和/lib目录下去查找libname.so。
 我们也可以用-L/path/to/library的方式，让链接器ld去/path/to/library路径下去找库文件。
