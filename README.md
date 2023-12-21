@@ -101,6 +101,12 @@ $ 分开read1和2
 $ paste - - - - - - - - < reads-int.fastq \
     | tee >(cut -f 1-4 | tr '\t' '\n' > reads-1.fastq) \
     | cut -f 5-8 | tr '\t' '\n' > reads-2.fastq
+
+$ 合并单细胞数据，合并cell barcodes 和 UMI, 名称 和 + 只用R2的，序列和质量值合并
+$ paste <(zcat Sample01_S1_R2_001.fastq.gz) \
+      <(zcat Sample01_S1_R3_001.fastq.gz) | \
+      awk -F '\t' '{ if(NR%4==1||NR%4==3) {print $1} else {print $1 $2} }' | \
+      gzip > Sample01_S1_CB_UMI.fastq.gz
 ```
 
 ### fasta 处理
