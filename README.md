@@ -243,6 +243,8 @@ $        --no-mixed -I 1 -X 1000 \
 $        -x hg19/GenomeHisat2Index/chrALL \
 $        -1 HBRR1_1.fq.gz -2 HBRR1_2.fq.gz 2>HBRR1.Map2GenomeStat.xls | samtools view -b -S -o HBRR1.bam -
 
+$ cd - # 表示回到上一次所在的目录
+
 $ # $ 变量调用符号
 
 $ # ; 命令分割符号(command separator)，一行中使用;链接的命令顺序执行
