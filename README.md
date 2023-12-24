@@ -208,6 +208,8 @@ $ # 2>> 错误追加符号
 $ ls -lth 2>>stderr.csv
 
 $ # < 重定向输入符号
+$ head -n 10 < file.fa
+
 
 $ # << 追加重定向输入符号
 
@@ -248,12 +250,13 @@ $ # ; 命令分割符号(command separator)，一行中使用;链接的命令顺
 $ # ;; 连续分号(terminator)，专门在case语句中承担终止的角色
 
 $ # () 整体执行(command group)
+$ cat <(head -n 1 xx.table) <(cat xx.table | grep -w "^Chr1") > result
+$ # 保留表头添加到筛选出的文件中，然后重定向新的文件
 
 $ # {} 变量分离
 
 $ # [] 中括号流程控制中使用
 
-# head -n 10 < file.fa
 
 $ # 组合字符
 $ $? 状态值 status variable
