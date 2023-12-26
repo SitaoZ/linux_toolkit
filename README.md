@@ -893,7 +893,7 @@ $ sed 's/chr/Chr/g; s/geneid/GeneID/g' xxx.fa # 同时多个替换操作
 ```bash
 $ # 传入shell变量时，需要使用双引号
 $ gene_id=AT1G79550
-$ cat file.txt | sed 's/$gene_id/PGK/g' # 替换基因名
+$ cat file.txt | sed "s/$gene_id/PGK/g" # 替换基因名
 ```
 
 #### 多点编辑
