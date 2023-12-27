@@ -63,7 +63,7 @@ $ cat file.txt | sort | uniq -c | sort -k1nr | head # 排序找出现最多的
 
 $ echo $PATH | tr ":" "\n" | nl # 打印全部路径按行排列
 
-$ sed '/^$/d' file.txt # 去除空白行
+$ sed '/^$/d' file.txt  # 去除空白行
 $ grep -v '^$' file.txt # 去除空白行
 $ awk '/./' file.txt    # 去除空白行
 $ cat file.txt | tr -s "\n" # 去除空白行
@@ -134,6 +134,11 @@ $ # 正则匹配
 $ seqkit grep -r -f id.txt TrEMBL/uniprot_trembl.fasta -o result.fa
 ```
 
+```bash
+$ # faFilter obtained from http://hgdownload.soe.ucsc.edu/admin/exe/
+$ faFilter -minSize=N -maxSize=N in.fa out.fa
+```
+
 
 
 
@@ -168,6 +173,21 @@ $ for i in input ip;
 		   ln -s `readlink -m ${i}${j}.bam | sed 's/02.hisat2/03.hisat2/';rm ${i}${j}.bam` ${i}${j}.bam 
 	   done
   done
+```
+
+### gtf & gff
+```bash
+$ # gff -> gtf
+$ gffread in.gff -T -o out.gtf
+
+$ # gtf -> gff
+$ gffread in.gtf -o out.gff
+
+$ # 提取转录本序列
+$ gffread -w transcripts.fa -g mm10.fa mm10.gtf
+
+$ # 提取CDS序列
+$ gffread -x cds.fa -g mm10.fa mm10.gtf
 ```
 
 ## Linux bash strict model 
