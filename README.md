@@ -1068,6 +1068,33 @@ $ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/clou
 $ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/
 $ vi ~/.condarc # 直接添加镜像网址也可以
 ```
+7.问题
+```bash
+conda activate bedtools 
+
+CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
+To initialize your shell, run
+
+    $ conda init <SHELL_NAME>
+
+Currently supported shells are:
+  - bash
+  - fish
+  - tcsh
+  - xonsh
+  - zsh
+  - powershell
+
+See 'conda init --help' for more information and options.
+
+IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+```
+```bash
+source activate   # 激活环境
+
+conda activate bedtools # 再次激活环境
+```
+
 ## Data download
 生信数据庞杂，如何下载自己想要的数据，除了要找对数据库，也得找到合适的工具。
 1. SRA tools 下载测序数据
