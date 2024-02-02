@@ -6,34 +6,94 @@
 * [链接处理](#链接处理)
 * [gtf_gff](#gtf_gff)
 * [vcf](#vcf)
+
 ### 基本文件处理
+- 找出常用命令
 ```bash
 $ history | awk '{a[$2]++} END{for(i in a){print a[i]" "i}}' | sort -rn | head # 列出常用的命令
+```
 
+- 内存监控
+```
 $ watch vmstat -sSM     # 实时监控
 $ vmstat -sSM           # 监控一次
-
+```
+- 找出最大文件夹
+```bash 
 $ du -h -d 1 | sort -rh # 找出最大文件夹
-
+```
+- 找出文件中出现次数最多的
+```bash
 $ cat file.txt | sort | uniq -c | sort -k1nr | head # 排序找出现最多的
-
+```
+- 打印全部路径
+```bash
 $ echo $PATH | tr ":" "\n" | nl # 打印全部路径按行排列
+```
 
+
+- 打印文件第一行
+```bash
+$ cat file.txt | sed -n '1p' # -n 表示silence模式，只有命令中指定的行才会被打印,1..n都可以
+$ cat file.txt | awk -F',' 'NR==1{print;next} {print $1}'
+```
+
+- 去除空白行
+```bash
 $ sed '/^$/d' file.txt  # 去除空白行
 $ grep -v '^$' file.txt # 去除空白行
 $ awk '/./' file.txt    # 去除空白行
 $ cat file.txt | tr -s "\n" # 去除空白行
+```
 
-$ echo 'ATTGCTATGCTNNNT' | rev | tr 'ACTG' 'TGAC' # 反向互补序列
+- 打印所有3mer的DNA组合
+```bash
+echo {A,C,T,G}{A,C,T,G}{A,C,T,G}
+```
+- 序列反向互补
+```bash
+echo 'AGTCATGCAGTGCNNNNT' | rev | tr 'ACTG' 'TGAC'
 
-$ cat a b | sort | uniq -d | wc # 求两个文件的交集
-$ cat a b | sort | uniq | wc    # 两个文件的并集
-$ cat a b b | sort | uniq -u    # a - b 差集
-$ cat a b a | sort | uniq -u    # b - a 差集
+echo 'AGTCATGCAGTGCNNNNT' | python -c "import sys;from Bio.Seq import Seq;a = [print(Seq(i.strip()).reverse_complement()) for i in sys.stdin];"
+```
 
-$ 打印文件第一行
-$ cat file.txt | sed -n '1p' # -n 表示silence模式，只有命令中指定的行才会被打印,1..n都可以
-$ cat file.txt | awk -F',' 'NR==1{print;next} {print $1}'
+- 文件的交集、并集、差集
+```bash
+#  使用sort和uniq快速求文件的交集、并集、差集
+# 主要使用的uniq 
+# uniq -d (only print duplicate lines, one for each group)
+# uniq -u (only print unique lines)
+# 并集
+sort a.txt b.txt | uniq | wc
+
+# 交集
+sort a.txt b.txt | uniq -d | wc
+
+# 差集 1
+# a.txt - b.txt 
+sort a.txt b.txt b.txt | uniq -u | wc
+
+# b.txt - a.txt 
+sort b.txt a.txt a.txt | uniq -u | wc
+```
+- 删除文件
+```bash
+# wildcard
+rm *bam
+
+# find and xargs
+find . -name "*.bam" | xargs rm
+```
+- 文件检查
+```bash
+# 生成一个文件的MD5值
+md5sum xxx.csv > md5.txt
+
+# 检查文件是否完整
+md5sum -c md5.txt 
+
+# or 
+md5sum -c --status md5.txt
 ```
 ### fastq处理
 ```
