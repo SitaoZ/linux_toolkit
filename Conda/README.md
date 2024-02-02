@@ -1,11 +1,16 @@
 ## Table of content
-* [创建环境(create)](#创建环境(create))
-* [环境(environment)](#环境(environment))
-* 
+* [创建环境(create)](#创建环境)
+* [环境管理(environment)](#环境管理)
+* [列出环境中的安装包(list)](#列出环境中的安装包)
+* [清理安装包的缓存(clean)](#清理安装包的缓存)
+* [包的安装(install)](#包的安装)
+* [配置文件(config)](#配置文件)
+* [问题](#问题)
+
 ## Conda tips
 Conda软件安装十分便利，可以建立不同的环境对软件进行依赖匹配。
 
-### 创建环境(create)
+### 创建环境
 ```bash
 $ conda --version                       # 显示conda版本
 $ conda create -n env_name python=3.7.2 # 创建环境
@@ -16,7 +21,7 @@ $ conda remove -n env_name --all         # 删除环境
 $ conda create --clone env_name1 -n env_name2 #克隆环境到新环境
 ```
 
-### 环境(environment) 
+### 环境管理 
 
 ```bash
 $ conda env list                             # 显示当前所有环境
@@ -31,7 +36,7 @@ $ conda env export -n env_name > ENV.yml               # 导出环境信息
 $ conda env create -n env_name --file ENV.yml          # 安装指定的环境
 ```
 
-3. 列出环境中的安装包(list)
+### 列出环境中的安装包
 ```bash
 $ conda list                                           # 显示当前环境中已经安装的包
 $ conda list --show-channel-urls                       # 列出安装包和来源信息
@@ -44,7 +49,7 @@ $ conda create -n new_env_name --file package-list.txt # 参考文件重新安�
 
 ```
 
-4. 清理安装包的缓存(clean)
+### 清理安装包的缓存
 ```bash
 $ conda clean -h
 $ conda clean -a # 快速删除
@@ -52,7 +57,8 @@ $ conda clean -p # 从可写包缓存中删除没有使用的包，但是不会�
 $ conda clean -t # 一键删除anaconda pkgs下面的压缩包
 
 ```
-5. 包的安装(install)
+
+### 包的安装
 ```bash
 $ conda install scipy                         # 当前环境下安装软件
 $ conda install -n env_name scipy             # 指定环境下安装软件
@@ -63,7 +69,8 @@ $ conda uninstall pkgname
 $
 $ conda search pkg --info                     # 搜索包的信息
 ```
-6. 配置文件(config)
+
+### 配置文件
 ```bash
 $ conda config --show         # 显示已经设置好的配置文件的值
 $ conda config --describe     # 显示所有可用的配置文件选项
@@ -81,7 +88,7 @@ $ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/clou
 $ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/
 $ vi ~/.condarc # 直接添加镜像网址也可以
 ```
-7.问题
+### 问题
 ```bash
 conda activate bedtools 
 
