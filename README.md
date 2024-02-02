@@ -2,8 +2,8 @@
 Linux commands and tricks in bioinformatics  
 ## Table of content
 * [One-liner](https://github.com/SitaoZ/linux_toolkit/blob/main/One-liner/README.md)
-* [Linux symbol](#https://github.com/SitaoZ/linux_toolkit/blob/main/linux-symbol/README.md)
-* [Shell commands](#https://github.com/SitaoZ/linux_toolkit/blob/main/shell_commands/README.md)
+* [linux_symbol](#https://github.com/SitaoZ/linux_toolkit/blob/main/linux-symbol/README.md)
+* [shell_commands](#https://github.com/SitaoZ/linux_toolkit/blob/main/shell_commands/README.md)
 * [Linux三剑客](#https://github.com/SitaoZ/linux_toolkit/blob/main/awk_grep_sed/README.md)
 * [vim](#https://github.com/SitaoZ/linux_toolkit/blob/main/vim/README.md)
 * [库文件](#库文件)
