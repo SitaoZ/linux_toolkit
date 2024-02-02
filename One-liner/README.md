@@ -157,12 +157,12 @@ $ faFilter -minSize=N -maxSize=N in.fa out.fa
 
 - split_multi_fasta.sh
 ```bash
-awk '/^>/{s=++d".fa"}{print > s}' xxx.fa
+$ awk '/^>/{s=++d".fa"}{print > s}' xxx.fa
 # /^>/ 匹配fasta 文件名
 # s=++d".fa" 生成文件名，一每一个fasta格式自追加编号
 # {print > s} 输出到该文件名
 
-csplit -z -q -n 4 -f sequence_ sequences.fasta /\>/ {*}  
+$ csplit -z -q -n 4 -f sequence_ sequences.fasta /\>/ {*}  
 # /[正则表达式]/   #匹配文本样式，比如/SERVER/，从第一行到包含SERVER的匹配行。
 # {*}     #表示根据匹配重复执行分割，直到文件尾停止，使用{整数}的形式指定分割执行的次数。
 # -z或--elide-empty-files 删除长度为0 Byte文件。
@@ -172,24 +172,55 @@ csplit -z -q -n 4 -f sequence_ sequences.fasta /\>/ {*}
 ```
 - 去除空白
 ```bash
-sed /^$/d
+$ sed /^$/d
 ```
 
 
 ### bam处理
 SAMtools是li heng开发的用于比对文件处理的利器[samtools](http://www.htslib.org/)。
+
+- bowtie2提取唯一比对文件
 ```bash
-$ # 不同比对软件的tag有细微差异，注意区分
-$ samtools view QC.sort.bam | grep "XM:i:0" > noMismatch.sam # 找出没有mismatch的比对
-$ samtools view QC.sor.bam | grep "AS:" | grep –v "XS:" > unique_alignments.sam # 从bowtie2筛选唯一比对
-$ samtools view reads.bam | grep 'XT:A:U' | samtools view -bS -T referenceSequence.fa - > reads.uniqueMap.bam # 从bwa比对文件中筛选唯一比对
-$ (samtools view -H QC.sort.bam; samtools view QC.sort.bam | grep -P "\tNH:i:1\t|\tNH:i:1$" | grep -v "ZS:i" ) | samtools view -bS - > unique.bam # 从hisat2中筛选唯一比对
-$
-$ # 计算基因组覆盖度
+$ samtools view QC.sort.bam | grep "AS:" | grep –v "XS:" > unique_alignments.sam
+# http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml
+# AS:i:<N>  Alignment score. Can be negative. Can be greater than 0 in --local mode (but not in --end-to-end mode). Only present if SAM record is for an aligned read.
+# AS:i:<N> 只有比对上的read才有该标签
+
+# XS:i:<N> Alignment score for the best-scoring alignment found other than the alignment reported. Can be negative. Can be greater than 0 in --local mode (but not in --end-to-end mode). Only present if the SAM record is for an aligned read and more than one alignment was found for the read. Note that, when the read is part of a concordantly-aligned pair, this score could be greater than AS:i.
+# XS:i:<N> 当read有多个比对位置时候，才出现该标签
+```
+- hisat2提取唯一比对文件
+```bash
+$ (samtools view -H QC.sort.bam; samtools view QC.sort.bam | grep -P "\tNH:i:1\t|\tNH:i:1$" | grep -v "ZS:i" ) | samtools view -bS - > unique.bam
+# samtools view -H QC.sort.bam 
+# 保留bam的头文件
+
+# NH:i:<N> : The number of mapped locations for the read or the pair.
+# http://daehwankimlab.github.io/hisat2/manual/
+# NH:i:1 表示 read比对上的位置的数目只有一个,即唯一比对
+
+# ZS:i:<N> : Alignment score for the best-scoring alignment found other than the alignment reported.
+# ZS:i : 当有多个比对位置时候才出现
+```
+- bwa提取唯一比对文件
+```bash
+$ samtools view reads.bam | grep 'XT:A:U' | samtools view -bS -T referenceSequence.fa - > reads.uniqueMap.bam
+```
+
+- 找出没有mismatch的比对
+```bash
+$ samtools view QC.sort.bam | grep "XM:i:0" > noMismatch.sam
+```
+- 计算基因组覆盖度
+```bash 
 $ samtools depth my.bam | awk '{sum+=$3} END { print "Average = ",sum/NR}'
-$ # 计算基因组大小
+```
+- 计算基因组大小
+```bash 
 $ samtools view -H my.bam | grep -P '^@SQ' | cut -f 3 -d ':' | awk '{sum+=$1} END {print sum}'
-$ # 添加MD标签, MD标签用于SNP calling
+```
+-  添加MD标签, MD标签用于SNP calling
+```bash
 $ samtools calmd -b <my.bam> <ref_genome.fasta> > my_md.bam
 ```
 [MD tag](https://vincebuffalo.com/notes/2014/01/17/md-tags-in-bam-files.html)
