@@ -12,6 +12,10 @@
 ```bash
 $ history | awk '{a[$2]++} END{for(i in a){print a[i]" "i}}' | sort -rn | head # 列出常用的命令
 ```
+- 循环脚本
+```bash
+$ for f in $(ls *.sh); do wc ${f}; done
+```
 
 - 内存监控
 ```
@@ -48,13 +52,13 @@ $ cat file.txt | tr -s "\n" # 去除空白行
 
 - 打印所有3mer的DNA组合
 ```bash
-echo {A,C,T,G}{A,C,T,G}{A,C,T,G}
+$ echo {A,C,T,G}{A,C,T,G}{A,C,T,G}
 ```
 - 序列反向互补
 ```bash
-echo 'AGTCATGCAGTGCNNNNT' | rev | tr 'ACTG' 'TGAC'
+$ echo 'AGTCATGCAGTGCNNNNT' | rev | tr 'ACTG' 'TGAC'
 
-echo 'AGTCATGCAGTGCNNNNT' | python -c "import sys;from Bio.Seq import Seq;a = [print(Seq(i.strip()).reverse_complement()) for i in sys.stdin];"
+$ echo 'AGTCATGCAGTGCNNNNT' | python -c "import sys;from Bio.Seq import Seq;a = [print(Seq(i.strip()).reverse_complement()) for i in sys.stdin];"
 ```
 
 - 文件的交集、并集、差集
@@ -64,36 +68,36 @@ echo 'AGTCATGCAGTGCNNNNT' | python -c "import sys;from Bio.Seq import Seq;a = [p
 # uniq -d (only print duplicate lines, one for each group)
 # uniq -u (only print unique lines)
 # 并集
-sort a.txt b.txt | uniq | wc
+$ sort a.txt b.txt | uniq | wc
 
 # 交集
-sort a.txt b.txt | uniq -d | wc
+$ sort a.txt b.txt | uniq -d | wc
 
 # 差集 1
 # a.txt - b.txt 
-sort a.txt b.txt b.txt | uniq -u | wc
+$ sort a.txt b.txt b.txt | uniq -u | wc
 
 # b.txt - a.txt 
-sort b.txt a.txt a.txt | uniq -u | wc
+$ sort b.txt a.txt a.txt | uniq -u | wc
 ```
 - 删除文件
 ```bash
 # wildcard
-rm *bam
+$ rm *bam
 
 # find and xargs
-find . -name "*.bam" | xargs rm
+$ find . -name "*.bam" | xargs rm
 ```
 - 文件检查
 ```bash
 # 生成一个文件的MD5值
-md5sum xxx.csv > md5.txt
+$ md5sum xxx.csv > md5.txt
 
 # 检查文件是否完整
-md5sum -c md5.txt 
+$ md5sum -c md5.txt 
 
 # or 
-md5sum -c --status md5.txt
+$ md5sum -c --status md5.txt
 ```
 - 子表格生成
 ```bash
@@ -133,11 +137,11 @@ $ awk 'BEGIN{sum=0;}{if(NR%4==2){sum+=length($0);}}END{print sum;}' sequences.fa
 ```
 - fastq 变成一行
 ```bash
-zcat sample.fastq.gz | paste - - - - | gzip > sample.one_line.fastq.gz
+$ zcat sample.fastq.gz | paste - - - - | gzip > sample.one_line.fastq.gz
 ```
 - fastq to fasta
 ```bash
-sed -n '1~4s/^@/>/p;2~4p' file.fq > file.fa
+$ sed -n '1~4s/^@/>/p;2~4p' file.fq > file.fa
 ```
 
 - 交错排布read1和2
@@ -166,7 +170,7 @@ $ paste <(zcat Sample01_S1_R2_001.fastq.gz) \
 - long read
 ```bash
 # long read QC
-zcat xaa.fq.gz | seqtk seq -A -L 10000 - | grep -v "^>" | tr -dc "ACGTNacgtn" | wc -m
+$ zcat xaa.fq.gz | seqtk seq -A -L 10000 - | grep -v "^>" | tr -dc "ACGTNacgtn" | wc -m
 
 # zcat ( concatenates the compressed fastq files into one stream )
 # seqtk ( converts to fasta format and drops reads less than 10k )
@@ -177,7 +181,7 @@ zcat xaa.fq.gz | seqtk seq -A -L 10000 - | grep -v "^>" | tr -dc "ACGTNacgtn" | 
 
 - read按barcode拆分
 ```bash
-paste <(zcat sample_1.fq.gz|paste - - - -) <(zcat sample_2.fq.gz|paste - - - - ) | awk -v FS="\t" -v OFS="\n" 'FNR==NR {samples[$2]=$1; next} {barcode = substr($6,0,6); if(samples[barcode]) { print $1,$2,$3,$4>>samples[barcode]"_1.fq"; print $5,$6,$7,$8>>samples[barcode]"_2.fq"}}' samples.txt -
+$ paste <(zcat sample_1.fq.gz|paste - - - -) <(zcat sample_2.fq.gz|paste - - - - ) | awk -v FS="\t" -v OFS="\n" 'FNR==NR {samples[$2]=$1; next} {barcode = substr($6,0,6); if(samples[barcode]) { print $1,$2,$3,$4>>samples[barcode]"_1.fq"; print $5,$6,$7,$8>>samples[barcode]"_2.fq"}}' samples.txt -
 
 # 1. paste - - - -, 四行打包成一行, 默认tab分隔符
 # 2. awk -v FS="\t" 指定输入符号为\t, OFS="\n" 指定输出分割符为"\n"
@@ -190,17 +194,13 @@ paste <(zcat sample_1.fq.gz|paste - - - -) <(zcat sample_2.fq.gz|paste - - - - )
 ```
 - 提取barcode
 ```bash
-less xxx.fastq.gz |  cut -c 1-8 > barcode.csv
+$ less xxx.fastq.gz |  cut -c 1-8 > barcode.csv
 # -c --characters=LIST 截取字符
 ```
 
 - 按模式提取read
 ```bash
-# method 1
-
-
-# method 2
-zcat reads.fq.gz \
+$ zcat reads.fq.gz \
 | paste - - - - \
 | awk -v FS="\t" -v OFS="\n" '$2 ~ "AAGTTGATAACGGACTAGCCTTATTTT" {print $1, $2, $3, $4}' \
 | gzip > filtered.fq.gz
@@ -338,12 +338,12 @@ $ gffread -x cds.fa -g mm10.fa mm10.gtf
 - 提取TSS信息
 ```bash
 # tss
-cat xxx.gff3 | awk '$3=="gene" {print $0}' | grep protein_coding | awk -v OFS="\t" '{if ($7=="+") {print $1, $4, $4+1}} else {print $1, $5-1, $5}' > tss.bed
+$ cat xxx.gff3 | awk '$3=="gene" {print $0}' | grep protein_coding | awk -v OFS="\t" '{if ($7=="+") {print $1, $4, $4+1}} else {print $1, $5-1, $5}' > tss.bed
 
 # promoter 5k upstream from tss
-cat xxx.gff3 | awk '$3=="gene" {print $0}' | grep protein_coding | awk -v OFS="\t" '{if ($7=="+") {print $1, $4, $4+5000} else {print $1, $5-5000, $5}}' > promoters.bed
+$ cat xxx.gff3 | awk '$3=="gene" {print $0}' | grep protein_coding | awk -v OFS="\t" '{if ($7=="+") {print $1, $4, $4+5000} else {print $1, $5-5000, $5}}' > promoters.bed
 ```
-- gff提取intron
+- gff提取intron awk脚本
 ```bash
 BEGIN{OFS="\t"}
 { start[NR]=$4; 
@@ -389,13 +389,13 @@ END {
 ### vcf 
 - 按染色体提取vcf
 ```bash
-for chr in {1..22}; do awk -v chr=$chr -v threshold=10 '$1 == chr && $6 > threshold' xxx.vcf > xxx_chr$chr.vcf; done
+$ for chr in {1..22}; do awk -v chr=$chr -v threshold=10 '$1 == chr && $6 > threshold' xxx.vcf > xxx_chr$chr.vcf; done
 # https://samtools.github.io/hts-specs/VCFv4.2.pdf
 # shell中的变量在awk中无法识别，可以使用-v指定变量传入awk
 # -v chr=$chr, 将shell中的变量$chr传入awk
 
 
-awk '$1 == 5 && $7 == "PASS"' xxx.vcf > xxx_filter.vcf
+$ awk '$1 == 5 && $7 == "PASS"' xxx.vcf > xxx_filter.vcf
 # 挑选五号染色体上的SNP
 # 过滤值为PASS
 ```
