@@ -5,7 +5,7 @@
 * [bam处理](#bam处理)
 * [链接处理](#链接处理)
 * [gtf_gff](#gtf_gff)
-* 
+* [vcf](#vcf)
 ### 基本文件处理
 ```bash
 $ history | awk '{a[$2]++} END{for(i in a){print a[i]" "i}}' | sort -rn | head # 列出常用的命令
@@ -162,4 +162,18 @@ $ gffread -w transcripts.fa -g mm10.fa mm10.gtf
 
 $ # 提取CDS序列
 $ gffread -x cds.fa -g mm10.fa mm10.gtf
+```
+
+### vcf 
+- 按染色体提取vcf
+```bash
+for chr in {1..22}; do awk -v chr=$chr -v threshold=10 '$1 == chr && $6 > threshold' xxx.vcf > xxx_chr$chr.vcf; done
+# https://samtools.github.io/hts-specs/VCFv4.2.pdf
+# shell中的变量在awk中无法识别，可以使用-v指定变量传入awk
+# -v chr=$chr, 将shell中的变量$chr传入awk
+
+
+awk '$1 == 5 && $7 == "PASS"' xxx.vcf > xxx_filter.vcf
+# 挑选五号染色体上的SNP
+# 过滤值为PASS
 ```
