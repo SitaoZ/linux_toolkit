@@ -1,10 +1,11 @@
 ## Table of content
 * [创建环境(create)](#创建环境(create))
+* [环境(environment)](#环境(environment))
 * 
 ## Conda tips
 Conda软件安装十分便利，可以建立不同的环境对软件进行依赖匹配。
 
-## 创建环境(create)
+### 创建环境(create)
 ```bash
 $ conda --version                       # 显示conda版本
 $ conda create -n env_name python=3.7.2 # 创建环境
@@ -15,7 +16,7 @@ $ conda remove -n env_name --all         # 删除环境
 $ conda create --clone env_name1 -n env_name2 #克隆环境到新环境
 ```
 
-2. 环境(environment) 
+### 环境(environment) 
 
 ```bash
 $ conda env list                             # 显示当前所有环境
