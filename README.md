@@ -2,6 +2,7 @@
 Linux commands and tricks in bioinformatics  
 ## Table of content
 * [One-liner](#One-liner)
+* [One-liner](#One-liner/One-liner)
 * [Linux bash strict model](#Linux-bash-strict-model)
 * [Linux symbol](#linux-symbol)
 * [shell 常用命令](#shell-常用命令)
