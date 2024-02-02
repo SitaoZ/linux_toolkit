@@ -107,35 +107,104 @@ $ cat <(less total.csv | head -n 1) <(less total.csv| grep AT3G49430) > result.c
 
 
 ### fastq处理
+- read长度分布
 ```
 $ # fastq长度分布
-$ zcat file.fastq.gz | awk 'NR%4 == 2 {lengths[length($0)]++} END {for (l in lengths) {print l, lengths[l]}}'  
+$ zcat xx.fq.gz | awk 'NR%4 == 2 {lengths[length($0)]++} END {for (l in lengths) {print l, lengths[l]}}' > reads.dist
+
+# read species
+zcat xx.fq.gz | awk 'NR%4 == 2 {species[$0]++} END {for (s in species) {print s, species[s]}}' > reads.count
+```
+- 过滤掉小片段fastq
+```
 $ # 过滤掉小片段fastq
 $ awk 'BEGIN {OFS = "\n"} {header = $0 ; getline seq ; getline qheader ; getline qseq ; \
-  if (length(seq) >= 10000) {print ">"header, seq}}' < input_reads.fastq > filtered_gt10kb.fasta 
-$ # 保留区间的长度
+  if (length(seq) >= 10000) {print ">"header, seq}}' < input_reads.fastq > filtered_gt10kb.fasta
+```
+- 保留区间的长度
+```
 $ awk 'BEGIN {OFS = "\n"} {header = $0 ; getline seq ; getline qheader ; getline qseq ; \
   if (length(seq) >= 10000 && length(seq) <= 20000) {print header, seq, qheader, qseq}}' < input.fastq > filtered_10kb-20kb.fastq
-$ # 计算fastq的碱基数
+```
+
+- 计算fastq的碱基数
+```bash
 $ awk 'BEGIN{sum=0;}{if(NR%4==2){sum+=length($0);}}END{print sum;}' sequences.fastq 
-$ 
-$ 交错排布read1和2
+```
+- fastq 变成一行
+```bash
+zcat sample.fastq.gz | paste - - - - | gzip > sample.one_line.fastq.gz
+```
+- fastq to fasta
+```bash
+sed -n '1~4s/^@/>/p;2~4p' file.fq > file.fa
+```
+
+- 交错排布read1和2
+```bash
 $ paste <(paste - - - - < reads-1.fastq) \
       <(paste - - - - < reads-2.fastq) \
     | tr '\t' '\n' \
     > reads-int.fastq
-$ 分开read1和2
+```
+- 分开read1和2
+```bash
 $ paste - - - - - - - - < reads-int.fastq \
     | tee >(cut -f 1-4 | tr '\t' '\n' > reads-1.fastq) \
     | cut -f 5-8 | tr '\t' '\n' > reads-2.fastq
+```
 
-$ 合并单细胞数据，合并cell barcodes 和 UMI, 名称 和 + 只用R2的，序列和质量值合并
+    
+
+- 合并单细胞数据，合并cell barcodes 和 UMI, 名称 和 + 只用R2的，序列和质量值合并
+```
 $ paste <(zcat Sample01_S1_R2_001.fastq.gz) \
       <(zcat Sample01_S1_R3_001.fastq.gz) | \
       awk -F '\t' '{ if(NR%4==1||NR%4==3) {print $1} else {print $1 $2} }' | \
       gzip > Sample01_S1_CB_UMI.fastq.gz
 ```
+- long read
+```bash
+# long read QC
+zcat xaa.fq.gz | seqtk seq -A -L 10000 - | grep -v "^>" | tr -dc "ACGTNacgtn" | wc -m
 
+# zcat ( concatenates the compressed fastq files into one stream )
+# seqtk ( converts to fasta format and drops reads less than 10k )
+# grep ( -v excludes lines starting with “>”, i.e. fasta headers )
+# tr ( -dc removes any characters not in set “ACGTNacgtn” )
+# wc ( -m counts characters )
+```
+
+- read按barcode拆分
+```bash
+paste <(zcat sample_1.fq.gz|paste - - - -) <(zcat sample_2.fq.gz|paste - - - - ) | awk -v FS="\t" -v OFS="\n" 'FNR==NR {samples[$2]=$1; next} {barcode = substr($6,0,6); if(samples[barcode]) { print $1,$2,$3,$4>>samples[barcode]"_1.fq"; print $5,$6,$7,$8>>samples[barcode]"_2.fq"}}' samples.txt -
+
+# 1. paste - - - -, 四行打包成一行, 默认tab分隔符
+# 2. awk -v FS="\t" 指定输入符号为\t, OFS="\n" 指定输出分割符为"\n"
+# 3. FNR==NR 处理第一个文件; awk 记录数为文件的行号(line number)
+# 当前文件行号和总行号相等，表示第一个文件.
+# 当前记录数: FNR(Number of input Record in current input File)
+# 总记录数: NR(total Number of Records seen so far )
+# 4. substr, awk 内置函数,截取字符串,substr(string,position,length)
+# 5. samples.txt - 标准输入samples.txt 内容到awk,(即处理的第一个文件)
+```
+- 提取barcode
+```bash
+less xxx.fastq.gz |  cut -c 1-8 > barcode.csv
+# -c --characters=LIST 截取字符
+```
+
+- 按模式提取read
+```bash
+# method 1
+
+
+# method 2
+zcat reads.fq.gz \
+| paste - - - - \
+| awk -v FS="\t" -v OFS="\n" '$2 ~ "AAGTTGATAACGGACTAGCCTTATTTT" {print $1, $2, $3, $4}' \
+| gzip > filtered.fq.gz
+```
 ### fasta处理
 ```bash
 $ # 将染色体分开
