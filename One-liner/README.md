@@ -1,7 +1,11 @@
-## Table of content
-* [One-liner](#One-liner)
-*  
 ## One-liner
+* [基本文件处理](#基本文件处理)
+* [fastq处理](#fastq处理)
+* [fasta处理](#fasta处理)
+* [bam处理](#bam处理)
+* [链接处理](#链接处理)
+* [gtf_gff](#gtf_gff)
+* 
 ### 基本文件处理
 ```bash
 $ history | awk '{a[$2]++} END{for(i in a){print a[i]" "i}}' | sort -rn | head # 列出常用的命令
@@ -61,7 +65,7 @@ $ paste <(zcat Sample01_S1_R2_001.fastq.gz) \
       gzip > Sample01_S1_CB_UMI.fastq.gz
 ```
 
-### fasta 处理
+### fasta处理
 ```bash
 $ # 将染色体分开
 $ cat Homo_sapiens.GRCh38.chr.dna.toplevel.fa | awk '{
@@ -94,7 +98,7 @@ $ faFilter -minSize=N -maxSize=N in.fa out.fa
 
 
 
-### samtools处理
+### bam处理
 SAMtools是li heng开发的用于比对文件处理的利器[samtools](http://www.htslib.org/)。
 ```bash
 $ # 不同比对软件的tag有细微差异，注意区分
@@ -127,7 +131,7 @@ $ for i in input ip;
   done
 ```
 
-### gtf & gff
+### gtf_gff
 ```bash
 $ # gff -> gtf
 $ gffread in.gff -T -o out.gtf
