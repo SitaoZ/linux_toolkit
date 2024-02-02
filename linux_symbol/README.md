@@ -1,7 +1,7 @@
 ## Table of content
-* [Linux bash strict model](# Linux bash strict model)
-* [Linux symbol](#Linux symbol)
-## Linux bash strict model 
+* [Linux bash strict model](# Linux-bash-strict-model)
+* [Linux symbol](#Linux-symbol)
+## Linux-bash-strict-model 
 Linux bash strict model非官方模式，和perl `use strict;`类似。
 ```bash
 $ set -e # error exit，当一个未处理的错误出现时立刻跳出程序，不会继续执行。
@@ -19,7 +19,7 @@ $	 echo $x;
 $ done 
 ```
 
-## Linux symbol
+## Linux-symbol
 linux中一些符号具有特定的含义，需要注意
 ```bash
 $ # # 井号 (comments)
