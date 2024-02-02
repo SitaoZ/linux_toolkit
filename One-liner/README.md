@@ -95,6 +95,17 @@ md5sum -c md5.txt
 # or 
 md5sum -c --status md5.txt
 ```
+- 子表格生成
+```bash
+$ cat <(less total.csv | head -n 1) <(less total.csv| grep AT3G49430) > result.csv
+# < 表示重定向输入符号,usage: command < file 
+# () 表示整体执行括弧中的命令
+# head -n 1 表示表头
+# <() 接 grep 表示另外一个筛选的内容
+# cat 合并; > 重定向文件
+```
+
+
 ### fastq处理
 ```
 $ # fastq长度分布
