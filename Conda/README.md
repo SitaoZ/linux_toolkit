@@ -16,7 +16,7 @@ $ conda --version                       # 显示conda版本
 $ conda create -n env_name python=3.7.2 # 创建环境
 $ conda activate env_name               # 激活环境
 $ conda deactivate                      # 退出环境
-$ conda remove -n env_name --all         # 删除环境
+$ conda remove -n env_name --all        # 删除环境
 
 $ conda create --clone env_name1 -n env_name2 #克隆环境到新环境
 ```
