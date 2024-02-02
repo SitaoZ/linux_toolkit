@@ -1,5 +1,5 @@
 ## Table of content
-* [Linux bash strict model](# Linux-bash-strict-model)
+* [Linux bash strict model](#Linux-bash-strict-model)
 * [Linux symbol](#Linux-symbol)
 ## Linux-bash-strict-model 
 Linux bash strict model非官方模式，和perl `use strict;`类似。
@@ -89,6 +89,7 @@ $ # ;; 连续分号(terminator)，专门在case语句中承担终止的角色
 $ # () 整体执行(command group)
 $ cat <(head -n 1 xx.table) <(cat xx.table | grep -w "^Chr1") > result
 $ # 保留表头添加到筛选出的文件中，然后重定向新的文件
+$ for i in $(ls *sh);do ls -l $i;done
 
 $ # {} 变量分离
 
