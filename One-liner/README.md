@@ -274,6 +274,48 @@ cat xxx.gff3 | awk '$3=="gene" {print $0}' | grep protein_coding | awk -v OFS="\
 # promoter 5k upstream from tss
 cat xxx.gff3 | awk '$3=="gene" {print $0}' | grep protein_coding | awk -v OFS="\t" '{if ($7=="+") {print $1, $4, $4+5000} else {print $1, $5-5000, $5}}' > promoters.bed
 ```
+- gff提取intron
+```bash
+BEGIN{OFS="\t"}
+{ start[NR]=$4; 
+  end[NR]=$5; 
+  strand[NR]=$7; 
+  ID[NR]=$11; 
+  chr[NR]=$1; 
+  ens[NR]=$9; 
+  symb[NR]=$10} 
+
+END { 
+    for (i=1; i<=NR; i++){
+        if(ID[i]==ID[i+1]){ 
+            if(strand[i]=="+"){
+                intron_start=start[i+1]-1;
+                intron_end=end[i]+1;
+                print chr[i], 
+                      intron_end, 
+                      intron_start,
+                      "intron",
+                      strand[i], 
+                      ens[i],
+                      symb[i], 
+                      ID[i]
+
+            }   
+            else{
+                intron_start=end[i]+1;
+                intron_end=start[i+1]-1;
+                print chr[i], 
+                      intron_start, 
+                      intron_end,
+                      "intron",
+                      strand[i], 
+                      ens[i], 
+                      symb[i], ID[i]
+            }   
+        }   
+    }   
+}
+```
 
 ### vcf 
 - 按染色体提取vcf
