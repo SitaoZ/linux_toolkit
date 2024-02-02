@@ -1,7 +1,6 @@
 # Linux_toolkit
 Linux commands and tricks in bioinformatics  
 ## Table of content
-* [One-liner](#One-liner)
 * [One-liner](https://github.com/SitaoZ/linux_toolkit/blob/main/One-liner/README.md)
 * [Linux bash strict model](#Linux-bash-strict-model)
 * [Linux symbol](#linux-symbol)
