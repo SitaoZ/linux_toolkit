@@ -212,6 +212,15 @@ $ 1.3 一般函数
 $ # close, system, getline,
 ```
 
+- awk转义引号
+```bash
+$ awk '{print "\""}'   # 双引号
+$ awk '{print "'\''"}' # 单引号
+```
+
+
+
+
 ### grep
 grep(global search regular expression and print out the line),全面搜索正则表达式并把行打印。
 ```bash
