@@ -1,5 +1,6 @@
 
 ## Shell Commands
+* [帮助信息](#帮助信息)
 * [系统命令](#系统命令)
 * [系统用户登录信息](#系统用户登录信息)
 * [文件夹操作](#文件夹操作)
@@ -9,6 +10,21 @@
 * [文件处理](#文件处理)
 * [文件权限](#文件权限)
 * [进程管理](#进程管理)
+
+
+### 帮助信息
+
+```bash
+$ man     # 手册(manual) 命令帮助信息查看
+$ man man # 查看man的帮助信息
+$ man -w man    # --where 显示man文档的位置
+$ # /usr/share/man/man1/man.man-db.1.gz
+$ man /usr/share/man/man1/man.man-db.1.gz
+
+$ man -w -a man # --all --where
+$ man ls        # 查看ls帮助信息
+```
+
 ### 系统命令
 ```bash
 $ uname -a      # 显示系统和内核
@@ -222,3 +238,4 @@ $ top        # 查看实时进程 show real time processes
 $ kii pid    # 删除进程 kill process with id pid
 $ pkill name # 使用程序名称删除进程 kill process with name 
 ```
+
