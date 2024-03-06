@@ -269,7 +269,7 @@ $ samtools idxstats xxx.bam # 生成每个染色体上比对了多少reads的报
 
 ```
 
-- proper_align
+- properly_alignment
 ```bash
 $ samtools flags UNMAP,SECONDARY,SUPPLEMENTARY
 $ 0x904	2308	UNMAP,SECONDARY,SUPPLEMENTARY
@@ -280,12 +280,28 @@ $ samtools view -c -f 2 xxx.bam         # 正确比对
 到底什么是正确比对proper-pair?
 对于PROPER_PAIR(正确比对)SAM文件给出的解释是：每个片段根据比对软件能正确的比对。这个定义不清晰。一般来说正确的proper-pairs是两条read都比对上reference，方向一正一反，且两端边界距离在正确的范围之内。
 
+- primary alignment
+对于每条read只会有一个primary alignment和其他的secondary、supplementary alignment。
+samtools没有primary的flag，我们主要通过取反secondary和supplementary来实现primary比对的统计
+```bash
+$ samtools flags SUPPLEMENTARY,SECONDARY
+$ # 0x900 2304 SECONDARY,SUPPLEMENTARY
+$ samtools view -c -F 4 -F 2304 xxx.bam # 统计primary alignment
+```
+
 - secondary alignment
 ```bash
 $ samtools flags SECONDARY
 $ # 0x100 256 SECONDARY
 $ samtools view -c -F 4 -f 256 xxx.bam
 
+```
+- supplementary alignment
+也称嵌合比对chimeric alignment,是一种部分匹配基因组不同区域而不重叠的比对。
+```bash
+$ samtools flags SUPPLEMENTARY
+$ # 0x800 2048 SUPPLEMENTARY
+$ samtools view -c -F 4 -f 2048 xxx.bam
 ```
 
 
