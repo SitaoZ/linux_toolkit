@@ -259,6 +259,36 @@ $ sed /^$/d
 ### bam处理
 SAMtools是li heng开发的用于比对文件处理的利器[samtools](http://www.htslib.org/)。
 
+- 整体查看bam
+```bash 
+$ samtools flagstat xxx.bam # 生成bam的flags报告
+$ # samtools flagstat 给出报告中的正确比对数目properly align为正确比对(properly mapped)且主要比对(primary alignment reads)
+$ bamtools stats -in SRR1972739.bwa.bam # 生成bam的flags报告
+$ # samtools flagstat和bamtools stats给出的正确比对有差异
+$ samtools idxstats xxx.bam # 生成每个染色体上比对了多少reads的报告
+
+```
+
+- proper_align
+```bash
+$ samtools flags UNMAP,SECONDARY,SUPPLEMENTARY
+$ 0x904	2308	UNMAP,SECONDARY,SUPPLEMENTARY
+$ samtools view -c -f 2 -F 2308 xxx.bam # 正确比对AND主要比对
+$ samtools view -c -f 2 xxx.bam         # 正确比对
+
+```
+到底什么是正确比对proper-pair?
+对于PROPER_PAIR(正确比对)SAM文件给出的解释是：每个片段根据比对软件能正确的比对。这个定义不清晰。一般来说正确的proper-pairs是两条read都比对上reference，方向一正一反，且两端边界距离在正确的范围之内。
+
+- secondary alignment
+```bash
+$ samtools flags SECONDARY
+$ # 0x100 256 SECONDARY
+$ samtools view -c -F 4 -f 256 xxx.bam
+
+```
+
+
 - bowtie2提取唯一比对文件
 ```bash
 $ samtools view QC.sort.bam | grep "AS:" | grep –v "XS:" > unique_alignments.sam
@@ -319,6 +349,32 @@ $ for i in input ip;
 	   done
   done
 ```
+
+- 统计bam中没有比对上的数目
+```bash
+$ samtools view -c -f 4 xxx.bam # 没有比对上的
+$ samtools view -c -F 4 xxx.bam # 比对上的
+$ samtools view -b -F 4 xxx.bam > aligned.bam
+```
+
+- 选出比对上负链的
+```bash
+$ samtools flags 4
+0x4	4	UNMAP
+
+$ samtools flags 16
+0x10	16	REVERSE
+
+$ samtools view -F 4 -f 16 xxx.bam  # 比对上负链的
+```
+
+
+
+
+
+
+
+
 
 ### gtf_gff
 - gffread处理
