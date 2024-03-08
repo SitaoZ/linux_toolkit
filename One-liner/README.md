@@ -231,6 +231,10 @@ $ seqkit grep -r -f id.txt TrEMBL/uniprot_trembl.fasta -o result.fa
 ```
 
 ```bash
+$ seqkit locate -f primers.fasta reference.fasta # 找回primer在基因组中的位置
+```
+
+```bash
 $ # faFilter obtained from http://hgdownload.soe.ucsc.edu/admin/exe/
 $ faFilter -minSize=N -maxSize=N in.fa out.fa
 ```
