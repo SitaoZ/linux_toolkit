@@ -156,6 +156,9 @@ $ # 数组下标1-based
 $ # Array[1] = 'AAAA'
 $ # split 分割函数 and length 函数
 $ awk 'BEGIN{info="it is a test";lens=split(info,tA," ");print length(tA),lens;}'
+
+$ # mRNA.bed
+$ cat Araport11_GFF3_genes_transposons.Mar92021.gff | awk '$3=="mRNA"' | awk -v OFS="\t" '{split($9,a,";"); print $1,$4,$5,a[1],$6,$7}' | sed 's/ID=//g' > mRNA.bed
 ```
 #### awk 内置函数
 ```bash
