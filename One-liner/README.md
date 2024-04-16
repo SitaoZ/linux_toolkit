@@ -502,3 +502,64 @@ $ bcftools view -v indels subset_hg19.vcf.gz | bcftools query -f '%POS\t%TYPE\n'
 $ # 141
 $ bcftools view -i 'TYPE="indel"' subset_hg19.vcf.gz | bcftools query -f '%POS\t%TYPE\n' | wc -l
 ```
+- 打印所有的基因型genotype(GT)
+```bash
+$ bcftools query -H -f "%CHROM\t%POS[\t%GT\t]\n" subset_hg19.vcf.gz | head -n 3
+```
+- 排除样本输出
+```bash
+$ bcftools view -s ^HG00115,HG00118 subset_hg19.vcf.gz | bcftools query -H -f '%POS[\t%GT\t]\n' | head -n 3
+```
+
+- 指定阈值
+-c, --min-ac helps to set the minimum allele count of sites to be printed.
+
+```bash
+$ bcftools view -c 5 subset_hg19.vcf.gz | grep -v "#" | wc -l 
+```
+
+- 选择所有的纯合位点输出
+```bash
+$ bcftools view -g ^het subset_hg19.vcf.gz | bcftools view -g ^miss | bcftools query -f '%POS[\t%GT\t]\n' | head -n 3
+$ # -g, --genotype
+$ # ^, exclude  
+```
+
+- 选择n个以上的样本含有杂合位点的数据
+[SnpSift](https://pcingola.github.io/SnpEff/snpsift/introduction/)
+```bash
+$ # alias snpsift="java -jar ~/bin/SnpSift.jar"
+$ snpsift filter "countHet() >= 3" subset_hg19.vcf.gz | snpsift extractFields - "POS" "GEN[0].GL[1]" | head -n 3
+```
+
+- 质量和深度过滤
+```bash
+$ bcftools query -i 'QUAL>50 && DP>5000' -f '%POS%QUAL%DP\n' subset_hg19.vcf.gz | head -n 3
+$ # -i --include
+$ # 
+```
+- 合并vcf或者bcf
+```bash
+$ bcftools merge -l samplelist > multi-sample.vcf
+$ cat samplelist
+$ # sample1.vcf.gz
+$ # sample2.vcf.gz
+$ # sample3.vcf.gz
+```
+
+- 找多个vcf的交集
+```bash
+$ bcftools isec -p outdir -n=3 sample1.vcf.gz sample2.vcf.gz sample3.vcf.gz
+$ # isec, intersections
+```
+
+- 至少2个以上样本出现的位点
+```bash
+$ bcftools isec -p outdir -n+2 sample1.vcf.gz sample2.vcf.gz sample3.vcf.gz
+```
+- 选择只在1个样本中出现的位点
+```bash
+$ # 只在sample1中出现的位点
+$ bcftools isec -p outdir -C sample1.vcf.gz sample2.vcf.gz sample3.vcf.gz
+$ -C, --complent
+```
