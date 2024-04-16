@@ -573,6 +573,7 @@ $ java -jar snpEff.jar databases | grep GRCh38
 $ ../jdk-22/bin/java -jar snpEff.jar download GRCh38.86
 ```
 - variants types
+
 |Type|What is means|Example|
 | :--- | :--- | :--- |
 |SNP	|Single-Nucleotide Polymorphism	|Reference = 'A', Sample = 'C'|
