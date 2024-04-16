@@ -490,8 +490,9 @@ $ # 19 400742 C T
 ```
 - 提取
 ```bash
-bcftools view -e 'GT= "." | GT="0|0"' subset_hg19.vcf.gz |bcftools query -f '%POS\t%TYPE' | wc -l 
+bcftools view -e 'GT= "." | GT="0|0"' subset_hg19.vcf.gz |bcftools query -f '%POS[\t%GT\t]\n' | head -n 3
 ```
+
 - 提取indel
 ```bash
 $ bcftools view -v indels subset_hg19.vcf.gz | bcftools query -f '%POS\t%TYPE\n' |wc -l
