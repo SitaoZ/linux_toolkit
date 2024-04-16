@@ -488,9 +488,12 @@ $ # 19 400410 CA C
 $ # 19 400666 G C
 $ # 19 400742 C T
 ```
-- 提取
+- 排除缺失位点和ref纯合位点
 ```bash
-bcftools view -e 'GT= "." | GT="0|0"' subset_hg19.vcf.gz |bcftools query -f '%POS[\t%GT\t]\n' | head -n 3
+$ #bcftools view -e 'GT= "." | GT="0|0"' subset_hg19.vcf.gz |bcftools query -f '%POS[\t%GT\t]\n' | head -n 3
+$ # 402556 0|1 0|1 1|1 1|0 0|1 1|1
+$ # 402707 0|1 0|1 1|1 1|0 0|1 1|1
+$ # 402723 0|1 0|1 1|1 1|0 0|1 1|1
 ```
 
 - 提取indel
