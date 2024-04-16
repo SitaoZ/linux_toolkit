@@ -563,3 +563,20 @@ $ # 只在sample1中出现的位点
 $ bcftools isec -p outdir -C sample1.vcf.gz sample2.vcf.gz sample3.vcf.gz
 $ -C, --complent
 ```
+
+- SnpEff
+snp注释
+```bash
+$ # 注意对Java版本有要求，java v1.11以上
+$ # 查询数据库
+$ java -jar snpEff.jar databases | grep GRCh38
+$ ../jdk-22/bin/java -jar snpEff.jar download GRCh38.86
+```
+- variants types
+|Type|	What is means|	Example|
+|:---|:---|:---|
+|SNP	|Single-Nucleotide Polymorphism	|Reference = 'A', Sample = 'C'|
+|Ins	|Insertion	|Reference = 'A', Sample = 'AGT'|
+|Del	|Deletion	|Reference = 'AC', Sample = 'C'|
+|MNP	|Multiple-nucleotide polymorphism	|Reference = 'ATA', Sample = 'GTC'|
+|MIXED	|Multiple-nucleotide and an InDel	|Reference = 'ATA', Sample = 'GTCAGT'|
