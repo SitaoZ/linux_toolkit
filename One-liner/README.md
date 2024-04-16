@@ -478,3 +478,23 @@ $ awk '$1 == 5 && $7 == "PASS"' xxx.vcf > xxx_filter.vcf
 # 挑选五号染色体上的SNP
 # 过滤值为PASS
 ```
+
+- bcftools
+```bash
+$ # 使用bcftools的query功能，指定位置和显示的信息
+$ bcftools query -r '19:400300-400800' -f '%CHROM\t%POS\t%REF\t%ALT\n' subset_hg19.vcf.gz
+$ # This will produce:
+$ # 19 400410 CA C
+$ # 19 400666 G C
+$ # 19 400742 C T
+```
+- 提取
+```bash
+bcftools view -e 'GT= "." | GT="0|0"' subset_hg19.vcf.gz |bcftools query -f '%POS\t%TYPE' | wc -l 
+```
+- 提取indel
+```bash
+$ bcftools view -v indels subset_hg19.vcf.gz | bcftools query -f '%POS\t%TYPE\n' |wc -l
+$ # 141
+$ bcftools view -i 'TYPE="indel"' subset_hg19.vcf.gz | bcftools query -f '%POS\t%TYPE\n' | wc -l
+```
