@@ -569,8 +569,23 @@ snp注释
 ```bash
 $ # 注意对Java版本有要求，java v1.11以上
 $ # 查询数据库
-$ java -jar snpEff.jar databases | grep GRCh38
+$ java -jar snpEff.jar databases | grep -i GRCh38
 $ ../jdk-22/bin/java -jar snpEff.jar download GRCh38.86
+
+$ java -jar snpEff.jar databases | grep -i arabidopsis
+```
+
+- ebola
+```bash
+$ java -jar snpEff.jar databases | grep ebola
+$ java -jar snpEff.jar download ebola_zaire
+$ java -jar snpEff.jar dump ebola_zaire | more
+
+$ curl -O http://data.biostarhandbook.com/variant/find-variants.sh
+$ curl http://data.biostarhandbook.com/sra/ebola-runinfo.csv > runinfo.txt
+$ cat runinfo.txt | grep "04-14" | cut -f 1 -d ',' | grep SRR | head -5 > samples.txt
+$ bash find-variants.sh KJ660346 samples.txt
+$ java -jar snpEff.jar ebola_zaire combined.vcf > annotated.vcf
 ```
 - variants types
 
