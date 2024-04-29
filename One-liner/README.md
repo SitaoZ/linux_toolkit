@@ -6,6 +6,7 @@
 * [链接处理](#链接处理)
 * [gtf_gff](#gtf_gff)
 * [vcf](#vcf)
+* [table](#table)
 
 ### 基本文件处理
 - 找出常用命令
@@ -108,7 +109,13 @@ $ cat <(less total.csv | head -n 1) <(less total.csv| grep AT3G49430) > result.c
 # <() 接 grep 表示另外一个筛选的内容
 # cat 合并; > 重定向文件
 ```
-
+- 找到含有特定字符的文件名
+```bash
+$ grep -lir "All_isoforms_peak_process" * # 在当前目录下找出含有All_isoforms_peak_process字符的文件名
+$ # -l --files-with-matches 打印匹配的文件名
+$ # -i --ignore-case 忽略大小写
+$ # -r --recursive 循环当前目录所有文件
+```
 
 ### fastq处理
 - read长度分布
@@ -596,3 +603,9 @@ $ java -jar snpEff.jar ebola_zaire combined.vcf > annotated.vcf
 |Del	|Deletion	|Reference = 'AC', Sample = 'C'|
 |MNP	|Multiple-nucleotide polymorphism	|Reference = 'ATA', Sample = 'GTC'|
 |MIXED	|Multiple-nucleotide and an InDel	|Reference = 'ATA', Sample = 'GTCAGT'|
+
+
+### table
+```bash
+$ cut -f5 --complement # 去除第五列，输出剩余列
+```
