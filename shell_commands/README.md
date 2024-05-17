@@ -105,7 +105,10 @@ $ mkdir dir # 创建目录 make directory
 $ cd dir    # 进入dir目录 change directory to dir 
 $ cd ..     # 进入上一个层级目录 go up a directory 
 $ ls        # 列出文件 list files
+
+$ mkdir -p ChIP-seq/{data,results,scripts,software} # 一次性在某个目录下创建多个目录
 ```
+
 ### 查找文件
 ```bash
 $ find  dir -name *fasta # 在dir 目录下查找后缀为fasta的文件
@@ -239,3 +242,23 @@ $ kii pid    # 删除进程 kill process with id pid
 $ pkill name # 使用程序名称删除进程 kill process with name 
 ```
 
+### 文件压缩与解压
+
+```bash
+$ #---- 压缩 ----#
+$ # tar 
+$ tar -zcvf test.tar.gz ./test/ # 压缩当前文件夹
+$ tar -cvf test.tar ./test/     # 打包当前文件夹，但是不压缩
+
+$ tar -jcvf test.tar.bz2 ./test/ # 换一种压缩方式
+
+$ #---- 解压 ----#
+$ # tar.gz
+$ tar -zxvf xxx.tar.gz
+
+$ # tar.bz2
+$ tar -jxzf xxx.tar.bz2
+
+$ # zip
+$ unzip xx.zip
+```
