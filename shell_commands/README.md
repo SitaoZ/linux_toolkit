@@ -257,7 +257,7 @@ $ # tar.gz
 $ tar -zxvf xxx.tar.gz
 
 $ # tar.bz2
-$ tar -jxzf xxx.tar.bz2
+$ tar -jxvf xxx.tar.bz2
 
 $ # zip
 $ unzip xx.zip
