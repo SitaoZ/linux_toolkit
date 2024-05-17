@@ -297,6 +297,27 @@ $ sed /^$/d
 ```
 
 
+- 查找基因组上的motif序列
+```bash
+$ zcat hairpin.fa.gz \
+    | seqkit locate -i -d -p AUGGACUN \
+    | head -n 4 \
+    | csvtk pretty -t
+
+$ cat z | seqkit locate -p 'GTGA(C|T)(G|A)T' -r | csvtk preety -t 
+```
+
+- 查找ORF
+```bash
+$ A[TU]G # 起始密码子
+$ [TU](?:AG|AA|GA) 终止密码子
+$ .{3})+? # 三联体
+$ zcat hairpin.fa.gz \
+    | seqkit locate -i -p "A[TU]G(?:.{3})+?[TU](?:AG|AA|GA)" -r \
+    | head -n 4 \
+    | csvtk pretty -t
+```
+
 ### bam处理
 SAMtools是li heng开发的用于比对文件处理的利器[samtools](http://www.htslib.org/)。
 
