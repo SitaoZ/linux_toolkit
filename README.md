@@ -4,6 +4,7 @@ Linux commands and tricks in bioinformatics
 * [One-liner](One-liner)
 * [Linux symbol](linux_symbol)
 * [Shell commands](shell_commands)
+* [Shell](shell)
 * [Linux三剑客](awk_grep_sed)
 * [Vim](vim)
 * [库文件](库文件)
