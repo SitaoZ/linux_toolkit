@@ -30,4 +30,54 @@ variable with space="value" # 避免空格
 $ for sample in `ls *gff`; do echo $sample;done 
 ```
 
+- 变量类型
+```bash
+$ # 字符串类型，使用`'`单引号和`"`双引号来定义。
+$ my_string='Human genome'
+$ my_string="Human genome"
 
+$ # 整型
+$ declare -i my_integer=12
+
+$ # 数组变量
+$ my_array=(1 2 3 4 5)
+
+$ # 关联数组
+$ declare -A associative_array
+$ associative_array["name"]="Jone"
+$ associative_array["age"]=30
+
+$ # 环境变量
+$ echo $PATH
+
+$ # 特殊变量
+$ $0 脚本名称
+$ $1, $2 表示脚本参数
+$ $# 表示传递给脚本参数的数量
+$ $? 表示上一个命令的退出状态
+```
+
+-  只读变量
+使用readonly 可以将变量定义为只读变量，值不会被改变
+```bash
+$ my_variable="www.baidu.com"
+$ readonly my_variable
+$ my_variable="www.google.com" # 运行脚本会报错
+```
+
+- 删除变量
+使用unset命令可以删除变量，变量删除后不能再次使用，unset不能删除只读变量。
+```bash
+$ unset variable_name
+```
+
+#### 1.2 变量的使用
+
+变量使用`$`符号调用
+```bash
+$ ath="Araport11.gff"
+$ echo $ath   # 直接调用
+$ echo ${ath} # 加上{}是为了帮助解释器识别变量的边界
+```
+
+### 2.字符串
