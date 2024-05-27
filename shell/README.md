@@ -81,3 +81,35 @@ $ echo ${ath} # 加上{}是为了帮助解释器识别变量的边界
 ```
 
 ### 2.字符串
+- 单引号的任何字符都会原样输出，单引号字符串中的变量是无效的
+- 单引号中不能出现单独一个单引号(转义也不行)
+
+- 双引号里可以有变量
+- 双引号可以出现转义字符
+```bash
+$ gff="Araport11.gff"
+$ str="We use the "$gff" as reference \n"
+$ echo -e $str
+```
+- 字符串长度
+```bash
+$ string="abcd"
+$ echo ${#string}
+$ echo ${#string[0]}
+```
+
+- 提取子字符串
+shell 字符串索引值为0
+```bash
+$ string="The human genome was finished in 2003"
+$ echo ${string:1:4}
+```
+
+- 查找子字符串
+查找字符i或o的位置，谁先出现就计算哪个
+```bash
+$ string="Human is searching outspace"
+$ echo `expr index "$string" io` # 输出 7
+```
+
+
