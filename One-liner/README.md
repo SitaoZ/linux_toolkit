@@ -88,6 +88,7 @@ $ rm *bam
 
 # find and xargs
 $ find . -name "*.bam" | xargs rm
+$ find . -name "*.sam" | xargs rm -rf 
 ```
 - 文件检查
 ```bash
