@@ -36,6 +36,21 @@ $ cat file.txt | sort | uniq -c | sort -k1nr | head # 排序找出现最多的
 $ echo $PATH | tr ":" "\n" | nl # 打印全部路径按行排列
 ```
 
+- 前一个命令的输出作为后一个命令的参数
+```bash
+$ # 1. `` 反斜杠
+$ echo `ls *bam`
+
+$ # 2. $() 效果等同于反斜杠
+$ echo $(ls *bam)
+
+$ # 3. xargs ,缺点在于参数过多(成千上万),导致后面的命令执行失败
+$ find . -name "*gz" | xargs rm
+
+$ # 4. find -exec执行，不受参数数量的影响，克服xargs的缺点
+$ find . -name "*gz" -exec ls {} \;
+
+```
 
 - 打印文件第一行
 ```bash
