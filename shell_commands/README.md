@@ -10,6 +10,7 @@
 * [文件处理](#文件处理)
 * [文件权限](#文件权限)
 * [进程管理](#进程管理)
+* [自定义快捷键](#自定义快捷键)
 
 
 ### 帮助信息
@@ -261,4 +262,26 @@ $ tar -jxvf xxx.tar.bz2
 
 $ # zip
 $ unzip xx.zip
+```
+
+### 自定义快捷键
+
+```bash
+# alias
+alias ll='ls -lh'
+alias les='less -S'
+alias htopz='htop -u zhusitao'
+alias utr='cd /home/zhusitao/project/utr'
+alias today="date +%F"
+alias software="cd /home/zhusitao/software"
+alias ldir='ls -d */'
+alias lsd='ls -d */ | sed "s#/##g"'
+alias q1='awk "NR%4==1"'
+alias q2='awk "NR%4==2"'
+alias rc='python -c "import sys;from Bio.Seq import Seq;a = [print(Seq(i.strip()).reverse_complement()) for i in sys.stdin];"'
+# awk fish
+alias c1="awk 'NR==FNR { lines[\$0]=1; next } \$0 in lines'"
+alias c4="awk 'FNR==NR {arr[\$4]++; next}{if(\$4 in arr)print \$0}'"
+alias fastq_check="sh ~/software/own/fastq_check.sh "
+alias wgetd="wget -r -np -nH -R index.html"
 ```
