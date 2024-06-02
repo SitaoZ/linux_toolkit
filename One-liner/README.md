@@ -343,6 +343,10 @@ $ bedtools slop -g $REF.fai -i $BED -b $N > extended.bed
 $ # Extract the sequences corresponding to these locations.
 $ REF=refs/saccer3.fa
 $ bedtools getfasta -bed extended.bed -fi $REF -fo sequences.fa
+
+$ # Run meme-chip on the sequences.
+$ rm -rf results
+$ meme-chip -meme-maxw 10 -meme-minw 5 -o results sequences.fa
 ```
 
 ### bam处理
