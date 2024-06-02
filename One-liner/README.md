@@ -337,6 +337,7 @@ $ zcat hairpin.fa.gz \
 - bed to fasta
 ```bash
 $ # Extend the peak locations by 50 basepairs left and right.
+$ N=50
 $ bedtools slop -g $REF.fai -i $BED -b $N > extended.bed
 
 $ # Extract the sequences corresponding to these locations.
