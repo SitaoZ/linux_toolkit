@@ -334,6 +334,16 @@ $ zcat hairpin.fa.gz \
     | csvtk pretty -t
 ```
 
+- bed to fasta
+```bash
+$ # Extend the peak locations by 50 basepairs left and right.
+$ bedtools slop -g $REF.fai -i $BED -b $N > extended.bed
+
+$ # Extract the sequences corresponding to these locations.
+$ REF=refs/saccer3.fa
+$ bedtools getfasta -bed extended.bed -fi $REF -fo sequences.fa
+```
+
 ### bam处理
 SAMtools是li heng开发的用于比对文件处理的利器[samtools](http://www.htslib.org/)。
 
