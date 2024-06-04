@@ -52,9 +52,9 @@ $ conda create -n new_env_name --file package-list.txt # 参考文件重新安�
 ### 清理安装包的缓存
 ```bash
 $ conda clean -h
-$ conda clean -a # 快速删除
-$ conda clean -p # 从可写包缓存中删除没有使用的包，但是不会检查已经安装的包是否有软连接到其中的缓存包
-$ conda clean -t # 一键删除anaconda pkgs下面的压缩包
+$ conda clean -a/--all      # 快速删除, 删除索引缓存、锁定文件、未使用过的包和tar包。
+$ conda clean -p/--packages # 从可写包缓存中删除没有使用的包，但是不会检查已经安装的包是否有软连接到其中的缓存包
+$ conda clean -t/tarballs   # 一键删除anaconda pkgs下面的压缩包
 
 ```
 
