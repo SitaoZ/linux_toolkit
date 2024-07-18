@@ -112,6 +112,11 @@ $ getline 当其左右有重定向符|或<时：getline作用于输入文件，
 
 $ awk 'BEGIN{ "date" | getline out; split(out,mon); print mon[2] }'
 $ seq 5 | awk 'BEGIN{getline; print "The first line "$0};{print $0}'
+
+
+$ awk multi fasta file to one_line fasta
+$ cat multi.fa | awk '/^>/ {printf("\n%s\n",$0);next; } { printf("%s",$0);}  END {printf("\n");}' > one_line.fa
+$ awk '!/^>/ { printf "%s", $0; n = "\n" } /^>/ { print n $0; n = "" } END { printf "%s", n }' multi.fa > one_line.fa
 ```
 
 #### awk 流程控制
