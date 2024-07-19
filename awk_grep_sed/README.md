@@ -38,8 +38,10 @@ $ RS 记录分割符, 默认是一个换行符
 $ ORS 输出记录分隔符，默认是一个换行符
 $ NF 字段数 Number of Fields
 $ NR 文件行号，记录数
+
 $ awk 传入外部变量
-$ awk -v variable=100 '{print $variable}' files
+$ awk -v variable=100 '{print variable}' files
+$ for i in `seq 10`;do awk -v a="$i" '$1==a' xxx.csv >> result.csv;done
 ```
 
 #### awk 运算与判断
