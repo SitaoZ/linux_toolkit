@@ -690,4 +690,7 @@ $ java -jar snpEff.jar ebola_zaire combined.vcf > annotated.vcf
 ### table
 ```bash
 $ cut -f5 --complement # 去除第五列，输出剩余列
+
+$ # csvtk pretty
+$ csvtk pretty runinfo.csv
 ```
