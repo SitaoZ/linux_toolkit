@@ -159,6 +159,8 @@ $ # -np/--no-parent 不到父目录去
 $ # -nH/--no-host-directories 不要将文件保存到主机名文件夹
 $ # -R/--reject index.html 不下载index.html文件
 
+$ wget https://ftp.arb-silva.de/current/SILVA_138.2_LSUParc_tax_silva.fasta.gz --directory-prefix=Exports # 下载到指定的目录
+
 $ curl   # (client URL) transfer a URL 用于数据传输，支持各种传输协议
 $ man curl
 $ curl -# # --progress-bar 显示进度条
