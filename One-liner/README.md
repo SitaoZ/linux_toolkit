@@ -8,7 +8,7 @@
 * [vcf](#vcf)
 * [table](#table)
 * [http](#http)
-
+* [命令执行](#命令执行)
 ### 基本文件处理
 - 找出常用命令
 ```bash
@@ -710,4 +710,13 @@ $ mkdir result # 创建文件夹，用于共享结果；将需要共享的文件
 $ cd result；
 $ python -m http.server 8000 # 使用Python的简易http服务，共享文件，
 $ # windows用户 http://ip:8000/即可网页下载
+```
+
+### 命令执行
+```bash
+$ # 执行file中最后的一行shell命令
+$ cat file.txt | tail -n 1 | xargs -I {} bash -c '{}'
+$ xargs -I 从标准输入中读取作为参数传递给后续命令
+$ bash -c 用于执行shell脚本
+
 ```
