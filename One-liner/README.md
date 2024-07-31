@@ -7,6 +7,7 @@
 * [gtf_gff](#gtf_gff)
 * [vcf](#vcf)
 * [table](#table)
+* [http](#http)
 
 ### 基本文件处理
 - 找出常用命令
@@ -691,6 +692,22 @@ $ java -jar snpEff.jar ebola_zaire combined.vcf > annotated.vcf
 ```bash
 $ cut -f5 --complement # 去除第五列，输出剩余列
 
-$ # csvtk pretty
+$ # csvtk pretty 使文件对齐，便于查看
 $ csvtk pretty runinfo.csv
+
+$ csv2xlsx csv/tsv 转变为Excel格式，便于在windows上查看
+$ csvtk csv2xlsx -t HICD2_Kleb_blast_anno.csv -o HICD2_Kleb_blast_anno.xlsx
+$ # -t 表示输入的csv文件采用tab分隔
+
+### http
+```
+
+### http
+
+```bash
+$ # 在Linux中经常要给Windows用户传递文件，可以使用http服务，减少文件的拷贝步骤
+$ mkdir result # 创建文件夹，用于共享结果；将需要共享的文件考入该目录
+$ cd result；
+$ python -m http.server 8000 # 使用Python的简易http服务，共享文件，
+$ # windows用户 http://ip:8000/即可网页下载
 ```
