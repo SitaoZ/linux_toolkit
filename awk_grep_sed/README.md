@@ -44,6 +44,24 @@ $ awk -v variable=100 '{print variable}' files
 $ for i in `seq 10`;do awk -v a="$i" '$1==a' xxx.csv >> result.csv;done
 ```
 
+```bash
+$ # 当处理两个文件时，可以使用FNR 和 NR来进行挑选
+$ # 如在第一个文件中，选出第二个文件出现的第一个文件中的内容
+$ cat file1.txt
+$ # gene1  gene1_function_descriptions
+$ # gene2  gene2_function_descriptions
+$ # gene3  gene3_function_descriptions
+$ cat file2.txt
+$ # gene1
+$ # gene3
+
+$ awk 'FNR==NR{a[$1]=$0} NR>FNR{print a[$1]}' file1.txt file2.txt > result
+$ cat result
+$ # gene1  gene1_function_descriptions
+$ # gene3  gene3_function_descriptions
+```
+
+
 #### awk 运算与判断
 ```bash
 $ awk 算术运算符
