@@ -221,6 +221,7 @@ $ paste <(zcat Sample01_S1_R2_001.fastq.gz) \
       awk -F '\t' '{ if(NR%4==1||NR%4==3) {print $1} else {print $1 $2} }' | \
       gzip > Sample01_S1_CB_UMI.fastq.gz
 ```
+
 - long read
 ```bash
 # long read QC
@@ -259,6 +260,18 @@ $ zcat reads.fq.gz \
 | awk -v FS="\t" -v OFS="\n" '$2 ~ "AAGTTGATAACGGACTAGCCTTATTTT" {print $1, $2, $3, $4}' \
 | gzip > filtered.fq.gz
 ```
+
+- 16s测序数据read1和read2合并
+```bash
+$ # 使用的是qiime的vsearch工具合并
+$ vsearch --fastq_mergepairs seq/xxx_1.fq.gz \
+       --reverse seq/xxx_2.fq.gz \
+       --fastqout temp/xxx.merged.fq \
+       --relabel xxx.
+```
+
+
+
 ### fasta处理
 ```bash
 $ # 将染色体分开
@@ -271,6 +284,7 @@ $ cat Homo_sapiens.GRCh38.chr.dna.toplevel.fa | awk '{
 ```
 - seqkit   
 seqkit工具可以快速处理fasta文件 [seqkit](https://bioinf.shenwei.me/seqkit/usage/)。
+
 ```bash
 $ # 按照长度过滤,选取长度小于300bp的fasta子集
 $ seqkit seq -M 300 refer.fasta -o lt300.fa
@@ -286,6 +300,12 @@ $ seqkit grep -r -f id.txt TrEMBL/uniprot_trembl.fasta -o result.fa
 
 ```bash
 $ seqkit locate -f primers.fasta reference.fasta # 找回primer在基因组中的位置
+```
+
+```bash
+$ seqkit stat rdp_16s_v18.fa # 统计fasta序列的相关信息
+$ # file            format  type  num_seqs     sum_len  min_len  avg_len  max_len
+$ # rdp_16s_v18.fa  FASTA   DNA     21,195  30,743,106      455  1,450.5    1,968
 ```
 
 ```bash
