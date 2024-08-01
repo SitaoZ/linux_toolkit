@@ -212,6 +212,8 @@ $ rm file1        # 删除文件
 $ head file1      # 前十行
 $ tail file1      # 后十行
 $ tail -F file1   # 实时查看文件
+$ tail -n+2       # 从文件的第二行开始显示，一般用于去除表头行
+
 $ sort            # 对文件排序
 $ uniq            # 对文件去重
 $ wc              # 统计文件行数，单词数，字符数
