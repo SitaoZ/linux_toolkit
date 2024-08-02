@@ -738,5 +738,10 @@ $ # 执行file中最后的一行shell命令
 $ cat file.txt | tail -n 1 | xargs -I {} bash -c '{}'
 $ xargs -I 从标准输入中读取作为参数传递给后续命令
 $ bash -c 用于执行shell脚本
+```
 
+- 每十行作为一个参数
+```bash
+$ # xargs -n
+$ cut -d "," -f 11 SRP342448.runinfo.csv | sed '1d' | xargs -n 10
 ```
