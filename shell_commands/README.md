@@ -226,6 +226,14 @@ $ echo agctagtcg | tr a-z A-Z | tr ATCG TAGC | rev # 反向互补DNA序列
 
 ```
 
+```bash
+$ ls -Slth # 按文件大小排序
+$ -S, sort by file size
+$ -h, --human-readable
+$ -l, use a long listing format
+$ -t, sort by time, newest first; see --time
+```
+
 ### 文件权限
 ```bash
 $ chmod 755 file1            # change mode of file
