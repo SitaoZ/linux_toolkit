@@ -10,6 +10,7 @@
 * [文件处理](#文件处理)
 * [文件权限](#文件权限)
 * [进程管理](#进程管理)
+* [文件压缩与解压](#文件压缩与解压)
 * [自定义快捷键](#自定义快捷键)
 
 
@@ -274,6 +275,21 @@ $ tar -jxvf xxx.tar.bz2
 
 $ # zip
 $ unzip xx.zip
+```
+
+- gzip vs pigz
+```bash
+$ gzip # 使用广泛的压缩工具，但是只能单核执行
+$ # -k, --keep        keep (don't delete) input files
+$ # -1, --fast        compress faster
+$ # -9, --best        compress better
+$ # -c, --stdout      write on standard output, keep original files unchanged
+
+$ pigz # parallel implementation of gzip 多进程的gzip
+$ # -p, --processes n 进程数
+$ # -k, --keep 保留原始文件
+$ # -c, --stdout         Write all processed output to stdout (won't delete)
+$ # --fast, --best       Compression levels 1 and 9 respectively
 ```
 
 ### 自定义快捷键
