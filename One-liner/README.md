@@ -745,3 +745,9 @@ $ bash -c 用于执行shell脚本
 $ # xargs -n
 $ cut -d "," -f 11 SRP342448.runinfo.csv | sed '1d' | xargs -n 10
 ```
+
+- java
+```bash
+$ java -X
+$ # -Xmx<size>        set maximum Java heap size
+```
