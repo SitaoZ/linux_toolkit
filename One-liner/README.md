@@ -751,3 +751,8 @@ $ cut -d "," -f 11 SRP342448.runinfo.csv | sed '1d' | xargs -n 10
 $ java -X
 $ # -Xmx<size>        set maximum Java heap size
 ```
+
+- 查看集群CPU配置信息
+```bash
+$ cat /proc/cpuinfo
+```
