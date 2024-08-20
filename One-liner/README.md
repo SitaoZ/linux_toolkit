@@ -18,6 +18,10 @@ $ history | awk '{a[$2]++} END{for(i in a){print a[i]" "i}}' | sort -rn | head #
 ```bash
 $ for f in $(ls *.sh); do wc ${f}; done
 ```
+- 一次性杀掉该用户的全部任务
+```bash
+$ ps -ef | grep zhusitao | awk '{ print $2 }'| xargs kill -9
+```
 
 - 内存监控
 ```
