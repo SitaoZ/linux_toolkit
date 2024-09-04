@@ -602,6 +602,11 @@ $ # 19 400410 CA C
 $ # 19 400666 G C
 $ # 19 400742 C T
 ```
+- 查看VCF头文件
+```bash
+$ bcftools view -h  newfile.vcf.gz
+```
+
 - 排除缺失位点和ref纯合位点
 ```bash
 $ #bcftools view -e 'GT= "." | GT="0|0"' subset_hg19.vcf.gz |bcftools query -f '%POS[\t%GT\t]\n' | head -n 3
