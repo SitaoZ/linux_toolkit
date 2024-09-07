@@ -59,3 +59,15 @@ gcc -L/path/to/library -lname myfile.c
 ```bash
 $ sudo yum install zlib-devel -y
 ```
+
+- 检查当前版本
+```bash
+$ gcc --version
+$ g++ --version
+
+$ locate libc.so.6
+$ locate libstdc++.so.6
+$ strings /usr/lib64/libc.so.6 | grep -E "^GLIBC_"
+$ strings /usr/lib64/libstdc++.so.6 | grep -E "^GLIBCXX_"
+
+```
