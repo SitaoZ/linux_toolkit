@@ -9,6 +9,7 @@
 * [table](#table)
 * [http](#http)
 * [命令执行](#命令执行)
+* [服务器配置信息](#服务器配置信息)
 ### 基本文件处理
 - 找出常用命令
 ```bash
@@ -760,8 +761,49 @@ $ cut -d "," -f 11 SRP342448.runinfo.csv | sed '1d' | xargs -n 10
 $ java -X
 $ # -Xmx<size>        set maximum Java heap size
 ```
+### 服务器配置信息
+- 查看物理CPU个数
+```bash
+$ cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l
+```
+- 查看每个物理CPU中core的个数(即核数)
+```bash
+$ cat /proc/cpuinfo| grep "cpu cores"| uniq
+```
+- 查看逻辑CPU的个数
+```bash
+$ cat /proc/cpuinfo| grep "processor"| wc -l
+```
+
+- 查看CPU信息（型号）
+```bash
+$ cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
+```
+
+- 查看有多少个虚拟CPU
+```bash
+$ cat /proc/cpuinfo | grep ^processor | sort | uniq |wc -l
+```
+
+- 查看CPU是几个核心的
+```bash
+$ cat /proc/cpuinfo | grep 'cpu cores' | uniq
+```
 
 - 查看集群CPU配置信息
 ```bash
 $ cat /proc/cpuinfo
+```
+- 查看系统内核
+```bash
+$ uname -a
+```
+
+- 查看内存信息
+```bash
+$ cat /proc/meminfo
+```
+- 使用free查看内存信息
+```bash
+$ free -m
 ```
