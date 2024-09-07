@@ -796,7 +796,8 @@ $ cat /proc/cpuinfo
 ```
 - 查看系统内核
 ```bash
-$ uname -a
+$ uname -a          # 方法1
+$ cat /proc/version # 方法2
 ```
 
 - 查看内存信息
@@ -806,4 +807,15 @@ $ cat /proc/meminfo
 - 使用free查看内存信息
 ```bash
 $ free -m
+```
+- 查看各分区使用情况
+```bash
+$ df -h
+```
+
+- 查看Linux系统版本的命令
+```bash
+$ cat /etc/redhat-release # 方法1
+$ lsb_release -a          # 方法2
+$ 
 ```
