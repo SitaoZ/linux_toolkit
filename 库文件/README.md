@@ -54,3 +54,8 @@ Linux有个约定速成的规则，假如库名是name，那么动态链接库�
 ```bash
 gcc -L/path/to/library -lname myfile.c
 ```
+
+- zlib 安装
+```bash
+$ sudo yum install zlib-devel -y
+```
