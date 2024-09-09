@@ -813,6 +813,22 @@ $ free -m
 $ df -h
 ```
 
+- 远程关机
+```bash
+$ # 方法1
+$ shutdown -h now # 系统立即关机
+$ shutdown -r now # 系统立即重启
+$ shutdown -h +10 # 系统十分钟后关机
+
+# 方法2
+$ poweroff   # 关机
+
+# 方法3
+$ reboot        # 重启
+$ reboot --halt # 停止机器
+$ reboot -p     # 关闭机器
+```
+
 - 查看Linux系统版本的命令
 ```bash
 $ cat /etc/redhat-release # 方法1
