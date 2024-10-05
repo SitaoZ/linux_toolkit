@@ -42,6 +42,11 @@ $ cat file.txt | sort | uniq -c | sort -k1nr | head # 排序找出现最多的
 $ echo $PATH | tr ":" "\n" | nl # 打印全部路径按行排列
 ```
 
+- tab分隔文件排序
+```bash
+$ sort -t $'\t' -rnk2 xxx.txt
+```
+
 - 前一个命令的输出作为后一个命令的参数
 ```bash
 $ # 1. `` 反斜杠
