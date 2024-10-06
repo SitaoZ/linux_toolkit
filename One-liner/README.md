@@ -599,6 +599,11 @@ $ awk '$1 == 5 && $7 == "PASS"' xxx.vcf > xxx_filter.vcf
 # 过滤值为PASS
 ```
 
+- 替换vcftools 过滤后genotype(GT)不正常的位点 原先是.|.，转换后变成了.
+```bash
+cat raw.mm8mac1.recode.vcf | sed $'s/\t.:/\t.|.:/g' > clean.mm8mac1.recode.vcf
+```
+
 - bcftools
 ```bash
 $ # 使用bcftools的query功能，指定位置和显示的信息
