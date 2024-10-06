@@ -597,6 +597,9 @@ $ for chr in {1..22}; do awk -v chr=$chr -v threshold=10 '$1 == chr && $6 > thre
 $ awk '$1 == 5 && $7 == "PASS"' xxx.vcf > xxx_filter.vcf
 # 挑选五号染色体上的SNP
 # 过滤值为PASS
+
+$ # 值提取PASS的位点
+$ awk -F '\t' '{if($0 ~ /\#/) print; else if($7 == "PASS") print}' xxx,vcf > xxx_filter.vcf
 ```
 
 - 替换vcftools 过滤后genotype(GT)不正常的位点 原先是.|.，转换后变成了.
@@ -620,7 +623,7 @@ $ bcftools view -h  newfile.vcf.gz
 
 - 排除缺失位点和ref纯合位点
 ```bash
-$ #bcftools view -e 'GT= "." | GT="0|0"' subset_hg19.vcf.gz |bcftools query -f '%POS[\t%GT\t]\n' | head -n 3
+$ bcftools view -e 'GT= "." | GT="0|0"' subset_hg19.vcf.gz |bcftools query -f '%POS[\t%GT\t]\n' | head -n 3
 $ # 402556 0|1 0|1 1|1 1|0 0|1 1|1
 $ # 402707 0|1 0|1 1|1 1|0 0|1 1|1
 $ # 402723 0|1 0|1 1|1 1|0 0|1 1|1
