@@ -1,8 +1,8 @@
 ## Table of content
-* [1.awk](#1.awk)
-* [2.grep](#2.grep)
-* [3.sed](#3.sed)
-### 1.awk
+* [awk](#awk)
+* [grep](#grep)
+* [sed](#sed)
+### awk
 文本处理的工具之一,[awk](https://wangchujiang.com/linux-command/c/awk.html)
 ```bash
 $ man awk
@@ -249,7 +249,7 @@ $ awk '{print "'\''"}' # 单引号
 
 
 
-### 2.grep
+### grep
 grep(global search regular expression and print out the line),全面搜索正则表达式并把行打印。
 ```bash
 $ man grep 
@@ -326,7 +326,7 @@ $ \w         # 匹配文字或数字字符 [a-zA-Z0-9]
 $ zgrep -v "^#" GCF_000001405.40_GRCh38.p14_genomic.gff.gz | awk 'BEGIN{FS="\t";OFS"\t"}$2=="RefSeqFE"&&$3!="biological_region"'
 ```
 
-### 3.sed
+### sed
 sed (stream editor for filtering and transforming text)流式编辑器
 ```bash
 $ # 命令格式
