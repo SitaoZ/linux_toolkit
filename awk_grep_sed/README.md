@@ -1,7 +1,7 @@
 ## Table of content
-* [awk](#1.awk)
-* [grep](#2.grep)
-* [sed](#3.sed)
+* [1.awk](#1.awk)
+* [2.grep](#2.grep)
+* [3.sed](#3.sed)
 ### 1.awk
 文本处理的工具之一,[awk](https://wangchujiang.com/linux-command/c/awk.html)
 ```bash
