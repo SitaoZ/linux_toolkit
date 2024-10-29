@@ -1,8 +1,8 @@
 ## Table of content
-* [awk](#awk)
-* [grep](#grep)
-* [sed](#sed)
-### awk
+* [awk](#1.awk)
+* [grep](#2.grep)
+* [sed](#3.sed)
+### 1.awk
 文本处理的工具之一,[awk](https://wangchujiang.com/linux-command/c/awk.html)
 ```bash
 $ man awk
@@ -26,7 +26,7 @@ $ 操作(action)主要包括：有一个或者多个命令、函数、表达式�
 
 ```
 
-#### awk 内置变量
+#### 1.1 awk 内置变量
 ```bash
 $ ARGC 命令行参数数目
 $ ARGV 包含命令行参数的数组
@@ -62,7 +62,7 @@ $ # gene3  gene3_function_descriptions
 ```
 
 
-#### awk 运算与判断
+#### 1.2 awk 运算与判断
 ```bash
 $ awk 算术运算符
 $ # + - 加减
@@ -82,7 +82,7 @@ $ || 逻辑或
 $ && 逻辑与
 $ awk 'BEGIN{a=1;b=2;print (a>5 && b<=2),(a>5 || b<=2);}'
 ```
-#### awk 正则运算
+#### 1.3 awk 正则运算
 ```bash 
 $ 正则运算符
 $ ~, !~
@@ -105,7 +105,7 @@ $ 正则需要用 /正则/ 包围
 $ 关系运算符
 $ <, <=, >, >=, !=, ==
 ```
-#### awk 读取
+#### 1.4 awk 读取
 ```bash
 $ # next 语句
 $ awk 'NR%4==3{next}{print NR,$0}' fastqs # 去读fastq文件，判断去除其第三行
@@ -139,7 +139,7 @@ $ cat multi.fa | awk '/^>/ {printf("\n%s\n",$0);next; } { printf("%s",$0);}  END
 $ awk '!/^>/ { printf "%s", $0; n = "\n" } /^>/ { print n $0; n = "" } END { printf "%s", n }' multi.fa > one_line.fa
 ```
 
-#### awk 流程控制
+#### 1.5 awk 流程控制
 ```bash
 $ while, for, do-while; break, continue语句控制流程
 $ break 退出循环; continue 中断当前正在执行的循环并跳到下一循环。
@@ -174,7 +174,7 @@ print total;
 }'
 ```
 
-#### awk 数组应用
+#### 1.6 awk 数组应用
 ```bash
 $ # awk 数组应用十分便利。数组不必提前声明
 $ # 数组下标1-based
@@ -185,7 +185,7 @@ $ awk 'BEGIN{info="it is a test";lens=split(info,tA," ");print length(tA),lens;}
 $ # mRNA.bed
 $ cat Araport11_GFF3_genes_transposons.Mar92021.gff | awk '$3=="mRNA"' | awk -v OFS="\t" '{split($9,a,";"); print $1,$4,$5,a[1],$6,$7}' | sed 's/ID=//g' > mRNA.bed
 ```
-#### awk 内置函数
+#### 1.7 awk 内置函数
 ```bash
 $ 1.1 awk 算术函数
 $ # atan2, cos, sin, exp, log, sqrt, int, rand, strand
@@ -249,12 +249,12 @@ $ awk '{print "'\''"}' # 单引号
 
 
 
-### grep
+### 2.grep
 grep(global search regular expression and print out the line),全面搜索正则表达式并把行打印。
 ```bash
 $ man grep 
 ```
-#### pattern syntax 
+#### 2.1 pattern syntax 
 ```bash
 $ -E/--extended-regexp # 拓展的正则匹配
 $ -F/--fixed-strings   # 将模式固定，不支持正则表达
@@ -262,7 +262,7 @@ $ -G/--basic-regexp    # 一般的正则表达
 $ -P/--perl-regexp     # perl正则
 ```
 
-#### match control 
+#### 2.2 match control 
 
 ```bash
 $ -e/--regexp # 指定字符串作为模式
@@ -274,7 +274,7 @@ $ -w/--word-regexp  # 匹配单词
 $ -x/--line-regexp  # 匹配整行
 ```
 
-#### general output control
+#### 2.3 general output control
 ```bash
 $ -c/--count # 打印出匹配的行数， 而不是输出行
 $ --color    # 显示颜色
@@ -284,7 +284,7 @@ $ -m/--max-count     # 指定最大的匹配次数
 $ -o/--only-matching # 只打印出匹配的,同时显示文件名
 ```
 
-#### output line prefix control
+#### 2.4 output line prefix control
 ```bash
 $ -b/--byte-offset   # 输出匹配的位置，0-base开始；可以和-o配合使用
 $ -H/--with-filename # 打印出每个匹配的文件名
@@ -295,7 +295,7 @@ $ -n/--line-number   # 打印行号，1-based
 $ -T/--initial-tab   # 在匹配的文件前使用一个tab符号, 结合-H, -n, -b效果更佳
 ```
 
-#### context line control 
+#### 2.5 context line control 
 
 ```bash
 $ -A/--after-context  # 打印匹配行后面NUM行
@@ -303,7 +303,7 @@ $ -B/--before-context # 打印匹配文件前面NUM行
 $ -C/--context        # 打印前后NUM行
 ```
 
-#### grep 正则表达式
+#### 2.6 grep 正则表达式
 ```bash
 $ ^   # 锚定行的开始 
 $ $   # 锚定行的结束
@@ -320,7 +320,13 @@ $ x\{m, n\}} # 重复字符x, 至少m次，至多n次
 $ \w         # 匹配文字或数字字符 [a-zA-Z0-9]
 ```
 
-### sed
+#### 2.7 zgrep 
+
+```bash
+$ zgrep -v "^#" GCF_000001405.40_GRCh38.p14_genomic.gff.gz | awk 'BEGIN{FS="\t";OFS"\t"}$2=="RefSeqFE"&&$3!="biological_region"'
+```
+
+### 3.sed
 sed (stream editor for filtering and transforming text)流式编辑器
 ```bash
 $ # 命令格式
@@ -330,7 +336,7 @@ $ # 命令必须由单引号包住；或者使用双引号包住，双引号主�
 $ # 每个command 由最多两个地址(addresses)和一个动作(action)组成,
 $ # 每个地址可以是正则表达式或者行数，动作见4.3.2
 ```
-#### sed 参数
+#### 3.1 sed 参数
 
 ```bash
 $ # 常用的sed参数，用来指定执行的方式
@@ -344,7 +350,7 @@ $ -V/--version # 显示版本信息
 $ -h/--help    # 显示帮助信息
 ```
 
-#### 动作说明
+#### 3.2 动作说明
 
 a: 新增 append  
 c: 取代 change  
@@ -356,13 +362,13 @@ y: 转换 transform
 q: 退出 quit  
 
 
-#### append 添加新行
+#### 3.3 append 添加新行
 
 ```bash
 $ sed '/ATCG/a atcg' file.txt # 在匹配的行后面添加新行
 ```
 
-#### deletion 删除命令
+#### 3.4 deletion 删除命令
 ```bash
 $ d
 $ sed '/^$/d' file # 去除所有的空白行
@@ -378,7 +384,7 @@ $ echo this is a test line | sed 's/\w\+/[&]/g' # \w+表示匹配每一个单词
 
 ```
 
-#### print 打印命令
+#### 3.5 print 打印命令
 ```bash
 $ # Nth line
 $ sed -n '2p' txt     # 打印文件第二行
@@ -391,7 +397,7 @@ $ sed '/pat/,$d' txt        # 打印/pat/开始到最后一行的内容
 $ yes | head -c100 | tr '\n' ' ' | sed -n l | head -n1 | wc -c
 ```
 
-#### substitute 替换标记
+#### 3.6 substitute 替换标记
 ```bash
 $ s
 $ g # 表示全局替换
@@ -416,22 +422,22 @@ $ echo this is digit 7 in a number | sed 's/digit \([0-9]\)/\1/'
 
 ```
 
-#### transform 转换
+#### 3.7 transform 转换
 ```bash
 $ echo ATCG | sed 'y/ATCG/TAGC/' | rev # DNA反向互补
 ```
 
-#### quit 退出 
+#### 3.8 quit 退出 
 ```bash
 $ sed '100q' file # 打印前100行，然后退出
 ```
-#### 组合多个表达式
+#### 3.9 组合多个表达式
 ```bash
 $ sed '表达式1; 表达式2' # sed '表达式1' | sed '表达式2'
 $ sed 's/chr/Chr/g; s/geneid/GeneID/g' xxx.fa # 同时多个替换操作
 ```
 
-#### 引用
+#### 3.10 引用
 
 ```bash
 $ # 传入shell变量时，需要使用双引号
@@ -439,7 +445,7 @@ $ gene_id=AT1G79550
 $ cat file.txt | sed "s/$gene_id/PGK/g" # 替换基因名
 ```
 
-#### 多点编辑
+#### 3.11 多点编辑
 ```bash
 $ nl /etc/passwd | sed -e '3,$d' -e 's/bash/blueshell/' # -e表示多点编辑，第一个编辑命令删除第三行到末尾的数据，第二条命令搜索bash替换为blueshell
 ```
