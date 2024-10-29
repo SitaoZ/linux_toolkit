@@ -107,6 +107,7 @@ $ mkdir dir # 创建目录 make directory
 $ cd dir    # 进入dir目录 change directory to dir 
 $ cd ..     # 进入上一个层级目录 go up a directory 
 $ ls        # 列出文件 list files
+$ ls -lthS  # 列出文件，按照文件的大小排列
 
 $ mkdir -p ChIP-seq/{data,results,scripts,software} # 一次性在某个目录下创建多个目录
 ```
