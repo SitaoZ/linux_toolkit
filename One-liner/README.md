@@ -172,7 +172,29 @@ $ fc -l -3 # 列出最后执行的3个命令
 $ fc -ln # 列出命令，但不现实行号
 $ 
 ```
+- 原样结构目录备份脚本和程序
 
+将下面的脚本写入 backup.sh; 执行 `bash backup.sh dirname`; 执行当前目录备份
+
+```bash
+for f in `find ../$1/ -name "*.py" | sed 's#\.\.\/#\.\/#g'`
+do 
+    DIRNAME=`dirname $f`
+    BASENAME=`basename $f`
+    mkdir -p $DIRNAME
+    cp ../$DIRNAME/$BASENAME $DIRNAME/$BASENAME
+done
+
+# shell scripts 
+
+for f in `find ../$1/ -name "*.sh" | sed 's#\.\.\/#\.\/#g'`
+do
+    DIRNAME=`dirname $f`
+    BASENAME=`basename $f`
+    mkdir -p $DIRNAME
+    cp ../$DIRNAME/$BASENAME $DIRNAME/$BASENAME
+done
+```
 
 ### fastq处理
 - read长度分布
