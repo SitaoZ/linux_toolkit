@@ -57,6 +57,8 @@ $ echo $(ls *bam)
 
 $ # 3. xargs ,缺点在于参数过多(成千上万),导致后面的命令执行失败
 $ find . -name "*gz" | xargs rm
+$ # 批量查看文件是否存在
+$ cat KO_WT_SampleList.txt | cut -d " "  -f 2 | xargs ls -l
 
 $ # 4. find -exec执行，不受参数数量的影响，克服xargs的缺点
 $ find . -name "*gz" -exec ls {} \;
