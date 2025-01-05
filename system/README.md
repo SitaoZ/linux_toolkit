@@ -10,3 +10,9 @@ netstat -tuln
 # -n: 显示数字形式的地址和端口号，而不是尝试解析主机名和服务名
 
 ```
+
+- kill listening port
+```bash
+lsof -i:8000            # 查看该端口的监听情况
+kill $(lsof -t -i:8000) # 杀掉该监听端口
+```
