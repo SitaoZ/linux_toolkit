@@ -69,6 +69,10 @@ $ conda uninstall pkgname
 $
 $ conda search pkg --info                     # 搜索包的信息
 ```
+- 指定源安装
+```bash
+$ conda install -y --channel=https://conda.anaconda.org/conda-forge --channel=https://conda.anaconda.org/pytorch --channel=https://conda.anaconda.org/pyg babel==2.13.1 biopandas==0.4.1 openbabel==3.1.1 plyfile==1.0.1 prody==2.4.0 torch-ema==0.3 torchmetrics==1.2.1
+```
 
 ### 配置文件
 ```bash
