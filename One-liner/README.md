@@ -15,6 +15,17 @@
 ```bash
 $ history | awk '{a[$2]++} END{for(i in a){print a[i]" "i}}' | sort -rn | head # 列出常用的命令
 ```
+
+- 批量给文件末尾添加一个换行符
+```
+$ for i in `ls *txt`; do echo >> $i  ;done
+
+$ sed -i '$a\' filename.sh
+
+$ printf "\n" >> filename.sh
+
+```
+
 - 循环脚本
 ```bash
 $ for f in $(ls *.sh); do wc ${f}; done
