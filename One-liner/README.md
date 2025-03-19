@@ -257,7 +257,15 @@ $ paste - - - - - - - - < reads-int.fastq \
     | cut -f 5-8 | tr '\t' '\n' > reads-2.fastq
 ```
 
-    
+- seqkit 按照`read id`去除fastq中的read
+ ```bash
+$ seqkit grep -v -f exclude_list.txt -n -i ../01.fastp/L1_A_R1.clean.fq.gz -o L1_A_R1.clean.remove.fq.gz
+# -v 取反
+# -f 输入匹配的字符文本
+# -n --by-name
+# -i --ignore-case 忽略大小写
+# -o --out-file 
+```
 
 - 合并单细胞数据，合并cell barcodes 和 UMI, 名称 和 + 只用R2的，序列和质量值合并
 ```
