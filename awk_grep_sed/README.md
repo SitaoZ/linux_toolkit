@@ -262,6 +262,11 @@ $ -G/--basic-regexp    # 一般的正则表达
 $ -P/--perl-regexp     # perl正则
 ```
 
+- 搜索SMILES cholesterol
+```bash
+# 字符串中包含特殊符号，需要将模式固定，再去匹配
+$ zcat a2a.ulds.tsv.gz  | grep -F -i "C[C@H](CCCC(C)C)[C@H]1CC[C@@H]2[C@@]1(CC[C@H]3[C@H]2CC=C4[C@@]3(CC[C@@H](C4)O)C)C"
+```
 #### 2.2 match control 
 
 ```bash
