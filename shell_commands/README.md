@@ -251,10 +251,11 @@ $
 ### 进程管理
 
 ```bash
-$ ps         # 查看进程 show snapshoot of processes
-$ top        # 查看实时进程 show real time processes
-$ kii pid    # 删除进程 kill process with id pid
-$ pkill name # 使用程序名称删除进程 kill process with name 
+$ ps             # 查看进程 show snapshoot of processes
+$ top            # 查看实时进程 show real time processes
+$ kill pid       # 删除进程 kill process with id pid
+$ killall python # 一次删除所有的python进程
+$ pkill name     # 使用程序名称删除进程 kill process with name 
 ```
 
 ### 文件压缩与解压
