@@ -53,6 +53,8 @@ $ ldd /bin/ls # 查看文件的动态依赖
 $ ulimit    # 控制shell程序资源
 $ ulimit -a # 显示目前资源的限定
 $ ulimit -n # 指定同一时间最多可开启的文件数
+$ # 有时候多进程处理时该文件数的设置太小，可用使用 ulimit -n 4096 （例子）增加能同时打开的文件数
+
 $ ulimit -H # 设定资源的硬性限制，也就是管理员所设下的限制
 
 $ launchctl limit maxfiles                   # macOS 最大文件数目
