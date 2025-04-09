@@ -414,20 +414,34 @@ $ \1 # 子串匹配标记
 $ & # 已匹配字符串标记
 
 $ sed 's/AAAA/TTTT/g' file # 全局替换
+
 $ # 定界符号一致均可
 $ sed 's#AAAA#TTTT#g' file 
 $ sed 's:AAAA:TTTT:g' file
 
-$ sed '2s/AAAA/TTTT/' file      # 只替换第二行
+
+$ sed '2 s/AAAA/TTTT/' file      # 只替换第二行 2和s 之间有无空白均可
+
+$ sed -i '/匹配字符串/s/替换源字符串/替换目标字符串/g' filename
 $ sed '/DDDD/s/AAAA/TTTT/' file # 替换匹配DDDD的行
 
 $ # 正则
-$ echo aaa BBB | sed 's/\([a-z]\+\) \([A-Z]\+\)/\2 \1/'
+$ # \([a-z]\+\) 用于匹配第一个子串，\([A-Z]\+\)用于匹配第二个，
+$ # 下面的命令是将匹配的第一子串和第二个子串互换
+$ echo aaa BBB | sed 's/\([a-z]\+\) \([A-Z]\+\)/\2 \1/' # BBB aaa
+$ # 将 digit 7 替换成 7 
 $ echo this is digit 7 in a number | sed 's/digit \([0-9]\)/\1/'
 
 ```
+#### 3.7 insert 插入
 
-#### 3.7 transform 转换
+```bash
+# 原地修改第一行， 将.quant替换为空， 只替换第一行，与前文sed '2 s/AAAA/TTTT/' file 一致
+sed -i '1 s/.quant//g' result/salmon/gene.*
+```
+
+
+#### 3.8 transform 转换
 ```bash
 $ echo ATCG | sed 'y/ATCG/TAGC/' | rev # DNA反向互补
 ```
