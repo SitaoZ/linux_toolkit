@@ -11,6 +11,26 @@
 * [命令执行](#命令执行)
 * [服务器配置信息](#服务器配置信息)
 ### 基本文件处理
+
+- 时间管理
+```bash
+$ # 显示 年-月-日 
+$ date +"%Y-%m-%d"  # or date +%Y-%m-%d
+$ # 显示 年-月-日-时-分-秒
+$ date +"%Y-%m-%d %T" # or date +"%Y-%m-%d %H:%M:%S"
+
+$ # 显示秒
+$ date +%s # seconds since 1970-01-01 00:00:00 UTC
+
+$ # 常用于命令执行前后，统计时间
+echo start: `date +"%Y-%m-%d %T"`
+start=`date +%s`
+sleep 10
+echo end: `date +"%Y-%m-%d %T"`
+end=`date +%s`
+echo TIME:`expr $end - $start`s
+
+```
 - 找出常用命令
 ```bash
 $ history | awk '{a[$2]++} END{for(i in a){print a[i]" "i}}' | sort -rn | head # 列出常用的命令
