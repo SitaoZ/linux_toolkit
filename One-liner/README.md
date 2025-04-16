@@ -121,6 +121,32 @@ $ echo 'AGTCATGCAGTGCNNNNT' | rev | tr 'ACTG' 'TGAC'
 $ echo 'AGTCATGCAGTGCNNNNT' | python -c "import sys;from Bio.Seq import Seq;a = [print(Seq(i.strip()).reverse_complement()) for i in sys.stdin];"
 ```
 
+- 转换大小写
+```bash
+$ cat DM12.txt | tr '[:lower:]' '[:upper:]'  # 小写换成大写
+$ cat DM12.txt | awk '{print toupper($0)}'   # 同上
+
+$ cat DM12.txt | tr '[:upper:]' '[:lower:]'  # 大写换成小写
+$ cat DM12.txt | tr [A-Z] [a-z]              # 同上
+$ cat DM12.txt | awk '{print tolower($0)}'   # 同上
+$ cat DM12.txt | perl -ne 'print lc'         # 同上
+
+
+$ echo "linux lowercase" | python3 -c 'print(input().title())' # 每个单词的首字母大写
+$ echo "linux lowercase" | awk '{ 
+    for (i=1; i<=NF; i++) {
+      $i = toupper(substr($i,1,1)) tolower(substr($i,2))
+    }
+    print
+  }'  # 同上
+# NF 是字段数（以空格分隔的单词）。
+# toupper(substr($i,1,1)) 将首字母大写。
+# tolower(substr($i,2)) 将剩余字母小写。
+                         
+$ text="linux lowercase"
+$ echo "${text^}"   # 仅首字母大写
+```
+
 - 文件的交集、并集、差集
 ```bash
 #  使用sort和uniq快速求文件的交集、并集、差集
