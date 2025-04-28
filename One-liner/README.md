@@ -29,6 +29,7 @@ sleep 10
 echo end: `date +"%Y-%m-%d %T"`
 end=`date +%s`
 echo TIME:`expr $end - $start`s
+```
 
 - 删除文件 (数量巨大)
 ```bash
@@ -38,7 +39,7 @@ echo *.txt | xargs -n 200 rm
 echo *.dir | xargs -n 200 rm -rf  
 ```
 
-```
+
 - 找出常用命令
 ```bash
 $ history | awk '{a[$2]++} END{for(i in a){print a[i]" "i}}' | sort -rn | head # 列出常用的命令
