@@ -30,6 +30,14 @@ echo end: `date +"%Y-%m-%d %T"`
 end=`date +%s`
 echo TIME:`expr $end - $start`s
 
+- 删除文件 (数量巨大)
+```bash
+$ # 一次性删除大量的文件
+$ # -n max-args
+echo *.txt | xargs -n 200 rm
+echo *.dir | xargs -n 200 rm -rf  
+```
+
 ```
 - 找出常用命令
 ```bash
