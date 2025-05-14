@@ -92,6 +92,7 @@ $ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/clou
 $ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/
 $ vi ~/.condarc # 直接添加镜像网址也可以
 ```
+
 ### 问题
 ```bash
 conda activate bedtools 
@@ -117,4 +118,9 @@ IMPORTANT: You may need to close and restart your shell after running 'conda ini
 source activate   # 激活环境
 
 conda activate bedtools # 再次激活环境
+```
+
+- Error while loading conda entry point: conda-libmamba-solver (libarchive.so.19: cannot open shared object file: No such file or directory)
+```bash
+conda install --solver=classic conda-forge::conda-libmamba-solver conda-forge::libmamba conda-forge::libmambapy conda-forge::libarchive
 ```
