@@ -39,6 +39,14 @@ echo *.txt | xargs -n 200 rm
 echo *.dir | xargs -n 200 rm -rf  
 ```
 
+- 循环创建软连接
+	- 通过 `-I{}` 定义占位符，逐个传递文件名并指定链接路径
+	- `{}` 表示每个 CSV 文件的路径 
+	- `.` 表示在当前目录创建同名链接 
+
+```bash
+ls ../result/humann/*genefamilies.tsv | xargs -I{} ln -s {} .
+```
 
 - 找出常用命令
 ```bash
