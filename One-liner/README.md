@@ -53,6 +53,21 @@ ls ../result/humann/*genefamilies.tsv | xargs -I{} ln -s {} .
 $ history | awk '{a[$2]++} END{for(i in a){print a[i]" "i}}' | sort -rn | head # 列出常用的命令
 ```
 
+- sort 失效处理
+
+```bash
+# 大部分linux系统的默认locale配置，要么为空，要么为"en_US.utf-8"
+# LANG：      用于设定LC_*的默认值，是最低级别的设置，如果LC_*没有设置，则会默认使用该值
+# LC_COLLATE：变量，决定排序能否正常执行
+# LC_ALL：    是一个宏，如果该值指定了，则会覆盖所有LC_*的值。注意，LANG值并不受该宏的影响
+# locale设置的优先级关系：LC_ALL > LC_* > LANG
+# 可以使用locale 查看
+$ locale
+
+$ LC_ALL=C sort a.txt | LC_ALL=C uniq
+
+```
+
 - 批量给文件末尾添加一个换行符
 ```
 $ for i in `ls *txt`; do echo >> $i  ;done
