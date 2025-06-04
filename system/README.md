@@ -16,3 +16,13 @@ netstat -tuln
 lsof -i:8000            # 查看该端口的监听情况
 kill $(lsof -t -i:8000) # 杀掉该监听端口
 ```
+- terminate called after throwing an instance of 'std::runtime_error'
+
+`terminate called after throwing an instance of 'std::runtime_error'  what():  locale::facet::_S_create_c_locale name not valid`
+```bash
+$ locale
+$ export LC_ALL=C
+$ # 最好把它写在.bashrc文件中，这样省的每次都要输入这个命令
+$ # LC_ALL=C 是为了去除所有本地化的设置，让命令能正确执行
+
+```
