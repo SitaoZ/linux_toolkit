@@ -26,3 +26,17 @@ $ # 最好把它写在.bashrc文件中，这样省的每次都要输入这个命
 $ # LC_ALL=C 是为了去除所有本地化的设置，让命令能正确执行
 
 ```
+
+
+- dnf
+DNF 是新一代的rpm软件包管理器。他首先出现在 Fedora 18 这个发行版中。而最近，它取代了yum，正式成为 Fedora 22 的包管理器。
+
+DNF包管理器克服了YUM包管理器的一些瓶颈，提升了包括用户体验，内存占用，依赖分析，运行速度等多方面的内容。DNF使用 RPM, libsolv 和 hawkey 库进行包管理操作。尽管它没有预装在 CentOS7 和 RHEL中，但你可以在使用 YUM 的同时使用 DNF 。
+
+DNF 的最新稳定发行版版本号是 1.0，发行日期是2015年5月11日。 这一版本的额 DNF 包管理器（包括在他之前的所有版本） 都大部分采用 Python 编写，发行许可为GPL v2.
+
+```bash
+$ sudo yum install epel-release # yum install epel-release -y
+$ sudo yum install dnf
+
+```
