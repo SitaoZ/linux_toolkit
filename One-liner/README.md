@@ -163,6 +163,16 @@ $ cat DM12.txt | tr [A-Z] [a-z]              # 同上
 $ cat DM12.txt | awk '{print tolower($0)}'   # 同上
 $ cat DM12.txt | perl -ne 'print lc'         # 同上
 
+$ # 仅首字母大写
+$ # Plasmid Name
+$ # ADCYAP1R1
+$ # ADORA1
+$ cat gpcr_gene.csv | sed '1d'| head -n 12 | tr [:upper:] [:lower:] | sed -e "s/\b\(.\)/\u\1/g" | awk '{printf "\""$1"\","}'
+$ # "Adcyap1r1","Adora1","Adora2a",
+$ #  tr [:upper:] [:lower:]     大写转小写
+$ #  sed -e "s/\b\(.\)/\u\1/g"  首字母大写
+$ #  awk '{printf "\""$1"\","}' 行排列逗号分隔
+
 
 $ echo "linux lowercase" | python3 -c 'print(input().title())' # 每个单词的首字母大写
 $ echo "linux lowercase" | awk '{ 
