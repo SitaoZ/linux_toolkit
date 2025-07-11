@@ -2,7 +2,7 @@
 * [awk](#awk)
 * [grep](#grep)
 * [sed](#sed)
-### awk
+### **awk**
 文本处理的工具之一,[awk](https://wangchujiang.com/linux-command/c/awk.html)
 ```bash
 $ man awk
@@ -256,7 +256,7 @@ awk -v bait=$2 'NR==1 || $0 ~ bait' $1 | csvtk pretty -t
 ```
 
 
-### grep
+### **grep**
 grep(global search regular expression and print out the line),全面搜索正则表达式并把行打印。
 ```bash
 $ man grep 
@@ -332,13 +332,28 @@ $ x\{m, n\}} # 重复字符x, 至少m次，至多n次
 $ \w         # 匹配文字或数字字符 [a-zA-Z0-9]
 ```
 
+- 正则 and
+```bash
+$ grep -E "pattern1.*pattern2" filename (顺序固定)
+$ grep -E "pattern1.*pattern2|pattern2.*pattern1" filename （顺序不固定）
+$ cat Mus_musculus.GRCm39.103.gff3 | awk '$3=="gene"' | awk '{print $9}' | awk -F ";" '{print $1, $2}' | grep -E "gene.*Name" | sed 's/ID=gene://g; s/Name=//g' > mmu_ens_symbol.csv
+```
+- 正则 or
+```bash
+$ grep -wE "master|bin" /etc/passwd
+```
+- 正则 not
+```bash
+$ grep -v "pattern1" filename 
+```
 #### 2.7 zgrep 
+
 
 ```bash
 $ zgrep -v "^#" GCF_000001405.40_GRCh38.p14_genomic.gff.gz | awk 'BEGIN{FS="\t";OFS"\t"}$2=="RefSeqFE"&&$3!="biological_region"'
 ```
 
-### sed
+### **sed**
 sed (stream editor for filtering and transforming text)流式编辑器
 ```bash
 $ # 命令格式
