@@ -411,6 +411,11 @@ $ vsearch --fastq_mergepairs seq/xxx_1.fq.gz \
        --relabel xxx.
 ```
 
+- bioawk 检查fastq   
+检查fastq文件，可能出现的序列和质量值长度不相等。可能由于文件损坏大致。可检查md5值。
+```bash
+$ bioawk -cfastx 'length($seq) == length($qual)' ZTPSN23NJ899-AH3_R2.fq.gz
+```
 
 
 ### fasta处理
